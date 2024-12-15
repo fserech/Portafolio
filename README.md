@@ -112,13 +112,11 @@ export const projects = [
 
 ### Blog Integration
 1. Get your Dev.to username
-2. Update `src/environments/environment.ts`:
+2. Update `src/utils/data/personal-data.ts`:
    ```typescript
-   export const environment = {
+   export const personalData = {
      // ... other config
-     devTo: {
-       username: 'your-devto-username'
-     }
+     devUsername: 'your-devto-username'
    };
    ```
 
