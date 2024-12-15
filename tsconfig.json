@@ -20,9 +20,28 @@
     "paths": {
       "@/*": [
         "src/*"
+      ],
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@core/*": [
+        "src/core/*"
+      ],
+      "@shared/*": [
+        "src/shared/*"
+      ],
+      "@utils/*": [
+        "src/utils/*"
+      ],
+      "@env/*": [
+        "src/environments/*"
       ]
     },
-    "baseUrl": "."
+    "baseUrl": ".",
+    "typeRoots": [
+      "node_modules/@types",
+      "src/core/types"
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
