@@ -28,9 +28,9 @@ import materialui from '../../assets/svg/skills/materialui.svg';
 import matlab from '../../assets/svg/skills/matlab.svg';
 import memsql from '../../assets/svg/skills/memsql.svg';
 import microsoftoffice from '../../assets/svg/skills/microsoftoffice.svg';
-import mongodb from '../../assets/svg/skills/mongoDB.svg';
-import nextJS from '../../assets/svg/skills/nextJS.svg';
-import nuxtJS from '../../assets/svg/skills/nuxtJS.svg';
+import mongodb from '../../assets/svg/skills/mongodb.svg';
+import nextJS from '../../assets/svg/skills/nextjs.svg';
+import nuxtJS from '../../assets/svg/skills/nuxtjs.svg';
 import opencv from '../../assets/svg/skills/opencv.svg';
 import photoshop from '../../assets/svg/skills/photoshop.svg';
 import php from '../../assets/svg/skills/php.svg';
@@ -194,7 +194,7 @@ export const skillsImage = (skill: string): string => {
     case 'mysql':
       return `/assets/svg/skills/${skillID}.svg`;
     case 'nextjs':
-      return `/assets/svg/skills/nextJS.svg`;
+      return `/assets/svg/skills/nextjs.svg`;
     case 'nginx':
       return `/assets/svg/skills/${skillID}.svg`;
     case 'numpy':

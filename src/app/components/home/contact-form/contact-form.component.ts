@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faMailForward } from '@fortawesome/free-solid-svg-icons';
 import { HttpClient } from '@angular/common/http';
-import { ContactForm } from '../../../core/models/contact.interface';
+import { ContactForm } from '@/core/models/contact.interface';
 
 @Component({
   selector: 'app-contact-form',

@@ -1,6 +1,6 @@
 export const personalData = {
   name: "Javeed Ishaq",
-  profile: '/profile.png',
+  profile: 'assets/profile.png',
   designation: "Software Developer",
   description: "I am a professional and enthusiastic programmer with a passion for mobile and web development. With expertise in Flutter, React.js, and various other technologies, I bring ideas to life through clean, efficient code. I am a quick learner with a self-learning attitude, always eager to explore new technologies and solve complex problems. I specialize in building cross-platform mobile applications and responsive web interfaces that deliver exceptional user experiences.",
   email: 'ishaqjaveed1@gmail.com',
