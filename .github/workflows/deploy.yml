@@ -32,9 +32,10 @@ jobs:
       - name: Build
         run: npm run build -- --configuration production --base-href "https://javeedishaq.github.io/"
 
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+      - name: Deploy to javeedishaq.github.io
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages
-          folder: dist/ngdevfolio/browser
-          token: ${{ secrets.GITHUB_TOKEN }}
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          external_repository: JaveedIshaq/javeedishaq.github.io
+          publish_branch: main  # Deploy to main branch
+          publish_dir: dist/ngdevfolio/browser

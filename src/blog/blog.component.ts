@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BlogService } from '../core/services/blog.service';
 import { BlogCardComponent } from '../app/components/shared/blog-card/blog-card.component';
-import { Blog } from '../core/models/blog.interface';
+import { Blog } from '@/core/models/blog.model';
 
 @Component({
   selector: 'app-blog',
