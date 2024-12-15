@@ -6,7 +6,6 @@ import { ExperienceComponent } from '../components/home/experience/experience.co
 import { SkillsComponent } from '../components/home/skills/skills.component';
 import { ProjectsComponent } from '../components/home/projects/projects.component';
 import { EducationComponent } from '../components/home/education/education.component';
-import { BlogComponent } from '../components/home/blog/blog.component';
 import { ContactComponent } from '../components/home/contact/contact.component';
 import { BlogService } from '@/core/services/blog.service';
 
@@ -22,7 +21,6 @@ import { BlogService } from '@/core/services/blog.service';
     SkillsComponent,
     ProjectsComponent,
     EducationComponent,
-    BlogComponent,
     ContactComponent
   ],
   templateUrl: './home.component.html',
