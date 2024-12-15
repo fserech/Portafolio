@@ -43,8 +43,26 @@ Before you begin, ensure you have the following installed:
 
 2. **Install dependencies**
    ```bash
-   npm install
+   npm install --legacy-peer-deps
    ```
+### Important Notes on Configuration
+
+#### Using --legacy-peer-deps
+We use `npm install --legacy-peer-deps` because Angular 19 has strict peer dependency requirements. This flag allows us to:
+- Install packages with peer dependency conflicts
+- Maintain compatibility with packages that haven't yet updated to support Angular 19
+- Work around the dependency conflict between @angular-builders/custom-webpack and Angular 19
+
+#### Custom Webpack Configuration
+The [custom-webpack.config.js](cci:7://file:///Users/javeedishaq/devwork/ng-dev-folio/custom-webpack.config.js:0:0-0:0) is essential because:
+1. Angular 19 doesn't natively support `.env` files for environment variables
+2. We use `dotenv-webpack` plugin to:
+   - Load environment variables from `.env` files
+   - Access these variables using `process.env` in our application
+   - Keep sensitive information like API keys secure
+   - Support different configurations for development and production
+
+This setup allows us to maintain secure and flexible environment configurations while working with Angular 19's architecture.   
 
 3. **Set up environment variables**
    - Create a `.env` file in the root directory
