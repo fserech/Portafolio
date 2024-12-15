@@ -1,10 +1,12 @@
+declare const process: any;
+
 export const environment = {
     production: true,
     gtmId: '',
-    apiUrl: 'http://localhost:3000',
+    apiUrl: 'https://your-api-url.com',
     emailJs: {
-        publicKey: 'YOUR_PUBLIC_KEY',
-        serviceId: 'YOUR_SERVICE_ID',
-        templateId: 'YOUR_TEMPLATE_ID'
+        publicKey: process.env['EMAILJS_PUBLIC_KEY'] || '',
+        serviceId: process.env['EMAILJS_SERVICE_ID'] || '',
+        templateId: process.env['EMAILJS_TEMPLATE_ID'] || ''
     }
 };

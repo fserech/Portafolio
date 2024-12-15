@@ -47,7 +47,14 @@
                             <fa-icon [icon]="mailIcon" size="lg"></fa-icon>
                         </span>
                     </ng-template>
+
                 </button>
+
+                <!-- Status Message -->
+                <div *ngIf="statusMessage" class="mt-4 p-3 rounded-md text-sm"
+                    [ngClass]="{'bg-green-500/10 text-green-400': isSuccess, 'bg-red-500/10 text-red-400': !isSuccess}">
+                    {{ statusMessage }}
+                </div>
             </div>
         </form>
     </div>
