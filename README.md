@@ -37,8 +37,8 @@ Before you begin, ensure you have the following installed:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/ngdevfolio.git
-   cd ngdevfolio
+   git clone https://github.com/JaveedIshaq/ng-dev-folio
+   cd ng-dev-folio
    ```
 
 2. **Install dependencies**
