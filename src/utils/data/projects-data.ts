@@ -3,60 +3,96 @@ import travel from '../../assets/images/travel.png';
 import realEstate from '../../assets/images/realEstate.png';
 import ayla from '../../assets/images/ayla.png';
 
-export const projectsData = [
+interface Project {
+    id: number;
+    name: string;
+    description: string;
+    tools: string[];
+    code: string;
+    demo: string;
+    image: string;
+    role: string;
+}
+
+export const projects: Project[] = [
     {
         id: 1,
-        name: 'AI Powered Financial App',
-        description: "Me and my team built an AI-powered financial mobile application. I have developed API using Express, Typescript, OpenAI, AWS, and MongoDB. Used OTP via AWS SES, Google, and Facebook for the authentication system. Built AI assistants using OpenAI's latest model and trained using our dataset. Voice messages are converted to text using AWS Transcribe. The app fetches data from Google Sheets and generates a PDF term sheet, sent via AWS SES.",
-        tools: ['Express', 'MongoDB', 'OpenAI API', 'AWS SES', 'AWS S3', 'Node Mailer', 'Joi', 'Puppeteer', 'EC2', 'PM2', 'Nginx'],
-        role: 'Backend Developer',
-        code: '',
-        demo: '',
-        image: "/assets/images/crefin.png",
+        name: "Crunch Africa",
+        description: "Fintech App developed with Flutter. Implemented complex features including QR code scanning, Firebase authentication, and comprehensive testing suite including unit, widget, and integration tests. Used Bloc for state management and integrated Sentry for error tracking.",
+        tools: ["Flutter", "Bloc", "Firebase", "Sentry", "Unit Testing", "Widget Testing"],
+        code: "",
+        demo: "https://apps.apple.com/us/app/crunch-africa/id1537297077",
+        image: "assets/images/projects/crunch-africa.webp",
+        role: "Mobile App Architect",
     },
     {
         id: 2,
-        name: 'Travel Agency App',
-        description: 'I have designed and developed a full-stack web app for 2Expedition, a travel agency in Armenia. I created the UI using NextJS, Typescript, MUI, TailwindCSS, Google Maps, Sun-Editor, and React Slick. The app supports multiple languages and currencies. I developed the API using NestJS, Typescript, MySQL, TypeORM, AWS, and Nodemailer. I deployed the front-end app to AWS Amplify and the back-end app to AWS EC2.',
-        tools: ['NextJS', 'Tailwind CSS', "Google Maps", "NestJS", "TypeScript", "MySQL", "AWS S3", "Sun-Editor", "Gmail Passkey"],
-        role: 'Full Stack Developer',
-        code: '',
-        demo: '',
-        image: "/assets/images/travel.png",
+        name: "Akyurt Online",
+        description: "E-commerce mobile application built for both iOS and Android platforms. Implemented complex UI components, integrated backend API services, and implemented secure payment processing systems using Provider pattern for state management.",
+        tools: ["Flutter", "Provider", "REST API", "Payment Integration"],
+        code: "",
+        demo: "https://apps.apple.com/us/app/akyurt-online/id1542598367",
+        image: "assets/images/projects/akyurt-online.webp",
+        role: "Flutter Developer",
     },
     {
         id: 3,
-        name: 'AI Powered Real Estate',
-        description: 'My team built an AI-based real estate app using Replicate API and OpenAI. We used Express, Typescript, OpenAI, Replicate, Stripe, and Mongoose to develop the API. We utilized NextJS, Formik, TailwindCSS, and other npm libraries for the UI. We have trained multiple AI assistants using the latest GPT model and integrated Replicate API for image processing. We added role-based auth, subscription plans, Cron job scheduling, and payment integration with Stripe.',
-        tools: ['React', 'Bootstrap', 'SCSS', 'Stripe', 'Express', 'TypeScript', 'MongoDB', 'Azure Blob', 'OpenAI API', 'Replicate AI', 'Cronjob', 'JWT'],
-        code: '',
-        role: 'Full Stack Developer',
-        demo: '',
-        image: "/assets/images/realEstate.png",
+        name: "Baredex",
+        description: "Mobile application with focus on REST API integration and data management. Implemented Provider pattern for efficient state management and created a robust architecture for API communication.",
+        tools: ["Flutter", "Provider", "REST API"],
+        code: "",
+        demo: "https://play.google.com/store/apps/details?id=com.breadex.app",
+        image: "assets/images/projects/baredex.webp",
+        role: "Flutter Developer",
     },
     {
         id: 4,
-        name: 'Newsroom Management',
-        description: "My team and I developed a newspaper management dashboard application called Newsroom Management. As a front-end developer, I worked on creating the dashboard using NextJS, Material UI, Redux, Calendar, and other necessary npm libraries. We used React Redux to manage the application's state and React-hook-form and Sun Editor to handle forms.",
-        tools: ['NextJS', 'Material UI', 'Redux', 'Sun Editor', "Calendar"],
-        code: '',
-        demo: '',
-        image: "/assets/images/ayla.png",
-        role: 'Full Stack Developer',
+        name: "Mocowi",
+        description: "IoT-based mobile application for card device management. Implemented real-time data synchronization and device communication through REST APIs. Created an intuitive interface for device monitoring and control.",
+        tools: ["Flutter", "IoT", "REST API", "Real-time Data"],
+        code: "",
+        demo: "https://play.google.com/store/apps/details?id=com.mocowi.mocowi",
+        image: "assets/images/projects/mocowi.webp",
+        role: "IoT App Developer",
+    },
+    {
+        id: 5,
+        name: "Sabroso",
+        description: "E-commerce application with comprehensive cart and payment system. Implemented Bloc pattern for state management and created extensive testing suite including unit, widget, and integration tests.",
+        tools: ["Flutter", "Bloc", "Payment Integration", "Unit Testing", "Widget Testing"],
+        code: "",
+        demo: "",
+        image: "assets/images/projects/sabroso-logo.jpg",
+        role: "Senior Flutter Developer",
+    },
+    {
+        id: 6,
+        name: "Sigma Math Quiz App",
+        description: "Educational game application featuring interactive math quizzes. Implemented complex animations and sound effects using Flutter. Used Bloc pattern for state management to handle game logic and user progress.",
+        tools: ["Flutter", "Bloc", "Animations", "Game Development"],
+        code: "",
+        demo: "",
+        image: "assets/images/projects/sigma-app.png",
+        role: "Game Developer",
+    },
+    {
+        id: 7,
+        name: "Daily Expense Manager",
+        description: "Personal finance management application utilizing Firebase Firestore for data storage and Google Authentication for user management. Implemented Provider pattern for state management.",
+        tools: ["Flutter", "Provider", "Firebase", "Google Auth"],
+        code: "",
+        demo: "https://play.google.com/store/apps/details?id=com.aqua.regalsystem.pocket.manager",
+        image: "assets/images/projects/daily-expense-manager.png",
+        role: "Flutter Developer",
+    },
+    {
+        id: 8,
+        name: "ABC Delivery",
+        description: "Delivery management application featuring Google Maps integration, Firebase Firestore for data storage, and Google Authentication. Implemented Provider pattern for state management and location tracking features.",
+        tools: ["Flutter", "Provider", "Google Maps", "Firebase", "Google Auth"],
+        code: "",
+        demo: "https://play.google.com/store/apps/details?id=com.eeizo.abcdelivery",
+        image: "assets/images/projects/abcd.png",
+        role: "Full Stack Developer",
     }
 ];
-
-
-// Do not remove any property.
-// Leave it blank instead as shown below
-
-// {
-//     id: 1,
-//     name: '',
-//     description: "",
-//     tools: [],
-//     role: '',
-//     code: '',
-//     demo: '',
-//     image: crefin,
-// },
