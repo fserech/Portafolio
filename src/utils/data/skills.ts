@@ -1,11 +1,10 @@
 export const skillsData = [
   'Flutter',
   'Android',
-  'Kotlin Multiplatform',
-  'Compose Multiplatform',
+  'Kotlin',
   'Dart',
   'Java',
-  'Sppring Boot',
+  'Spring-Boot',
   'Javascript',
   'Typescript',
   'Angular',

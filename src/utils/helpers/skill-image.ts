@@ -1,57 +1,9 @@
-import adobeXd from '../../assets/svg/skills/adobe-xd.svg';
-import afterEffects from '../../assets/svg/skills/after-effects.svg';
-import angular from '../../assets/svg/skills/angular.svg';
-import aws from '../../assets/svg/skills/aws.svg';
-import azure from '../../assets/svg/skills/azure.svg';
-import blender from '../../assets/svg/skills/blender.svg';
-import bootstrap from '../../assets/svg/skills/bootstrap.svg';
-import bulma from '../../assets/svg/skills/bulma.svg';
-import c from '../../assets/svg/skills/c.svg';
-import capacitorjs from '../../assets/svg/skills/capacitorjs.svg';
-import coffeescript from '../../assets/svg/skills/coffeescript.svg';
-import css from '../../assets/svg/skills/css.svg';
-import dart from '../../assets/svg/skills/dart.svg';
-import fastify from '../../assets/svg/skills/fastify.svg';
-import figma from '../../assets/svg/skills/figma.svg';
-import firebase from '../../assets/svg/skills/firebase.svg';
-import flutter from '../../assets/svg/skills/flutter.svg';
-import gcp from '../../assets/svg/skills/gcp.svg';
-import gimp from '../../assets/svg/skills/gimp.svg';
-import git from '../../assets/svg/skills/git.svg';
-import java from '../../assets/svg/skills/java.svg';
-import javascript from '../../assets/svg/skills/javascript.svg';
-import julia from '../../assets/svg/skills/julia.svg';
-import kotlin from '../../assets/svg/skills/kotlin.svg';
-import lightroom from '../../assets/svg/skills/lightroom.svg';
-import markdown from '../../assets/svg/skills/markdown.svg';
-import materialui from '../../assets/svg/skills/materialui.svg';
-import matlab from '../../assets/svg/skills/matlab.svg';
-import memsql from '../../assets/svg/skills/memsql.svg';
-import microsoftoffice from '../../assets/svg/skills/microsoftoffice.svg';
-import mongodb from '../../assets/svg/skills/mongodb.svg';
-import nextJS from '../../assets/svg/skills/nextjs.svg';
-import nuxtJS from '../../assets/svg/skills/nuxtjs.svg';
-import opencv from '../../assets/svg/skills/opencv.svg';
-import photoshop from '../../assets/svg/skills/photoshop.svg';
-import php from '../../assets/svg/skills/php.svg';
-import python from '../../assets/svg/skills/python.svg';
-import react from '../../assets/svg/skills/react.svg';
-import ruby from '../../assets/svg/skills/ruby.svg';
-import strapi from '../../assets/svg/skills/strapi.svg';
-import svelte from '../../assets/svg/skills/svelte.svg';
-import tailwind from '../../assets/svg/skills/tailwind.svg';
-import tensorflow from '../../assets/svg/skills/tensorflow.svg';
-import typescript from '../../assets/svg/skills/typescript.svg';
-import unity from '../../assets/svg/skills/unity.svg';
-import vitejs from '../../assets/svg/skills/vitejs.svg';
-import vue from '../../assets/svg/skills/vue.svg';
-import vuetifyjs from '../../assets/svg/skills/vuetifyjs.svg';
-import wolframalpha from '../../assets/svg/skills/wolframalpha.svg';
-
 export type Skill =
   | 'adobe-xd'
   | 'after-effects'
   | 'angular'
+  | 'android'
+  | 'kotlin'
   | 'aws'
   | 'azure'
   | 'blender'
@@ -110,6 +62,10 @@ export const skillsImage = (skill: string): string => {
     case 'after effects':
       return `/assets/svg/skills/after-effects.svg`;
     case 'angular':
+      return `/assets/svg/skills/${skillID}.svg`;
+    case 'android':
+      return `/assets/svg/skills/${skillID}.svg`;
+    case 'spring-boot':
       return `/assets/svg/skills/${skillID}.svg`;
     case 'aws':
       return `/assets/svg/skills/${skillID}.svg`;
@@ -190,7 +146,7 @@ export const skillsImage = (skill: string): string => {
     case 'microsoftoffice':
       return `/assets/svg/skills/${skillID}.svg`;
     case 'mongodb':
-      return `/assets/svg/skills/${skillID}.svg`;
+      return `/assets/svg/skills/mongoDB.svg`;
     case 'mysql':
       return `/assets/svg/skills/${skillID}.svg`;
     case 'nextjs':
