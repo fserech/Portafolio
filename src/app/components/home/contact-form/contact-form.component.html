@@ -1,58 +1,52 @@
-<div>
-    <p class="font-medium mb-5 text-[#16f2b3] text-xl uppercase">Contact with me</p>
-    <div class="max-w-3xl text-white rounded-lg border border-[#464c6a] p-3 lg:p-5">
-        <p class="text-sm text-[#d3d8e8]">
-            If you have any questions or concerns, please don't hesitate to contact me. I am open to any work
-            opportunities that align with my skills and interests.
-        </p>
+<div class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
+    <div class="mx-auto max-w-2xl lg:max-w-5xl">
+        <div class="text-center">
+            <h1 class="text-3xl font-bold text-gray-800 sm:text-4xl dark:text-white">Contact Me</h1>
+            <p class="mt-1 text-gray-600 dark:text-gray-400">
+                If you have any questions or concerns, please don't hesitate to contact me. I am open to any work
+                opportunities that align with my skills and interests.
+            </p>
+        </div>
         <form (ngSubmit)="handleSendMail($event)" class="mt-6 flex flex-col gap-4">
             <div class="flex flex-col gap-2">
                 <label class="text-base">Your Name: </label>
                 <input
-                    class="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
-                    type="text" maxlength="100" required [(ngModel)]="userInput.name" name="name"
-                    (blur)="checkRequired()" />
+                    class="w-full rounded-lg border bg-transparent px-3 py-2 text-sm outline-none focus:border-gray-600"
+                    type="text" name="name" [(ngModel)]="userInput.name" required />
             </div>
-
             <div class="flex flex-col gap-2">
                 <label class="text-base">Your Email: </label>
                 <input
-                    class="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
-                    type="email" maxlength="100" required [(ngModel)]="userInput.email" name="email"
-                    (blur)="checkRequired(); error.email = !isValidEmail(userInput.email)" />
-                <p *ngIf="error.email" class="text-sm text-red-400">Please provide a valid email!</p>
+                    class="w-full rounded-lg border bg-transparent px-3 py-2 text-sm outline-none focus:border-gray-600"
+                    type="email" name="email" [(ngModel)]="userInput.email" required />
+                <p *ngIf="error.email" class="text-red-500 text-sm">
+                    Please enter a valid email address
+                </p>
             </div>
-
             <div class="flex flex-col gap-2">
-                <label class="text-base">Your Message: </label>
+                <label class="text-base">Message: </label>
                 <textarea
-                    class="bg-[#10172d] w-full border rounded-md border-[#353a52] focus:border-[#16f2b3] ring-0 outline-0 transition-all duration-300 px-3 py-2"
-                    maxlength="500" name="message" required [(ngModel)]="userInput.message" (blur)="checkRequired()"
-                    rows="4"></textarea>
-            </div>
-
-            <div class="flex flex-col items-center gap-3">
-                <p *ngIf="error.required" class="text-sm text-red-400">
-                    All fields are required!
+                    class="h-40 w-full rounded-lg border bg-transparent px-3 py-2 text-sm outline-none focus:border-gray-600"
+                    name="message" [(ngModel)]="userInput.message" required></textarea>
+                <p *ngIf="error.required" class="text-red-500 text-sm">
+                    Please fill in all required fields
                 </p>
                 <button
-                    class="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-5 md:px-12 py-2.5 md:py-3 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold"
+                    class="flex justify-center mt-5 gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-5 md:px-12 py-2.5 md:py-3 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold"
                     type="submit" [disabled]="isLoading">
                     <ng-container *ngIf="isLoading; else notLoading">
                         <span>Sending Message...</span>
                     </ng-container>
                     <ng-template #notLoading>
-                        <span class="flex items-center gap-1">
-                            Send Message
-                            <fa-icon [icon]="mailIcon" size="lg"></fa-icon>
-                        </span>
+                        <span>Send Message</span>
+                        <fa-icon [icon]="mailIcon"></fa-icon>
                     </ng-template>
-
                 </button>
-
-                <!-- Status Message -->
-                <div *ngIf="statusMessage" class="mt-4 p-3 rounded-md text-sm"
-                    [ngClass]="{'bg-green-500/10 text-green-400': isSuccess, 'bg-red-500/10 text-red-400': !isSuccess}">
+            </div>
+            <div class="mt-3">
+                <div *ngIf="statusMessage"
+                    [ngClass]="{'text-green-500': statusMessage.includes('success'), 'text-red-500': !statusMessage.includes('success')}"
+                    class="text-center">
                     {{ statusMessage }}
                 </div>
             </div>

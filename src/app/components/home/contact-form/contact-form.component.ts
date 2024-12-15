@@ -1,88 +1,107 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faMailForward } from '@fortawesome/free-solid-svg-icons';
-import { ContactForm } from '@/core/models/contact.interface';
-import { ContactService } from '@/core/services/contact.service';
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { RECAPTCHA_V3_SITE_KEY, ReCaptchaV3Service, RecaptchaV3Module } from 'ng-recaptcha';
+import { environment } from '../../../../environments/environment';
+import emailjs from '@emailjs/browser';
+
+interface ContactForm {
+  name: string;
+  email: string;
+  message: string;
+  recaptchaToken?: string;
+}
 
 @Component({
   selector: 'app-contact-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, FontAwesomeModule],
+  imports: [CommonModule, FormsModule, FontAwesomeModule, RecaptchaV3Module],
   templateUrl: './contact-form.component.html',
-  styleUrls: ['./contact-form.component.css']
+  providers: [
+    {
+      provide: RECAPTCHA_V3_SITE_KEY,
+      useValue: environment.recaptcha.siteKey,
+    },
+  ],
 })
-export class ContactFormComponent {
-  mailIcon = faMailForward;
-  error = { email: false, required: false };
+export class ContactFormComponent implements OnInit {
+  mailIcon = faPaperPlane;
   isLoading = false;
   statusMessage = '';
-  isSuccess = false;
+  environment = environment;
+
   userInput: ContactForm = {
     name: '',
     email: '',
-    message: ''
+    message: '',
   };
 
-  constructor(private contactService: ContactService) { }
+  error = {
+    required: false,
+    email: false,
+  };
+
+  constructor(private recaptchaV3Service: ReCaptchaV3Service) { }
+
+  ngOnInit(): void {
+    emailjs.init(environment.emailJs.publicKey);
+  }
 
   isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
   }
 
-  checkRequired() {
-    if (this.userInput.email && this.userInput.message && this.userInput.name) {
-      this.error = { ...this.error, required: false };
-    }
+  checkRequired(): void {
+    this.error.required =
+      !this.userInput.name || !this.userInput.email || !this.userInput.message;
   }
 
-  private resetForm() {
-    this.userInput = {
-      name: '',
-      email: '',
-      message: ''
-    };
-    this.error = { email: false, required: false };
-  }
+  async handleSendMail(event: Event): Promise<void> {
+    event.preventDefault();
+    this.checkRequired();
 
-  private showMessage(message: string, success: boolean) {
-    this.statusMessage = message;
-    this.isSuccess = success;
-    if (success) {
-      setTimeout(() => {
-        this.statusMessage = '';
-      }, 5000); // Clear success message after 5 seconds
-    }
-  }
-
-  async handleSendMail(e: Event) {
-    e.preventDefault();
-
-    if (!this.userInput.email || !this.userInput.message || !this.userInput.name) {
-      this.error = { ...this.error, required: true };
-      return;
-    } else if (this.error.email) {
+    if (this.error.required || !this.isValidEmail(this.userInput.email)) {
+      this.error.email = !this.isValidEmail(this.userInput.email);
       return;
     }
 
-    this.error = { ...this.error, required: false };
-    this.statusMessage = '';
-    
     try {
       this.isLoading = true;
-      const result = await this.contactService.sendMessage(this.userInput);
-      
-      if (result.success) {
-        this.showMessage('Message sent successfully!', true);
-        this.resetForm();
-      } else {
-        this.showMessage('Failed to send message. Please try again.', false);
-      }
+
+      // Get reCAPTCHA token
+      const token = await this.recaptchaV3Service.execute('submit').toPromise();
+
+      const templateParams = {
+        from_name: this.userInput.name,
+        from_email: this.userInput.email,
+        message: this.userInput.message,
+        'g-recaptcha-response': token
+      };
+
+      await emailjs.send(
+        environment.emailJs.serviceId,
+        environment.emailJs.templateId,
+        templateParams
+      );
+
+      this.statusMessage = 'Message sent successfully!';
+
+      setTimeout(() => {
+        this.statusMessage = '';
+      }, 5000);
+
+      this.userInput = {
+        name: '',
+        email: '',
+        message: '',
+      };
+
     } catch (error) {
-      console.error('Failed to send message:', error);
-      this.showMessage('An error occurred while sending the message. Please try again.', false);
+      console.error('Error sending email:', error);
+      this.statusMessage = 'Failed to send message. Please try again.';
     } finally {
       this.isLoading = false;
     }
