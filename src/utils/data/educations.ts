@@ -3,20 +3,20 @@ import { Education } from "@/core/models/education.interface";
 export const educations: Education[] = [
   {
     id: 1,
-    title: "Bachelor Degree",
-    duration: "2020 - Present",
-    institution: "National University of Bangladesh",
+    title: "Full-Stack Web Development with React",
+    duration: "2018",
+    institution: "Coursera - The Hong Kong University of Science and Technology",
   },
   {
     id: 2,
-    title: "Higher Secondary Certificate",
-    duration: "2018 - 2020",
-    institution: "Noakhali Islamia Kamil Madrasah",
+    title: "Full Stack Web and Multiplatform Mobile App Development",
+    duration: "2017",
+    institution: "Coursera - The Hong Kong University of Science and Technology",
   },
   {
     id: 3,
-    title: "Secondary School Certificate",
-    duration: "2008 - 2018",
-    institution: "Baitus Saif Islamia Madrasah",
+    title: "Become an Android Mobile App Developer",
+    duration: "2020",
+    institution: "Linkedin Learning - Udacity",
   }
 ]
