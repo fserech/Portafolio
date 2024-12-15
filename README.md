@@ -10,7 +10,7 @@
 > This is an Angular adaptation of the excellent [Developer Portfolio](https://github.com/said7388/developer-portfolio) project originally created by [Abu Said](https://github.com/said7388) in Next.js.
 
 <p align="center">
-  <img src="src/assets/images/logo.png" alt="NgDevFolio Logo" width="200"/>
+  <img src="https://github.com/JaveedIshaq/ng-dev-folio/blob/main/screenshot.png?raw=true" alt="Ng Dev Folio Screenshot" width="200"/>
 </p>
 
 A modern, responsive, and customizable portfolio website built with Angular 19. Perfect for developers looking to showcase their work, skills, and professional journey.
@@ -216,5 +216,19 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
+<<<<<<< HEAD
 Made with ❤️ by Javeed Ishaq
 >>>>>>> 408ad50 (portfolio readme added)
+=======
+## What's Next?
+
+- [ ] Add support for multiple blog platforms
+- [ ] Integrate with other services (e.g. Twitter, GitHub, etc.)
+- [ ] Add more customization options
+- [ ] Improve accessibility
+- [ ] Add a feedback system
+
+dev version: 1.0
+
+Made with ❤️ by Javeed Ishaq
+>>>>>>> fe83e52 (Update README.md)

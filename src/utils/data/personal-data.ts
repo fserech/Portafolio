@@ -2,7 +2,7 @@ export const personalData = {
   name: "Javeed Ishaq",
   profile: 'assets/profile.png',
   designation: "Software Developer",
-  description: "Experto en crear aplicaciones web eficientes y seguras, con conocimientos en gestión de firewalls, monitoreo de redes y análisis de vulnerabilidades. Me destaco por entregar soluciones de calidad, aprender rápidamente y aportar a la protección y optimización de infraestructuras tecnológicas, listo para integrarme a proyectos que requieran innovación y confiabilidad.",
+  description: "Experto en crear aplicaciones web eficientes, con conocimientos en gestión de firewalls, monitoreo de redes y análisis de vulnerabilidades. Me destaco por entregar soluciones de calidad, aprender rápidamente y aportar a la protección y optimización de infraestructuras tecnológicas, listo para integrarme a proyectos que requieran innovación y confiabilidad.",
   email: 'serech63@gmail.com',
   phone: '+50241051656',
   address: 'Chimaltenango, Guatemala',
