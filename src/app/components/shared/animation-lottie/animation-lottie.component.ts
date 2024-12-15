@@ -14,12 +14,7 @@ export function playerFactory() {
   selector: 'app-animation-lottie',
   standalone: true,
   imports: [CommonModule, LottieComponent],
-  template: `
-    <ng-lottie
-      [options]="options"
-      [styles]="styles">
-    </ng-lottie>
-  `,
+  templateUrl: './animation-lottie.component.html',
   styles: [`:host { display: block; }`]
 })
 export class AnimationLottieComponent {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faGraduationCap } from '@fortawesome/free-solid-svg-icons';
@@ -12,8 +12,16 @@ import { educations } from '@/utils/data/educations';
   templateUrl: './education.component.html',
   styleUrls: ['./education.component.css']
 })
-export class EducationComponent {
+export class EducationComponent implements OnInit {
   educations = educations;
   workspaceIcon = faGraduationCap;
-  lottieFile = '/assets/lottie/study.json'; // Make sure to move the lottie file to assets
+  lottieFile: any;
+
+  async ngOnInit() {
+    try {
+      this.lottieFile = await fetch('assets/lottie/education.json').then(res => res.json());
+    } catch (error) {
+      console.error('Error loading Lottie animation:', error);
+    }
+  }
 }

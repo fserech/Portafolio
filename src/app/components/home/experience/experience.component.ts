@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBriefcase } from '@fortawesome/free-solid-svg-icons';
@@ -8,12 +8,20 @@ import { experiences } from '@/utils/data/experience';
 @Component({
   selector: 'app-experience',
   standalone: true,
-  imports: [CommonModule, AnimationLottieComponent, FontAwesomeModule],
+  imports: [CommonModule, AnimationLottieComponent, FontAwesomeModule, AnimationLottieComponent],
   templateUrl: './experience.component.html',
   styleUrls: ['./experience.component.css']
 })
-export class ExperienceComponent {
+export class ExperienceComponent implements OnInit {
   experiences = experiences;
   workIcon = faBriefcase;
-  lottieFile = '/assets/lottie/code.json'; // Make sure to move the lottie file to assets
+  lottieFile: any;
+
+  async ngOnInit() {
+    try {
+      this.lottieFile = await fetch('assets/lottie/code.json').then(res => res.json());
+    } catch (error) {
+      console.error('Error loading Lottie animation:', error);
+    }
+  }
 }
