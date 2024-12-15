@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main  # or your default branch
+      - main
   workflow_dispatch:
 
 jobs:
@@ -30,14 +30,17 @@ jobs:
           echo "EMAILJS_TEMPLATE_ID=${{ secrets.EMAILJS_TEMPLATE_ID }}" >> $GITHUB_ENV
 
       - name: Build
-        run: npm run build -- --configuration production --base-href "https://javeedishaq.github.io/"
+        run: npm run build -- --configuration production
+
+      - name: Create CNAME
+        run: echo "www.javeedishaq.com" > dist/ngdevfolio/browser/CNAME
 
       - name: Deploy to javeedishaq.github.io
         uses: peaceiris/actions-gh-pages@v3
         with:
           personal_token: ${{ secrets.PERSONAL_TOKEN }}
           external_repository: JaveedIshaq/javeedishaq.github.io
-          publish_branch: main  # Deploy to main branch
+          publish_branch: main
           publish_dir: dist/ngdevfolio/browser
-          cname: www.javeedishaq.com  
-
+          cname: www.javeedishaq.com
+          enable_jekyll: false
