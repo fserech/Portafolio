@@ -1,5 +1,7 @@
 <div id="blogs" class="relative z-50 border-t my-12 lg:my-24 border-[#25213b]">
-  <div class="w-[100px] h-[100px] bg-violet-100 rounded-full absolute top-6 left-[42%] translate-x-1/2 filter blur-3xl opacity-20"></div>
+  <div
+    class="w-[100px] h-[100px] bg-violet-100 rounded-full absolute top-6 left-[42%] translate-x-1/2 filter blur-3xl opacity-20">
+  </div>
 
   <div class="flex justify-center -translate-y-[1px]">
     <div class="w-3/4">
@@ -17,9 +19,7 @@
 
   <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-5 lg:gap-8 xl:gap-10">
     @for (blog of blogs.slice(0, 6); track blog.id) {
-      @if (blog?.cover_image) {
-        <app-blog-card [blog]="blog"></app-blog-card>
-      }
+    <app-blog-card [blog]="blog"></app-blog-card>
     }
   </div>
 

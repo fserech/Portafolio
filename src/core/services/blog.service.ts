@@ -1,9 +1,9 @@
 // src/core/services/blog.service.ts
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { personalData } from '../../utils/data/personal-data';
+import { Injectable } from '@angular/core';
+import { Observable, catchError, map, of } from 'rxjs';
+import { personalData } from '@/utils/data/personal-data';
+import { Blog } from '@/core/models/blog.model';
 
 @Injectable({
     providedIn: 'root'
@@ -11,15 +11,18 @@ import { personalData } from '../../utils/data/personal-data';
 export class BlogService {
     constructor(private http: HttpClient) { }
 
-    getBlogs(): Observable<any[]> {
+    getBlogs(): Observable<Blog[]> {
         return this.http
-            .get<any[]>(`https://dev.to/api/articles?username=${personalData.devUsername}`)
+            .get<Blog[]>(`https://dev.to/api/articles?username=${personalData.devUsername}`)
             .pipe(
-                map(data =>
-                    data
-                        .filter(item => item?.cover_image)
-                        .sort(() => Math.random() - 0.5)
-                )
+                map(data => {
+                    console.log('Raw blog data:', data);
+                    return data || [];
+                }),
+                catchError(error => {
+                    console.error('Error fetching blogs:', error);
+                    return of([]);
+                })
             );
     }
 }

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faComment } from '@fortawesome/free-solid-svg-icons';
-import { Blog } from '../../../../core/models/blog.interface';
+import { Blog } from '../../../../core/models/blog.model';
 
 @Component({
   selector: 'app-blog-card',
