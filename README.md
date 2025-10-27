@@ -2,9 +2,7 @@
 
 > This is an Angular adaptation of the excellent [Developer Portfolio](https://github.com/said7388/developer-portfolio) project originally created by [Abu Said](https://github.com/said7388) in Next.js.
 
-<p align="center">
-  <img src="https://github.com/JaveedIshaq/ng-dev-folio/blob/main/screenshot.png?raw=true" alt="Ng Dev Folio Screenshot"/>
-</p>
+
 
 A modern, responsive, and customizable portfolio website built with Angular 19. Perfect for developers looking to showcase their work, skills, and professional journey.
 
