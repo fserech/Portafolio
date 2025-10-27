@@ -12,10 +12,10 @@ import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 })
 export class WhatsappButtonComponent {
   whatsappIcon = faWhatsapp;
-  phoneNumber = '+923217281104';
+  phoneNumber = '+50241051656';
 
   openWhatsApp() {
-    const message = 'Hello! I visited your portfolio and would like to connect.';
+    const message = 'hola, quiero ponerme en contacto contigo!';
     const whatsappUrl = `https://wa.me/${this.phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   }
