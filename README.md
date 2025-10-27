@@ -191,14 +191,6 @@ export const projects = [
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
-
-- Original Portfolio Design by [Abu Said](https://github.com/said7388/developer-portfolio) built with Next.js
-- Angular Team for the amazing framework
-- Tailwind CSS for the utility-first CSS framework
-- EmailJS for the email service
-- Dev.to for the blog integration capabilities
-
 ---
 
 ## What's Next?
