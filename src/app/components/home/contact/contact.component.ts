@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faEnvelope, faPhone, faLocationDot } from '@fortawesome/free-solid-svg-icons';
-import { faGithub, faLinkedin, faTwitter, faStackOverflow, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faLinkedin, faTwitter, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { personalData } from '../../../../utils/data/personal-data';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
 
@@ -23,6 +23,5 @@ export class ContactComponent {
   faGithub = faGithub;
   faLinkedin = faLinkedin;
   faTwitter = faTwitter;
-  faStackOverflow = faStackOverflow;
   faFacebook = faFacebook;
 }

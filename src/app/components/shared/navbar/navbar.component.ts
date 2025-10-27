@@ -15,7 +15,6 @@ export class NavbarComponent {
     { path: '/#experience', label: 'EXPERIENCE' },
     { path: '/#skills', label: 'SKILLS' },
     { path: '/#education', label: 'EDUCATION' },
-    { path: '/blog', label: 'BLOGS' },
     { path: '/#projects', label: 'PROJECTS' }
   ];
 }

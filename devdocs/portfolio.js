@@ -33,14 +33,9 @@ const greeting = {
 // Social Media Links
 
 const socialMediaLinks = {
-  github: "https://github.com/javeedishaq",
-  linkedin: "https://www.linkedin.com/in/javeed-ishaq/",
-  gmail: "ishaqjaveed1@gmail.com",
-  gitlab: "https://gitlab.com/JaveedIshaq",
-  facebook: "https://web.facebook.com/javeedishaq",
-  twitter: "https://twitter.com/javeedishaq",
-  medium: "https://medium.com/@javeedishaq",
-  stackoverflow: "https://stackoverflow.com/users/4778545/javeed-ishaq",
+ github: 'https://github.com/fserech',
+    facebook: 'https://www.facebook.com/fredy.serech',
+    linkedIn: 'https://www.linkedin.com/in/fredy-serech/',
   // Instagram, Twitter and Kaggle are also supported in the links!
   // To customize icons and social links, tweak src/components/SocialMedia
   display: true // Set true to display this section, defaults to false
