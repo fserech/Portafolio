@@ -87,7 +87,7 @@ export class ContactFormComponent implements OnInit {
         templateParams
       );
 
-      this.statusMessage = 'Message sent successfully!';
+      this.statusMessage = 'Mensaje enviado!';
 
       setTimeout(() => {
         this.statusMessage = '';
@@ -100,8 +100,8 @@ export class ContactFormComponent implements OnInit {
       };
 
     } catch (error) {
-      console.error('Error sending email:', error);
-      this.statusMessage = 'Failed to send message. Please try again.';
+      console.error('Error:', error);
+      this.statusMessage = 'Error al enviar el mensaje. Por favor, inténtalo de nuevo.';
     } finally {
       this.isLoading = false;
     }

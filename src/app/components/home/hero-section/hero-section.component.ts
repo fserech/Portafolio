@@ -18,6 +18,5 @@ export class HeroSectionComponent {
   faGithub = faGithub;
   faLinkedin = faLinkedin;
   faFacebook = faFacebookSquare;
-  faTwitter = faTwitterSquare;
   faDownload = faDownload;
 }

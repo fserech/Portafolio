@@ -15,12 +15,12 @@
 
         <div class="flex flex-col gap-2 ml-8">
             <div>
-                <span class="text-[#e87d88]">name:</span>
+                <span class="text-[#e87d88]">nombre:</span>
                 <span class="text-[#5ba0fc]">"{{project.name}}"</span>
                 <span class="text-gray-400">,</span>
             </div>
             <div>
-                <span class="text-[#e87d88]">tools:</span>
+                <span class="text-[#e87d88]">herramientas:</span>
                 <span class="text-[#5ba0fc]">[</span>
                 <span *ngFor="let tool of project.tools; let last = last" class="text-[#5ba0fc]">
                     "{{tool}}"{{!last ? ', ' : ''}}
@@ -29,12 +29,12 @@
                 <span class="text-gray-400">,</span>
             </div>
             <div>
-                <span class="text-[#e87d88]">role:</span>
+                <span class="text-[#e87d88]">rol:</span>
                 <span class="text-[#5ba0fc]">"{{project.role}}"</span>
                 <span class="text-gray-400">,</span>
             </div>
             <div>
-                <span class="text-[#e87d88]">description:</span>
+                <span class="text-[#e87d88]">descripcion:</span>
                 <span class="text-[#5ba0fc]">"{{project.description}}"</span>
             </div>
         </div>

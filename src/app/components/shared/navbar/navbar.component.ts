@@ -11,10 +11,10 @@ import { RouterModule } from '@angular/router';
 })
 export class NavbarComponent {
   navItems = [
-    { path: '/#about', label: 'ABOUT' },
-    { path: '/#experience', label: 'EXPERIENCE' },
-    { path: '/#skills', label: 'SKILLS' },
-    { path: '/#education', label: 'EDUCATION' },
-    { path: '/#projects', label: 'PROJECTS' }
+    { path: '/#about', label: 'SOBRE MI' },
+    { path: '/#experience', label: 'EXPERIENCIA' },
+    { path: '/#skills', label: 'HABILIDADES' },
+    { path: '/#education', label: 'EDUCACION' },
+    { path: '/#projects', label: 'PROYECTOS' }
   ];
 }
