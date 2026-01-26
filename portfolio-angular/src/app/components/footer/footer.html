@@ -1,35 +1,51 @@
-<footer class="bg-gray-900 dark:bg-black text-gray-300 py-12 border-t border-gray-800 dark:border-gray-800 transition-colors duration-300">
-  <div class="w-full px-4 sm:px-6 lg:px-12">
+<footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
+  <div class="w-full px-4 sm:px-6 lg:px-12 py-8">
     <div class="flex flex-col md:flex-row justify-between items-center gap-6">
 
+      <!-- Logo y descripción -->
       <div class="text-center md:text-left">
-        <h3 class="text-2xl font-bold text-white mb-2">
-          DEV<span class="text-blue-500">FOLIO</span>
+        <h3 class="text-lg font-bold font-mono text-gray-900 dark:text-white mb-2">
+          fredy@<span class="text-blue-600 dark:text-blue-500">dev
+          </span>
         </h3>
-        <p class="text-sm text-gray-400">
-          Construyendo el futuro de la web, un píxel a la vez.
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          Developer & Security Enthusiast
         </p>
       </div>
 
-      <div class="flex gap-6">
-        <a href="#" class="hover:text-blue-500 transition-colors">
-          <lucide-angular [img]="Github" [size]="20"></lucide-angular>
+      <!-- Links sociales -->
+      <div class="flex items-center gap-6">
+        <a href="#home" class="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
+          Inicio
         </a>
-        <a href="#" class="hover:text-blue-500 transition-colors">
-          <lucide-angular [img]="Linkedin" [size]="20"></lucide-angular>
+        <a href="#projects" class="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
+          Proyectos
         </a>
-        <a href="#" class="hover:text-blue-500 transition-colors">
-          <lucide-angular [img]="Twitter" [size]="20"></lucide-angular>
+        <a href="#contact" class="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
+          Contacto
         </a>
+        <div class="flex gap-4 ml-4 pl-4 border-l border-gray-300 dark:border-gray-700">
+          <a href="https://github.com/tu-usuario"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
+            <lucide-angular [img]="Github" [size]="18"></lucide-angular>
+          </a>
+          <a href="https://linkedin.com/in/tu-perfil"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
+            <lucide-angular [img]="Linkedin" [size]="18"></lucide-angular>
+          </a>
+        </div>
       </div>
     </div>
 
-    <div class="mt-8 pt-8 border-t border-gray-800 dark:border-gray-800 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-500">
-      <p>© {{ currentYear }} DevFolio. Todos los derechos reservados.</p>
-      <p class="flex items-center gap-1 mt-2 sm:mt-0">
-        Hecho con
-        <lucide-angular [img]="Heart" [size]="14" class="text-red-500 fill-red-500"></lucide-angular>
-        usando Angular & Tailwind
+    <!-- Copyright -->
+    <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-800 text-center">
+      <p class="text-sm text-gray-600 dark:text-gray-400">
+        © {{ currentYear }} Fredy. Hecho con pasion
+        usando Angular & Tailwind CSS
       </p>
     </div>
   </div>

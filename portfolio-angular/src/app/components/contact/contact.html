@@ -11,52 +11,54 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
 
-      <!-- Contact Info -->
-      <div class="bg-blue-600 dark:bg-blue-700 rounded-2xl p-8 sm:p-12 text-white shadow-xl overflow-hidden relative transition-colors h-full fade-in-left">
-        <h3 class="text-3xl font-bold mb-6">Información de Contacto</h3>
-        <p class="text-blue-100 mb-12 text-lg">
+      <!-- Contact Info - MODO CLARO: GRIS CLARO -->
+      <div class="bg-gray-200 dark:bg-gray-800 rounded-2xl p-8 sm:p-12 shadow-xl overflow-hidden relative border border-gray-300 dark:border-gray-700 transition-colors h-full fade-in-left">
+        <h3 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white transition-colors">
+          Información de Contacto
+        </h3>
+        <p class="text-gray-700 dark:text-gray-300 mb-12 text-lg transition-colors">
           Estoy disponible para trabajos freelance y oportunidades a tiempo completo.
           ¡No dudes en contactarme para discutir tu próximo proyecto!
         </p>
 
         <div class="space-y-8">
           <div class="flex items-start gap-6">
-            <div class="bg-white/10 p-4 rounded-xl shrink-0">
-              <lucide-angular [img]="Mail" class="h-6 w-6"></lucide-angular>
+            <div class="bg-blue-500 dark:bg-blue-600/20 p-4 rounded-xl shrink-0 border border-blue-600 dark:border-blue-500/30 transition-colors">
+              <lucide-angular [img]="Mail" class="h-6 w-6 text-white dark:text-blue-400 transition-colors"></lucide-angular>
             </div>
             <div>
-              <h4 class="font-semibold text-xl mb-1">Email</h4>
-              <p class="text-blue-100 text-lg">hola@tu-email.com</p>
+              <h4 class="font-semibold text-xl mb-1 text-gray-900 dark:text-white transition-colors">Email</h4>
+              <p class="text-gray-700 dark:text-gray-300 text-lg transition-colors">hola@tu-email.com</p>
             </div>
           </div>
 
           <div class="flex items-start gap-6">
-            <div class="bg-white/10 p-4 rounded-xl shrink-0">
-              <lucide-angular [img]="Phone" class="h-6 w-6"></lucide-angular>
+            <div class="bg-blue-500 dark:bg-blue-600/20 p-4 rounded-xl shrink-0 border border-blue-600 dark:border-blue-500/30 transition-colors">
+              <lucide-angular [img]="Phone" class="h-6 w-6 text-white dark:text-blue-400 transition-colors"></lucide-angular>
             </div>
             <div>
-              <h4 class="font-semibold text-xl mb-1">Teléfono</h4>
-              <p class="text-blue-100 text-lg">+34 123 456 789</p>
+              <h4 class="font-semibold text-xl mb-1 text-gray-900 dark:text-white transition-colors">Teléfono</h4>
+              <p class="text-gray-700 dark:text-gray-300 text-lg transition-colors">+34 123 456 789</p>
             </div>
           </div>
 
           <div class="flex items-start gap-6">
-            <div class="bg-white/10 p-4 rounded-xl shrink-0">
-              <lucide-angular [img]="MapPin" class="h-6 w-6"></lucide-angular>
+            <div class="bg-blue-500 dark:bg-blue-600/20 p-4 rounded-xl shrink-0 border border-blue-600 dark:border-blue-500/30 transition-colors">
+              <lucide-angular [img]="MapPin" class="h-6 w-6 text-white dark:text-blue-400 transition-colors"></lucide-angular>
             </div>
             <div>
-              <h4 class="font-semibold text-xl mb-1">Ubicación</h4>
-              <p class="text-blue-100 text-lg">Madrid, España (Remoto)</p>
+              <h4 class="font-semibold text-xl mb-1 text-gray-900 dark:text-white transition-colors">Ubicación</h4>
+              <p class="text-gray-700 dark:text-gray-300 text-lg transition-colors">Madrid, España (Remoto)</p>
             </div>
           </div>
         </div>
 
-        <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-2xl"></div>
-        <div class="absolute top-10 right-10 w-32 h-32 bg-white/5 rounded-full blur-xl"></div>
+        <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-blue-300/20 dark:bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div class="absolute top-10 right-10 w-32 h-32 bg-blue-200/30 dark:bg-blue-500/5 rounded-full blur-xl"></div>
       </div>
 
       <!-- Contact Form -->
-      <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 sm:p-12 shadow-lg border border-gray-100 dark:border-gray-700 transition-colors h-full fade-in-right">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 sm:p-12 shadow-lg border border-gray-200 dark:border-gray-700 transition-colors h-full fade-in-right">
         <form (ngSubmit)="onSubmit($event)" class="space-y-8 h-full flex flex-col justify-center">
 
           <div>
@@ -68,7 +70,7 @@
                    [(ngModel)]="formData.name"
                    name="name"
                    required
-                   class="w-full px-4 py-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                   class="w-full px-4 py-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                    placeholder="Juan Pérez">
           </div>
 
@@ -81,7 +83,7 @@
                    [(ngModel)]="formData.email"
                    name="email"
                    required
-                   class="w-full px-4 py-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                   class="w-full px-4 py-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
                    placeholder="juan@ejemplo.com">
           </div>
 
@@ -94,7 +96,7 @@
                       name="message"
                       required
                       rows="5"
-                      class="w-full px-4 py-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
+                      class="w-full px-4 py-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
                       placeholder="Cuéntame sobre tu proyecto..."></textarea>
           </div>
 

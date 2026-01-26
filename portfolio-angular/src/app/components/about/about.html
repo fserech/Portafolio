@@ -9,9 +9,10 @@
       </p>
     </div>
 
+    <!-- Cards de características -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <div *ngFor="let feature of features; let i = index"
-           class="p-8 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg dark:hover:shadow-blue-900/10 transition-all border border-gray-100 dark:border-gray-700 fade-in-up"
+           class="p-8 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg dark:hover:shadow-blue-900/10 transition-all border border-gray-200 dark:border-gray-700 fade-in-up"
            [style.animation-delay.ms]="i * 200">
         <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-6 transition-colors">
           <lucide-angular [img]="feature.icon" class="h-6 w-6 text-blue-600 dark:text-blue-400"></lucide-angular>
@@ -25,27 +26,30 @@
       </div>
     </div>
 
-    <div class="mt-16 bg-blue-600 dark:bg-blue-700 rounded-2xl p-8 sm:p-12 text-white overflow-hidden relative transition-colors">
+    <!-- Sección "¿Por qué trabajar conmigo?" - MODO CLARO: GRIS CLARO -->
+    <div class="mt-16 bg-gray-200 dark:bg-gray-800 rounded-2xl p-8 sm:p-12 overflow-hidden relative border border-gray-300 dark:border-gray-700 transition-colors">
       <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <div>
-          <h3 class="text-2xl font-bold mb-4">¿Por qué trabajar conmigo?</h3>
-          <p class="text-blue-100 mb-6 text-lg">
+          <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white transition-colors">
+            ¿Por qué trabajar conmigo?
+          </h3>
+          <p class="text-gray-700 dark:text-gray-300 mb-6 text-lg transition-colors">
             Combino habilidades técnicas sólidas con una gran capacidad de comunicación y trabajo en equipo.
             Me mantengo actualizado con las últimas tendencias de React, Angular y el ecosistema web moderno.
           </p>
         </div>
         <div class="grid grid-cols-2 gap-8">
-          <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl text-center">
-            <span class="block text-4xl font-bold mb-2">3+</span>
-            <span class="text-sm text-blue-100 uppercase tracking-wider">Años de Exp.</span>
+          <div class="bg-blue-500 dark:bg-blue-600/20 backdrop-blur-sm p-6 rounded-xl text-center border border-blue-600 dark:border-blue-500/30 transition-colors">
+            <span class="block text-4xl font-bold mb-2 text-white dark:text-blue-400 transition-colors">3+</span>
+            <span class="text-sm text-white dark:text-gray-300 uppercase tracking-wider transition-colors">AÑOS DE EXP.</span>
           </div>
-          <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl text-center">
-            <span class="block text-4xl font-bold mb-2">20+</span>
-            <span class="text-sm text-blue-100 uppercase tracking-wider">Proyectos</span>
+          <div class="bg-blue-500 dark:bg-blue-600/20 backdrop-blur-sm p-6 rounded-xl text-center border border-blue-600 dark:border-blue-500/30 transition-colors">
+            <span class="block text-4xl font-bold mb-2 text-white dark:text-blue-400 transition-colors">20+</span>
+            <span class="text-sm text-white dark:text-gray-300 uppercase tracking-wider transition-colors">PROYECTOS</span>
           </div>
         </div>
       </div>
-      <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-white/10 rounded-full blur-2xl"></div>
+      <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-blue-300/20 dark:bg-blue-500/10 rounded-full blur-3xl"></div>
     </div>
   </div>
 </section>
