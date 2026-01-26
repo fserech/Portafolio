@@ -1,4 +1,4 @@
-import { Injectable, signal, effect, PLATFORM_ID, inject } from '@angular/core';
+import { Injectable, signal, PLATFORM_ID, inject, effect } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
@@ -8,40 +8,54 @@ export class ThemeService {
   private platformId = inject(PLATFORM_ID);
   private isBrowser = isPlatformBrowser(this.platformId);
 
-  darkMode = signal<boolean>(false);
+  darkMode = signal(this.getInitialTheme());
 
   constructor() {
-    console.log('ThemeService initialized, isBrowser:', this.isBrowser);
+    // Aplicar tema automáticamente cuando cambia
+    effect(() => {
+      if (this.isBrowser) {
+        this.applyTheme(this.darkMode());
+      }
+    });
+  }
 
-    if (this.isBrowser) {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const savedTheme = localStorage.getItem('theme');
+  private getInitialTheme(): boolean {
+    if (!this.isBrowser) {
+      return false;
+    }
 
-      console.log('Saved theme:', savedTheme, 'Prefers dark:', prefersDark);
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      return savedTheme === 'dark';
+    }
 
-      const shouldBeDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
-      this.darkMode.set(shouldBeDark);
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
 
-      effect(() => {
-        const isDark = this.darkMode();
-        console.log('Theme effect running, isDark:', isDark);
+  toggleTheme(): void {
+    if (!this.isBrowser) return;
 
-        if (isDark) {
-          document.documentElement.classList.add('dark');
-          localStorage.setItem('theme', 'dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-          localStorage.setItem('theme', 'light');
-        }
-      });
+    this.darkMode.update(value => {
+      const newValue = !value;
+      localStorage.setItem('theme', newValue ? 'dark' : 'light');
+      return newValue;
+    });
+  }
+
+  private applyTheme(isDark: boolean): void {
+    if (!this.isBrowser) return;
+
+    const html = document.documentElement;
+
+    if (isDark) {
+      html.classList.add('dark');
+    } else {
+      html.classList.remove('dark');
     }
   }
 
-  toggleTheme() {
-    if (this.isBrowser) {
-      console.log('toggleTheme called, current value:', this.darkMode());
-      this.darkMode.update(value => !value);
-      console.log('toggleTheme after update:', this.darkMode());
-    }
+  initTheme(): void {
+    if (!this.isBrowser) return;
+    this.applyTheme(this.darkMode());
   }
 }

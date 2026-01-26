@@ -1,6 +1,6 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, HostListener, signal, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { LucideAngularModule, Menu, X, Moon, Sun } from 'lucide-angular';
 import { ThemeService } from '../../services/theme';
 
@@ -14,9 +14,21 @@ interface NavLink {
   standalone: true,
   imports: [CommonModule, LucideAngularModule],
   templateUrl: './navbar.html',
-  styleUrls: ['./navbar.scss']
+  styleUrls: ['./navbar.scss'],
+  animations: [
+    trigger('slideDown', [
+      transition(':enter', [
+        style({ height: '0', opacity: '0', overflow: 'hidden' }),
+        animate('200ms ease-out', style({ height: '*', opacity: '1' }))
+      ]),
+      transition(':leave', [
+        style({ height: '*', opacity: '1', overflow: 'hidden' }),
+        animate('200ms ease-in', style({ height: '0', opacity: '0' }))
+      ])
+    ])
+  ]
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   readonly Menu = Menu;
   readonly X = X;
   readonly Moon = Moon;
@@ -34,6 +46,10 @@ export class NavbarComponent {
   ];
 
   constructor(public themeService: ThemeService) {}
+
+  ngOnInit() {
+    this.themeService.initTheme();
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
