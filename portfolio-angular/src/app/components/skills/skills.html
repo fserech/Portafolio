@@ -1,1 +1,28 @@
-<p>skills works!</p>
+<section id="skills" class="py-20 bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
+  <div class="w-full px-4 sm:px-6 lg:px-12">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl transition-colors">
+        Habilidades Técnicas
+      </h2>
+      <p class="mt-4 text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto transition-colors">
+        Mi stack tecnológico actual y herramientas que utilizo en mi día a día.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div *ngFor="let category of skillCategories; let i = index"
+           class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md dark:shadow-none transition-all p-8 border border-gray-100 dark:border-gray-700 skill-card"
+           [style.animation-delay.ms]="i * 100">
+        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-100 dark:border-gray-700 transition-colors">
+          {{ category.title }}
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          <span *ngFor="let skill of category.skills"
+                class="px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm rounded-full font-medium transition-colors">
+            {{ skill }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

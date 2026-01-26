@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { LucideAngularModule, ArrowRight, Github, Linkedin, Mail } from 'lucide-angular';
 
 @Component({
   selector: 'app-hero',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, LucideAngularModule],
   templateUrl: './hero.html',
-  styleUrl: './hero.scss',
+  styleUrls: ['./hero.scss']
 })
-export class Hero {
+export class HeroComponent {
+  @Input() imageUrl: string = '';
 
+  readonly ArrowRight = ArrowRight;
+  readonly Github = Github;
+  readonly Linkedin = Linkedin;
+  readonly Mail = Mail;
 }

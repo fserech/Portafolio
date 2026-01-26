@@ -1,1 +1,61 @@
-<p>navbar works!</p>
+<nav [class]="'fixed top-0 left-0 right-0 z-50 transition-all duration-300 ' +
+  (scrolled() ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm border-b border-gray-200/50 dark:border-gray-800/50' : 'bg-transparent')">
+
+  <div class="w-full px-4 sm:px-6 lg:px-12">
+    <div class="flex justify-between items-center h-16">
+
+      <!-- Logo -->
+      <div class="flex-shrink-0 flex items-center">
+        <a href="#" class="font-bold text-xl tracking-tighter text-gray-900 dark:text-white transition-colors">
+          DEV<span class="text-blue-600 dark:text-blue-500">FOLIO</span>
+        </a>
+      </div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a *ngFor="let link of navLinks"
+           [href]="link.href"
+           class="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+          {{ link.name }}
+        </a>
+
+        <!-- Theme Toggle Desktop -->
+        <button (click)="themeService.toggleTheme()"
+                class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+                aria-label="Toggle Dark Mode">
+          <lucide-angular *ngIf="!themeService.darkMode()" [img]="Moon" [size]="20"></lucide-angular>
+          <lucide-angular *ngIf="themeService.darkMode()" [img]="Sun" [size]="20"></lucide-angular>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden flex items-center gap-4">
+        <button (click)="themeService.toggleTheme()"
+                class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+          <lucide-angular *ngIf="!themeService.darkMode()" [img]="Moon" [size]="20"></lucide-angular>
+          <lucide-angular *ngIf="themeService.darkMode()" [img]="Sun" [size]="20"></lucide-angular>
+        </button>
+
+        <button (click)="toggleMenu()"
+                class="text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white focus:outline-none">
+          <lucide-angular *ngIf="!isOpen()" [img]="Menu" [size]="24"></lucide-angular>
+          <lucide-angular *ngIf="isOpen()" [img]="X" [size]="24"></lucide-angular>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div *ngIf="isOpen()"
+       class="md:hidden bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800"
+       [@slideDown]>
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      <a *ngFor="let link of navLinks"
+         [href]="link.href"
+         (click)="closeMenu()"
+         class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+        {{ link.name }}
+      </a>
+    </div>
+  </div>
+</nav>
