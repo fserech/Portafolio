@@ -1,0 +1,39 @@
+{
+  "projects": [
+    {
+      "id": "yami-system",
+      "title": "Sistema de Gestión Yami",
+      "description": "Sistema empresarial completo para gestión de inventarios, ventas, clientes y productos. Incluye dashboard interactivo con KPIs en tiempo real, gestión de roles, reportes avanzados y análisis de tendencias.",
+      "image": "/assets/images/projects/yami.png",
+      "category": "enterprise",
+      "technologies": ["Angular", "Node.js", "PostgreSQL", "Tailwind CSS"],
+      "featured": true,
+      "demoUrl": "https://yami-demo.com",
+      "githubUrl": "https://github.com/tu-usuario/yami",
+      "year": 2024
+    },
+    {
+      "id": "ecommerce-modern",
+      "title": "E-commerce Moderno",
+      "description": "Tienda en línea con carrito de compras, pasarela de pago simulada y filtrado avanzado de productos. Diseño totalmente responsivo.",
+      "image": "/assets/images/projects/ecommerce.png",
+      "category": "ecommerce",
+      "technologies": ["Angular", "RxJS", "Stripe API", "SCSS"],
+      "featured": false,
+      "demoUrl": "https://ecommerce-demo.com",
+      "githubUrl": "https://github.com/tu-usuario/ecommerce",
+      "year": 2024
+    },
+    {
+      "id": "landing-corporate",
+      "title": "Landing Page Corporativa",
+      "description": "Página de aterrizaje de alta conversión para una startup tecnológica. Incluye animaciones suaves y formularios integrados.",
+      "image": "/assets/images/projects/landing.png",
+      "category": "landing",
+      "technologies": ["Angular", "Animations", "Tailwind CSS"],
+      "featured": false,
+      "demoUrl": "https://landing-demo.com",
+      "year": 2023
+    }
+  ]
+}
