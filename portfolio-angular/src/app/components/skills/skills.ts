@@ -17,19 +17,19 @@ export class SkillsComponent {
   skillCategories: SkillCategory[] = [
     {
       title: 'Frontend Core',
-      skills: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'TypeScript', 'React', 'Angular']
+      skills: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'TypeScript', 'Angular']
+    },
+    {
+      title: 'Backend',
+      skills: ['Spring Boot', 'Java', 'REST APIs', 'MySQL']
     },
     {
       title: 'Estilos & UI',
       skills: ['Tailwind CSS', 'SASS/SCSS', 'Framer Motion', 'Material UI', 'Bootstrap']
     },
     {
-      title: 'Herramientas',
-      skills: ['Git & GitHub', 'VS Code', 'Vite', 'Webpack', 'NPM/Yarn', 'Figma']
-    },
-    {
-      title: 'Otros',
-      skills: ['REST APIs', 'GraphQL', 'SEO Básico', 'Accesibilidad (a11y)', 'Performance']
+      title: 'DevOps & Herramientas',
+      skills: ['Docker', 'Git & GitHub', 'VS Code', 'Vite', 'Webpack', 'NPM/Yarn', 'Figma']
     }
   ];
 }
