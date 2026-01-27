@@ -21,7 +21,7 @@ export class SkillsComponent {
     },
     {
       title: 'Backend',
-      skills: ['Spring Boot', 'Java', 'REST APIs', 'MySQL']
+      skills: ['Spring Boot', 'Java', 'Postman', 'MySQL']
     },
     {
       title: 'Estilos & UI',
@@ -29,7 +29,7 @@ export class SkillsComponent {
     },
     {
       title: 'DevOps & Herramientas',
-      skills: ['Docker', 'Git & GitHub', 'VS Code', 'Vite', 'Webpack', 'NPM/Yarn', 'Figma']
+      skills: ['Docker', 'Git & GitHub', 'VS Code', 'Figma']
     }
   ];
 }
