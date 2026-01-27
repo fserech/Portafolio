@@ -1,19 +1,25 @@
 <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
   <div class="w-full px-4 sm:px-6 lg:px-12 py-8">
+    <!-- Todo en una línea -->
     <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-
       <!-- Logo y descripción -->
       <div class="text-center md:text-left">
         <h3 class="text-lg font-bold font-mono text-gray-900 dark:text-white mb-2">
-          fredy@<span class="text-blue-600 dark:text-blue-500">dev
-          </span>
+          fredy@<span class="text-blue-600 dark:text-blue-500">dev</span>
         </h3>
         <p class="text-sm text-gray-600 dark:text-gray-400">
           Developer & Security Enthusiast
         </p>
       </div>
 
-      <!-- Links sociales -->
+      <!-- Centro: Copyright -->
+      <div class="text-center">
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          © {{ currentYear }} Fredy Serech. Hecho con pasión usando Angular & Tailwind CSS
+        </p>
+      </div>
+
+      <!-- Derecha: Links e iconos sociales -->
       <div class="flex items-center gap-6">
         <a href="#home" class="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
           Inicio
@@ -24,29 +30,34 @@
         <a href="#contact" class="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
           Contacto
         </a>
+
         <div class="flex gap-4 ml-4 pl-4 border-l border-gray-300 dark:border-gray-700">
-          <a href="https://github.com/tu-usuario"
+          <!-- GitHub -->
+          <a href="https://github.com/fserech"
              target="_blank"
              rel="noopener noreferrer"
-             class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
+             class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors"
+             title="GitHub">
             <lucide-angular [img]="Github" [size]="18"></lucide-angular>
           </a>
-          <a href="https://linkedin.com/in/tu-perfil"
+
+          <!-- LinkedIn -->
+          <a href="https://www.linkedin.com/in/fredy-serech-08a11a246"
              target="_blank"
              rel="noopener noreferrer"
-             class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
+             class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors"
+             title="LinkedIn">
             <lucide-angular [img]="Linkedin" [size]="18"></lucide-angular>
+          </a>
+
+          <!-- Email -->
+          <a href="mailto:serech63@gmail.com"
+             class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors"
+             title="Email">
+            <lucide-angular [img]="Mail" [size]="18"></lucide-angular>
           </a>
         </div>
       </div>
-    </div>
-
-    <!-- Copyright -->
-    <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-800 text-center">
-      <p class="text-sm text-gray-600 dark:text-gray-400">
-        © {{ currentYear }} Fredy. Hecho con pasion
-        usando Angular & Tailwind CSS
-      </p>
     </div>
   </div>
 </footer>
