@@ -1,51 +1,127 @@
-<section id="about" class="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+<section id="about" class="bg-white dark:bg-gray-900 transition-colors duration-300
+                                   max-[575.98px]:py-12
+                                   min-[768px]:max-[991.98px]:py-16
+                                   min-[992px]:max-[1199.98px]:py-20
+                                   min-[1200px]:py-20">
   <div class="w-full px-4 sm:px-6 lg:px-12">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl transition-colors">
+    <!-- Header -->
+    <div class="text-center
+                max-[575.98px]:mb-10
+                min-[768px]:max-[991.98px]:mb-12
+                min-[992px]:mb-16">
+      <h2 class="font-bold text-gray-900 dark:text-white transition-colors
+                 max-[575.98px]:text-2xl
+                 min-[768px]:max-[991.98px]:text-3xl
+                 min-[992px]:max-[1199.98px]:text-3xl
+                 min-[1200px]:text-4xl">
         Sobre Mí
       </h2>
-      <p class="mt-4 text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto transition-colors">
+      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-3xl mx-auto transition-colors
+                max-[575.98px]:text-base max-[575.98px]:mt-3 max-[575.98px]:px-4
+                min-[768px]:max-[991.98px]:text-lg min-[768px]:max-[991.98px]:mt-3
+                min-[992px]:max-[1199.98px]:text-xl min-[992px]:max-[1199.98px]:mt-4
+                min-[1200px]:text-xl min-[1200px]:mt-4">
         Más que un desarrollador, soy un apasionado por crear soluciones digitales que impactan.
       </p>
     </div>
 
     <!-- Cards de características -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="grid gap-8
+                max-[575.98px]:grid-cols-1 max-[575.98px]:gap-6
+                min-[768px]:max-[991.98px]:grid-cols-2 min-[768px]:max-[991.98px]:gap-6
+                min-[992px]:max-[1199.98px]:grid-cols-3 min-[992px]:max-[1199.98px]:gap-6
+                min-[1200px]:grid-cols-3 min-[1200px]:gap-8">
       <div *ngFor="let feature of features; let i = index"
-           class="p-8 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg dark:hover:shadow-blue-900/10 transition-all border border-gray-200 dark:border-gray-700 fade-in-up"
+           class="bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg dark:hover:shadow-blue-900/10 transition-all border border-gray-200 dark:border-gray-700 fade-in-up
+                  max-[575.98px]:p-6
+                  min-[768px]:max-[991.98px]:p-7
+                  min-[992px]:max-[1199.98px]:p-8
+                  min-[1200px]:p-8"
            [style.animation-delay.ms]="i * 200">
-        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-6 transition-colors">
-          <lucide-angular [img]="feature.icon" class="h-6 w-6 text-blue-600 dark:text-blue-400"></lucide-angular>
+        <div class="bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-6 transition-colors
+                    max-[575.98px]:w-10 max-[575.98px]:h-10 max-[575.98px]:mb-4
+                    min-[768px]:max-[991.98px]:w-11 min-[768px]:max-[991.98px]:h-11 min-[768px]:max-[991.98px]:mb-5
+                    min-[992px]:w-12 min-[992px]:h-12">
+          <lucide-angular [img]="feature.icon"
+                         class="text-blue-600 dark:text-blue-400
+                                max-[575.98px]:h-5 max-[575.98px]:w-5
+                                min-[768px]:max-[991.98px]:h-5 min-[768px]:max-[991.98px]:w-5
+                                min-[992px]:h-6 min-[992px]:w-6"></lucide-angular>
         </div>
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 transition-colors">
+        <h3 class="font-bold text-gray-900 dark:text-white mb-3 transition-colors
+                   max-[575.98px]:text-lg max-[575.98px]:mb-2
+                   min-[768px]:max-[991.98px]:text-lg min-[768px]:max-[991.98px]:mb-2
+                   min-[992px]:max-[1199.98px]:text-xl min-[992px]:max-[1199.98px]:mb-3
+                   min-[1200px]:text-xl min-[1200px]:mb-3">
           {{ feature.title }}
         </h3>
-        <p class="text-gray-600 dark:text-gray-400 leading-relaxed transition-colors">
+        <p class="text-gray-600 dark:text-gray-400 leading-relaxed transition-colors
+                  max-[575.98px]:text-sm
+                  min-[768px]:max-[991.98px]:text-sm
+                  min-[992px]:text-base">
           {{ feature.description }}
         </p>
       </div>
     </div>
 
-    <!-- Sección "¿Por qué trabajar conmigo?" - MODO CLARO: GRIS CLARO -->
-    <div class="mt-16 bg-gray-200 dark:bg-gray-800 rounded-2xl p-8 sm:p-12 overflow-hidden relative border border-gray-300 dark:border-gray-700 transition-colors">
-      <div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+    <!-- Sección "¿Por qué trabajar conmigo?" -->
+    <div class="bg-gray-200 dark:bg-gray-800 rounded-2xl overflow-hidden relative border border-gray-300 dark:border-gray-700 transition-colors
+                max-[575.98px]:mt-10 max-[575.98px]:p-6 max-[575.98px]:rounded-xl
+                min-[768px]:max-[991.98px]:mt-12 min-[768px]:max-[991.98px]:p-8
+                min-[992px]:max-[1199.98px]:mt-14 min-[992px]:max-[1199.98px]:p-10
+                min-[1200px]:mt-16 min-[1200px]:p-12">
+      <div class="relative z-10 grid items-center
+                  max-[575.98px]:grid-cols-1 max-[575.98px]:gap-6
+                  min-[768px]:max-[991.98px]:grid-cols-1 min-[768px]:max-[991.98px]:gap-8
+                  min-[992px]:grid-cols-2 min-[992px]:gap-12">
         <div>
-          <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white transition-colors">
+          <h3 class="font-bold mb-4 text-gray-900 dark:text-white transition-colors
+                     max-[575.98px]:text-xl max-[575.98px]:mb-3
+                     min-[768px]:max-[991.98px]:text-xl min-[768px]:max-[991.98px]:mb-3
+                     min-[992px]:max-[1199.98px]:text-2xl min-[992px]:max-[1199.98px]:mb-4
+                     min-[1200px]:text-2xl min-[1200px]:mb-4">
             ¿Por qué trabajar conmigo?
           </h3>
-          <p class="text-gray-700 dark:text-gray-300 mb-6 text-lg transition-colors">
+          <p class="text-gray-700 dark:text-gray-300 mb-6 transition-colors
+                    max-[575.98px]:text-base max-[575.98px]:mb-4
+                    min-[768px]:max-[991.98px]:text-base min-[768px]:max-[991.98px]:mb-5
+                    min-[992px]:max-[1199.98px]:text-lg min-[992px]:max-[1199.98px]:mb-6
+                    min-[1200px]:text-lg min-[1200px]:mb-6">
             Combino habilidades técnicas sólidas con una gran capacidad de trabajo en equipo.
-            Me mantengo actualizado con las últimas tendencias de  Angular y el ecosistema web moderno.
+            Me mantengo actualizado con las últimas tendencias de Angular y el ecosistema web moderno.
           </p>
         </div>
-        <div class="grid grid-cols-2 gap-8">
-          <div class="bg-blue-500 dark:bg-blue-600/20 backdrop-blur-sm p-6 rounded-xl text-center border border-blue-600 dark:border-blue-500/30 transition-colors">
-            <span class="block text-4xl font-bold mb-2 text-white dark:text-blue-400 transition-colors">3+</span>
-            <span class="text-sm text-white dark:text-gray-300 uppercase tracking-wider transition-colors">AÑOS DE EXP.</span>
+        <div class="grid grid-cols-2
+                    max-[575.98px]:gap-4
+                    min-[768px]:max-[991.98px]:gap-6
+                    min-[992px]:gap-8">
+          <div class="bg-blue-500 dark:bg-blue-600/20 backdrop-blur-sm rounded-xl text-center border border-blue-600 dark:border-blue-500/30 transition-colors
+                      max-[575.98px]:p-4
+                      min-[768px]:max-[991.98px]:p-5
+                      min-[992px]:p-6">
+            <span class="block font-bold mb-2 text-white dark:text-blue-400 transition-colors
+                         max-[575.98px]:text-2xl max-[575.98px]:mb-1
+                         min-[768px]:max-[991.98px]:text-3xl min-[768px]:max-[991.98px]:mb-1
+                         min-[992px]:max-[1199.98px]:text-4xl min-[992px]:max-[1199.98px]:mb-2
+                         min-[1200px]:text-4xl min-[1200px]:mb-2">3+</span>
+            <span class="text-white dark:text-gray-300 uppercase tracking-wider transition-colors
+                         max-[575.98px]:text-xs
+                         min-[768px]:max-[991.98px]:text-xs
+                         min-[992px]:text-sm">AÑOS DE EXP.</span>
           </div>
-          <div class="bg-blue-500 dark:bg-blue-600/20 backdrop-blur-sm p-6 rounded-xl text-center border border-blue-600 dark:border-blue-500/30 transition-colors">
-            <span class="block text-4xl font-bold mb-2 text-white dark:text-blue-400 transition-colors">20+</span>
-            <span class="text-sm text-white dark:text-gray-300 uppercase tracking-wider transition-colors">PROYECTOS</span>
+          <div class="bg-blue-500 dark:bg-blue-600/20 backdrop-blur-sm rounded-xl text-center border border-blue-600 dark:border-blue-500/30 transition-colors
+                      max-[575.98px]:p-4
+                      min-[768px]:max-[991.98px]:p-5
+                      min-[992px]:p-6">
+            <span class="block font-bold mb-2 text-white dark:text-blue-400 transition-colors
+                         max-[575.98px]:text-2xl max-[575.98px]:mb-1
+                         min-[768px]:max-[991.98px]:text-3xl min-[768px]:max-[991.98px]:mb-1
+                         min-[992px]:max-[1199.98px]:text-4xl min-[992px]:max-[1199.98px]:mb-2
+                         min-[1200px]:text-4xl min-[1200px]:mb-2">20+</span>
+            <span class="text-white dark:text-gray-300 uppercase tracking-wider transition-colors
+                         max-[575.98px]:text-xs
+                         min-[768px]:max-[991.98px]:text-xs
+                         min-[992px]:text-sm">PROYECTOS</span>
           </div>
         </div>
       </div>

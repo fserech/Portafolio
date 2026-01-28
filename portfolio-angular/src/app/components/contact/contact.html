@@ -1,54 +1,141 @@
-<section id="contact" class="py-20 bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
+<section id="contact" class="bg-gray-50 dark:bg-gray-950 transition-colors duration-300
+                                      max-[575.98px]:py-12
+                                      min-[768px]:max-[991.98px]:py-16
+                                      min-[992px]:max-[1199.98px]:py-20
+                                      min-[1200px]:py-20">
   <div class="w-full px-4 sm:px-6 lg:px-12">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl transition-colors">
+    <!-- Header -->
+    <div class="text-center
+                max-[575.98px]:mb-10
+                min-[768px]:max-[991.98px]:mb-12
+                min-[992px]:mb-16">
+      <h2 class="font-bold text-gray-900 dark:text-white transition-colors
+                 max-[575.98px]:text-2xl
+                 min-[768px]:max-[991.98px]:text-3xl
+                 min-[992px]:max-[1199.98px]:text-3xl
+                 min-[1200px]:text-4xl">
         Hablemos
       </h2>
-      <p class="mt-4 text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto transition-colors">
+      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-3xl mx-auto transition-colors
+                max-[575.98px]:text-base max-[575.98px]:mt-3 max-[575.98px]:px-4
+                min-[768px]:max-[991.98px]:text-lg min-[768px]:max-[991.98px]:mt-3
+                min-[992px]:max-[1199.98px]:text-xl min-[992px]:max-[1199.98px]:mt-4
+                min-[1200px]:text-xl min-[1200px]:mt-4">
         ¿Tienes un proyecto en mente o quieres colaborar? ¡Me encantaría escucharte!
       </p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-7xl mx-auto">
+    <div class="grid max-w-7xl mx-auto
+                max-[575.98px]:grid-cols-1 max-[575.98px]:gap-8
+                min-[768px]:max-[991.98px]:grid-cols-1 min-[768px]:max-[991.98px]:gap-10
+                min-[992px]:grid-cols-2 min-[992px]:gap-12">
 
-      <!-- Contact Info - MODO CLARO: GRIS CLARO -->
-      <div class="bg-gray-200 dark:bg-gray-800 rounded-2xl p-8 sm:p-12 shadow-xl overflow-hidden relative border border-gray-300 dark:border-gray-700 transition-colors h-full fade-in-left">
-        <h3 class="text-3xl font-bold mb-6 text-gray-900 dark:text-white transition-colors">
+      <!-- Contact Info -->
+      <div class="bg-gray-200 dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden relative border border-gray-300 dark:border-gray-700 transition-colors h-full fade-in-left
+                  max-[575.98px]:p-6 max-[575.98px]:rounded-xl
+                  min-[768px]:max-[991.98px]:p-8 min-[768px]:max-[991.98px]:rounded-2xl
+                  min-[992px]:max-[1199.98px]:p-10
+                  min-[1200px]:p-12">
+        <h3 class="font-bold mb-6 text-gray-900 dark:text-white transition-colors
+                   max-[575.98px]:text-xl max-[575.98px]:mb-4
+                   min-[768px]:max-[991.98px]:text-2xl min-[768px]:max-[991.98px]:mb-5
+                   min-[992px]:max-[1199.98px]:text-2xl min-[992px]:max-[1199.98px]:mb-6
+                   min-[1200px]:text-3xl min-[1200px]:mb-6">
           Información de Contacto
         </h3>
-        <p class="text-gray-700 dark:text-gray-300 mb-12 text-lg transition-colors">
+        <p class="text-gray-700 dark:text-gray-300 mb-12 transition-colors
+                  max-[575.98px]:text-sm max-[575.98px]:mb-8
+                  min-[768px]:max-[991.98px]:text-base min-[768px]:max-[991.98px]:mb-10
+                  min-[992px]:max-[1199.98px]:text-lg min-[992px]:max-[1199.98px]:mb-10
+                  min-[1200px]:text-lg min-[1200px]:mb-12">
           Estoy disponible para trabajos freelance y oportunidades a tiempo completo.
           ¡No dudes en contactarme para discutir tu próximo proyecto!
         </p>
 
-        <div class="space-y-8">
-          <div class="flex items-start gap-6">
-            <div class="bg-blue-500 dark:bg-blue-600/20 p-4 rounded-xl shrink-0 border border-blue-600 dark:border-blue-500/30 transition-colors">
-              <lucide-angular [img]="Mail" class="h-6 w-6 text-white dark:text-blue-400 transition-colors"></lucide-angular>
+        <div class="space-y-8
+                    max-[575.98px]:space-y-6
+                    min-[768px]:max-[991.98px]:space-y-7">
+          <!-- Email -->
+          <div class="flex items-start
+                      max-[575.98px]:gap-4
+                      min-[768px]:max-[991.98px]:gap-5
+                      min-[992px]:gap-6">
+            <div class="bg-blue-500 dark:bg-blue-600/20 rounded-xl shrink-0 border border-blue-600 dark:border-blue-500/30 transition-colors
+                        max-[575.98px]:p-3
+                        min-[768px]:max-[991.98px]:p-3.5
+                        min-[992px]:p-4">
+              <lucide-angular [img]="Mail"
+                             class="text-white dark:text-blue-400 transition-colors
+                                    max-[575.98px]:h-5 max-[575.98px]:w-5
+                                    min-[768px]:max-[991.98px]:h-5 min-[768px]:max-[991.98px]:w-5
+                                    min-[992px]:h-6 min-[992px]:w-6"></lucide-angular>
             </div>
             <div>
-              <h4 class="font-semibold text-xl mb-1 text-gray-900 dark:text-white transition-colors">Email</h4>
-              <p class="text-gray-700 dark:text-gray-300 text-lg transition-colors">serech63@gmail.com</p>
+              <h4 class="font-semibold mb-1 text-gray-900 dark:text-white transition-colors
+                         max-[575.98px]:text-base max-[575.98px]:mb-0.5
+                         min-[768px]:max-[991.98px]:text-lg min-[768px]:max-[991.98px]:mb-1
+                         min-[992px]:max-[1199.98px]:text-xl min-[992px]:max-[1199.98px]:mb-1
+                         min-[1200px]:text-xl min-[1200px]:mb-1">Email</h4>
+              <p class="text-gray-700 dark:text-gray-300 transition-colors
+                        max-[575.98px]:text-sm
+                        min-[768px]:max-[991.98px]:text-base
+                        min-[992px]:text-lg">serech63@gmail.com</p>
             </div>
           </div>
 
-          <div class="flex items-start gap-6">
-            <div class="bg-blue-500 dark:bg-blue-600/20 p-4 rounded-xl shrink-0 border border-blue-600 dark:border-blue-500/30 transition-colors">
-              <lucide-angular [img]="Phone" class="h-6 w-6 text-white dark:text-blue-400 transition-colors"></lucide-angular>
+          <!-- Phone -->
+          <div class="flex items-start
+                      max-[575.98px]:gap-4
+                      min-[768px]:max-[991.98px]:gap-5
+                      min-[992px]:gap-6">
+            <div class="bg-blue-500 dark:bg-blue-600/20 rounded-xl shrink-0 border border-blue-600 dark:border-blue-500/30 transition-colors
+                        max-[575.98px]:p-3
+                        min-[768px]:max-[991.98px]:p-3.5
+                        min-[992px]:p-4">
+              <lucide-angular [img]="Phone"
+                             class="text-white dark:text-blue-400 transition-colors
+                                    max-[575.98px]:h-5 max-[575.98px]:w-5
+                                    min-[768px]:max-[991.98px]:h-5 min-[768px]:max-[991.98px]:w-5
+                                    min-[992px]:h-6 min-[992px]:w-6"></lucide-angular>
             </div>
             <div>
-              <h4 class="font-semibold text-xl mb-1 text-gray-900 dark:text-white transition-colors">Teléfono</h4>
-              <p class="text-gray-700 dark:text-gray-300 text-lg transition-colors">+50241051656</p>
+              <h4 class="font-semibold mb-1 text-gray-900 dark:text-white transition-colors
+                         max-[575.98px]:text-base max-[575.98px]:mb-0.5
+                         min-[768px]:max-[991.98px]:text-lg min-[768px]:max-[991.98px]:mb-1
+                         min-[992px]:max-[1199.98px]:text-xl min-[992px]:max-[1199.98px]:mb-1
+                         min-[1200px]:text-xl min-[1200px]:mb-1">Teléfono</h4>
+              <p class="text-gray-700 dark:text-gray-300 transition-colors
+                        max-[575.98px]:text-sm
+                        min-[768px]:max-[991.98px]:text-base
+                        min-[992px]:text-lg">+502 4105 1656</p>
             </div>
           </div>
 
-          <div class="flex items-start gap-6">
-            <div class="bg-blue-500 dark:bg-blue-600/20 p-4 rounded-xl shrink-0 border border-blue-600 dark:border-blue-500/30 transition-colors">
-              <lucide-angular [img]="MapPin" class="h-6 w-6 text-white dark:text-blue-400 transition-colors"></lucide-angular>
+          <!-- Location -->
+          <div class="flex items-start
+                      max-[575.98px]:gap-4
+                      min-[768px]:max-[991.98px]:gap-5
+                      min-[992px]:gap-6">
+            <div class="bg-blue-500 dark:bg-blue-600/20 rounded-xl shrink-0 border border-blue-600 dark:border-blue-500/30 transition-colors
+                        max-[575.98px]:p-3
+                        min-[768px]:max-[991.98px]:p-3.5
+                        min-[992px]:p-4">
+              <lucide-angular [img]="MapPin"
+                             class="text-white dark:text-blue-400 transition-colors
+                                    max-[575.98px]:h-5 max-[575.98px]:w-5
+                                    min-[768px]:max-[991.98px]:h-5 min-[768px]:max-[991.98px]:w-5
+                                    min-[992px]:h-6 min-[992px]:w-6"></lucide-angular>
             </div>
             <div>
-              <h4 class="font-semibold text-xl mb-1 text-gray-900 dark:text-white transition-colors">Ubicación</h4>
-              <p class="text-gray-700 dark:text-gray-300 text-lg transition-colors">Chimaltenango, Guatemala</p>
+              <h4 class="font-semibold mb-1 text-gray-900 dark:text-white transition-colors
+                         max-[575.98px]:text-base max-[575.98px]:mb-0.5
+                         min-[768px]:max-[991.98px]:text-lg min-[768px]:max-[991.98px]:mb-1
+                         min-[992px]:max-[1199.98px]:text-xl min-[992px]:max-[1199.98px]:mb-1
+                         min-[1200px]:text-xl min-[1200px]:mb-1">Ubicación</h4>
+              <p class="text-gray-700 dark:text-gray-300 transition-colors
+                        max-[575.98px]:text-sm
+                        min-[768px]:max-[991.98px]:text-base
+                        min-[992px]:text-lg">Chimaltenango, Guatemala</p>
             </div>
           </div>
         </div>
@@ -58,11 +145,21 @@
       </div>
 
       <!-- Contact Form -->
-      <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 sm:p-12 shadow-lg border border-gray-200 dark:border-gray-700 transition-colors h-full fade-in-right">
-        <form (ngSubmit)="onSubmit($event)" class="space-y-8 h-full flex flex-col justify-center">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 transition-colors h-full fade-in-right
+                  max-[575.98px]:p-6 max-[575.98px]:rounded-xl
+                  min-[768px]:max-[991.98px]:p-8 min-[768px]:max-[991.98px]:rounded-2xl
+                  min-[992px]:max-[1199.98px]:p-10
+                  min-[1200px]:p-12">
+        <form (ngSubmit)="onSubmit($event)" class="h-full flex flex-col justify-center
+                                                    max-[575.98px]:space-y-6
+                                                    min-[768px]:max-[991.98px]:space-y-7
+                                                    min-[992px]:space-y-8">
 
           <div>
-            <label for="name" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+            <label for="name" class="block font-semibold text-gray-700 dark:text-gray-300 mb-2 transition-colors
+                                     max-[575.98px]:text-xs
+                                     min-[768px]:max-[991.98px]:text-sm
+                                     min-[992px]:text-sm">
               Nombre Completo
             </label>
             <input type="text"
@@ -70,12 +167,18 @@
                    [(ngModel)]="formData.name"
                    name="name"
                    required
-                   class="w-full px-4 py-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                   class="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all
+                          max-[575.98px]:px-3 max-[575.98px]:py-3 max-[575.98px]:text-sm
+                          min-[768px]:max-[991.98px]:px-4 min-[768px]:max-[991.98px]:py-3.5 min-[768px]:max-[991.98px]:text-base
+                          min-[992px]:px-4 min-[992px]:py-4"
                    placeholder="Juan Pérez">
           </div>
 
           <div>
-            <label for="email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+            <label for="email" class="block font-semibold text-gray-700 dark:text-gray-300 mb-2 transition-colors
+                                      max-[575.98px]:text-xs
+                                      min-[768px]:max-[991.98px]:text-sm
+                                      min-[992px]:text-sm">
               Correo Electrónico
             </label>
             <input type="email"
@@ -83,29 +186,43 @@
                    [(ngModel)]="formData.email"
                    name="email"
                    required
-                   class="w-full px-4 py-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+                   class="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all
+                          max-[575.98px]:px-3 max-[575.98px]:py-3 max-[575.98px]:text-sm
+                          min-[768px]:max-[991.98px]:px-4 min-[768px]:max-[991.98px]:py-3.5 min-[768px]:max-[991.98px]:text-base
+                          min-[992px]:px-4 min-[992px]:py-4"
                    placeholder="juan@ejemplo.com">
           </div>
 
           <div>
-            <label for="message" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2 transition-colors">
+            <label for="message" class="block font-semibold text-gray-700 dark:text-gray-300 mb-2 transition-colors
+                                        max-[575.98px]:text-xs
+                                        min-[768px]:max-[991.98px]:text-sm
+                                        min-[992px]:text-sm">
               Mensaje
             </label>
             <textarea id="message"
                       [(ngModel)]="formData.message"
                       name="message"
                       required
-                      rows="5"
-                      class="w-full px-4 py-4 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
+                      class="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none
+                             max-[575.98px]:px-3 max-[575.98px]:py-3 max-[575.98px]:text-sm max-[575.98px]:rows-4
+                             min-[768px]:max-[991.98px]:px-4 min-[768px]:max-[991.98px]:py-3.5 min-[768px]:max-[991.98px]:text-base min-[768px]:max-[991.98px]:rows-5
+                             min-[992px]:px-4 min-[992px]:py-4 min-[992px]:rows-5"
+                      [attr.rows]="5"
                       placeholder="Cuéntame sobre tu proyecto..."></textarea>
           </div>
 
           <button type="submit"
                   [disabled]="isSubmitting()"
-                  class="w-full flex justify-center items-center gap-3 py-4 px-6 border border-transparent rounded-xl text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-bold text-lg transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-xl">
+                  class="w-full flex justify-center items-center gap-3 border border-transparent rounded-xl text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-bold transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-xl
+                         max-[575.98px]:py-3 max-[575.98px]:px-5 max-[575.98px]:text-base
+                         min-[768px]:max-[991.98px]:py-3.5 min-[768px]:max-[991.98px]:px-6 min-[768px]:max-[991.98px]:text-base
+                         min-[992px]:py-4 min-[992px]:px-6 min-[992px]:text-lg">
             <ng-container *ngIf="!isSubmitting()">
               Enviar Mensaje
-              <lucide-angular [img]="Send" [size]="20"></lucide-angular>
+              <lucide-angular [img]="Send"
+                             class="max-[575.98px]:w-4 max-[575.98px]:h-4
+                                    min-[768px]:w-5 min-[768px]:h-5"></lucide-angular>
             </ng-container>
             <ng-container *ngIf="isSubmitting()">
               Enviando...

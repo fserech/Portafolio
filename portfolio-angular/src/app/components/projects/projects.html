@@ -1,48 +1,111 @@
-<section id="projects" class="py-20 bg-white dark:bg-gray-900 transition-colors duration-300">
+<section id="projects" class="bg-white dark:bg-gray-900 transition-colors duration-300
+                                      max-[575.98px]:py-12
+                                      min-[768px]:max-[991.98px]:py-16
+                                      min-[992px]:max-[1199.98px]:py-20
+                                      min-[1200px]:py-20">
   <div class="w-full px-4 sm:px-6 lg:px-12">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl transition-colors">
+    <!-- Header -->
+    <div class="text-center
+                max-[575.98px]:mb-10
+                min-[768px]:max-[991.98px]:mb-12
+                min-[992px]:mb-16">
+      <h2 class="font-bold text-gray-900 dark:text-white transition-colors
+                 max-[575.98px]:text-2xl
+                 min-[768px]:max-[991.98px]:text-3xl
+                 min-[992px]:max-[1199.98px]:text-3xl
+                 min-[1200px]:text-4xl">
         Proyectos Destacados
       </h2>
-      <p class="mt-4 text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto transition-colors">
+      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-3xl mx-auto transition-colors
+                max-[575.98px]:text-base max-[575.98px]:mt-3 max-[575.98px]:px-4
+                min-[768px]:max-[991.98px]:text-lg min-[768px]:max-[991.98px]:mt-3
+                min-[992px]:max-[1199.98px]:text-xl min-[992px]:max-[1199.98px]:mt-4
+                min-[1200px]:text-xl min-[1200px]:mt-4">
         Una selección de mis trabajos recientes donde aplico mis conocimientos.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Projects Grid -->
+    <div class="grid
+                max-[575.98px]:grid-cols-1 max-[575.98px]:gap-6
+                min-[768px]:max-[991.98px]:grid-cols-2 min-[768px]:max-[991.98px]:gap-6
+                min-[992px]:max-[1199.98px]:grid-cols-3 min-[992px]:max-[1199.98px]:gap-6
+                min-[1200px]:grid-cols-3 min-[1200px]:gap-8">
       <div *ngFor="let project of projects; let i = index"
            class="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-xl dark:hover:shadow-blue-900/10 transition-all duration-300 group flex flex-col project-card"
            [style.animation-delay.ms]="i * 200">
 
-        <div class="relative h-64 overflow-hidden">
+        <!-- Image Container -->
+        <div class="relative overflow-hidden
+                    max-[575.98px]:h-48
+                    min-[768px]:max-[991.98px]:h-56
+                    min-[992px]:max-[1199.98px]:h-60
+                    min-[1200px]:h-64">
           <img [src]="project.image"
                [alt]="project.title"
                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
 
-          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+          <!-- Overlay con botones -->
+          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center
+                      max-[575.98px]:gap-3
+                      min-[768px]:max-[991.98px]:gap-3
+                      min-[992px]:gap-4">
             <a [href]="project.demoUrl"
-               class="p-3 bg-white rounded-full text-gray-900 hover:bg-blue-600 hover:text-white transition-colors transform hover:scale-110"
+               class="bg-white rounded-full text-gray-900 hover:bg-blue-600 hover:text-white transition-colors transform hover:scale-110
+                      max-[575.98px]:p-2.5
+                      min-[768px]:max-[991.98px]:p-2.5
+                      min-[992px]:p-3"
                title="Ver Demo">
-              <lucide-angular [img]="ExternalLink" [size]="24"></lucide-angular>
+              <lucide-angular [img]="ExternalLink"
+                             class="max-[575.98px]:w-5 max-[575.98px]:h-5
+                                    min-[768px]:max-[991.98px]:w-5 min-[768px]:max-[991.98px]:h-5
+                                    min-[992px]:w-6 min-[992px]:h-6"></lucide-angular>
             </a>
             <a [href]="project.repoUrl"
-               class="p-3 bg-white rounded-full text-gray-900 hover:bg-gray-900 hover:text-white transition-colors transform hover:scale-110"
+               class="bg-white rounded-full text-gray-900 hover:bg-gray-900 hover:text-white transition-colors transform hover:scale-110
+                      max-[575.98px]:p-2.5
+                      min-[768px]:max-[991.98px]:p-2.5
+                      min-[992px]:p-3"
                title="Ver Código">
-              <lucide-angular [img]="Github" [size]="24"></lucide-angular>
+              <lucide-angular [img]="Github"
+                             class="max-[575.98px]:w-5 max-[575.98px]:h-5
+                                    min-[768px]:max-[991.98px]:w-5 min-[768px]:max-[991.98px]:h-5
+                                    min-[992px]:w-6 min-[992px]:h-6"></lucide-angular>
             </a>
           </div>
         </div>
 
-        <div class="p-8 flex-1 flex flex-col">
-          <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+        <!-- Content -->
+        <div class="flex-1 flex flex-col
+                    max-[575.98px]:p-5
+                    min-[768px]:max-[991.98px]:p-6
+                    min-[992px]:max-[1199.98px]:p-7
+                    min-[1200px]:p-8">
+          <h3 class="font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors
+                     max-[575.98px]:text-lg max-[575.98px]:mb-2
+                     min-[768px]:max-[991.98px]:text-xl min-[768px]:max-[991.98px]:mb-2
+                     min-[992px]:max-[1199.98px]:text-xl min-[992px]:max-[1199.98px]:mb-3
+                     min-[1200px]:text-2xl min-[1200px]:mb-3">
             {{ project.title }}
           </h3>
-          <p class="text-gray-600 dark:text-gray-400 mb-6 line-clamp-3 transition-colors flex-1">
+          <p class="text-gray-600 dark:text-gray-400 line-clamp-3 transition-colors flex-1
+                    max-[575.98px]:text-sm max-[575.98px]:mb-4
+                    min-[768px]:max-[991.98px]:text-sm min-[768px]:max-[991.98px]:mb-5
+                    min-[992px]:max-[1199.98px]:text-base min-[992px]:max-[1199.98px]:mb-5
+                    min-[1200px]:text-base min-[1200px]:mb-6">
             {{ project.description }}
           </p>
-          <div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-gray-100 dark:border-gray-700">
+
+          <!-- Tags -->
+          <div class="flex flex-wrap mt-auto pt-4 border-t border-gray-100 dark:border-gray-700
+                      max-[575.98px]:gap-1.5
+                      min-[768px]:max-[991.98px]:gap-2
+                      min-[992px]:gap-2">
             <span *ngFor="let tag of project.tags"
-                  class="px-3 py-1 bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs rounded-full font-medium transition-colors">
+                  class="bg-blue-50 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full font-medium transition-colors
+                         max-[575.98px]:px-2 max-[575.98px]:py-0.5 max-[575.98px]:text-xs
+                         min-[768px]:max-[991.98px]:px-2.5 min-[768px]:max-[991.98px]:py-1 min-[768px]:max-[991.98px]:text-xs
+                         min-[992px]:px-3 min-[992px]:py-1 min-[992px]:text-xs">
               {{ tag }}
             </span>
           </div>

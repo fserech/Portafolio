@@ -1,24 +1,60 @@
-<section id="skills" class="py-20 bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
+<section id="skills" class="bg-gray-50 dark:bg-gray-950 transition-colors duration-300
+                                     max-[575.98px]:py-12
+                                     min-[768px]:max-[991.98px]:py-16
+                                     min-[992px]:max-[1199.98px]:py-20
+                                     min-[1200px]:py-20">
   <div class="w-full px-4 sm:px-6 lg:px-12">
-    <div class="text-center mb-16">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white sm:text-4xl transition-colors">
+    <!-- Header -->
+    <div class="text-center
+                max-[575.98px]:mb-10
+                min-[768px]:max-[991.98px]:mb-12
+                min-[992px]:mb-16">
+      <h2 class="font-bold text-gray-900 dark:text-white transition-colors
+                 max-[575.98px]:text-2xl
+                 min-[768px]:max-[991.98px]:text-3xl
+                 min-[992px]:max-[1199.98px]:text-3xl
+                 min-[1200px]:text-4xl">
         Habilidades Técnicas
       </h2>
-      <p class="mt-4 text-xl text-gray-500 dark:text-gray-400 max-w-3xl mx-auto transition-colors">
+      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-3xl mx-auto transition-colors
+                max-[575.98px]:text-base max-[575.98px]:mt-3 max-[575.98px]:px-4
+                min-[768px]:max-[991.98px]:text-lg min-[768px]:max-[991.98px]:mt-3
+                min-[992px]:max-[1199.98px]:text-xl min-[992px]:max-[1199.98px]:mt-4
+                min-[1200px]:text-xl min-[1200px]:mt-4">
         Mi stack tecnológico actual y herramientas que utilizo en mi día a día.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Skills Grid -->
+    <div class="grid
+                max-[575.98px]:grid-cols-1 max-[575.98px]:gap-4
+                min-[768px]:max-[991.98px]:grid-cols-2 min-[768px]:max-[991.98px]:gap-5
+                min-[992px]:max-[1199.98px]:grid-cols-4 min-[992px]:max-[1199.98px]:gap-5
+                min-[1200px]:grid-cols-4 min-[1200px]:gap-6">
       <div *ngFor="let category of skillCategories; let i = index"
-           class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md dark:shadow-none transition-all p-8 border border-gray-100 dark:border-gray-700 skill-card"
+           class="bg-white dark:bg-gray-800 rounded-xl shadow-sm hover:shadow-md dark:shadow-none transition-all border border-gray-100 dark:border-gray-700 skill-card
+                  max-[575.98px]:p-5
+                  min-[768px]:max-[991.98px]:p-6
+                  min-[992px]:max-[1199.98px]:p-7
+                  min-[1200px]:p-8"
            [style.animation-delay.ms]="i * 100">
-        <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-6 pb-2 border-b border-gray-100 dark:border-gray-700 transition-colors">
+        <h3 class="font-bold text-gray-900 dark:text-white pb-2 border-b border-gray-100 dark:border-gray-700 transition-colors
+                   max-[575.98px]:text-base max-[575.98px]:mb-4
+                   min-[768px]:max-[991.98px]:text-base max-[768px]:max-[991.98px]:mb-5
+                   min-[992px]:max-[1199.98px]:text-lg min-[992px]:max-[1199.98px]:mb-5
+                   min-[1200px]:text-lg min-[1200px]:mb-6">
           {{ category.title }}
         </h3>
-        <div class="flex flex-wrap gap-2">
+        <div class="flex flex-wrap
+                    max-[575.98px]:gap-1.5
+                    min-[768px]:max-[991.98px]:gap-2
+                    min-[992px]:gap-2">
           <span *ngFor="let skill of category.skills"
-                class="px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm rounded-full font-medium transition-colors">
+                class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full font-medium transition-colors
+                       max-[575.98px]:px-2 max-[575.98px]:py-1 max-[575.98px]:text-xs
+                       min-[768px]:max-[991.98px]:px-2.5 min-[768px]:max-[991.98px]:py-1 min-[768px]:max-[991.98px]:text-xs
+                       min-[992px]:max-[1199.98px]:px-2.5 min-[992px]:max-[1199.98px]:py-1.5 min-[992px]:max-[1199.98px]:text-sm
+                       min-[1200px]:px-3 min-[1200px]:py-1.5 min-[1200px]:text-sm">
             {{ skill }}
           </span>
         </div>

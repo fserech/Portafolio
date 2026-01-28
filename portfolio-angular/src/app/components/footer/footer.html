@@ -1,44 +1,97 @@
 <footer class="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
-  <div class="w-full px-4 sm:px-6 lg:px-12 py-8">
-    <!-- Todo en una línea -->
-    <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+  <div class="w-full px-4 sm:px-6 lg:px-12
+              max-[575.98px]:py-6
+              min-[768px]:max-[991.98px]:py-7
+              min-[992px]:py-8">
+
+    <!-- Main Footer Content -->
+    <div class="flex justify-between items-center
+                max-[575.98px]:flex-col max-[575.98px]:gap-5
+                min-[768px]:max-[991.98px]:flex-col min-[768px]:max-[991.98px]:gap-6
+                min-[992px]:flex-row min-[992px]:gap-6">
+
       <!-- Logo y descripción -->
-      <div class="text-center md:text-left">
-        <h3 class="text-lg font-bold font-mono text-gray-900 dark:text-white mb-2">
+      <div class="text-center
+                  max-[575.98px]:order-1
+                  min-[768px]:max-[991.98px]:order-1
+                  min-[992px]:text-left min-[992px]:order-1">
+        <h3 class="font-bold font-mono text-gray-900 dark:text-white
+                   max-[575.98px]:text-base max-[575.98px]:mb-1
+                   min-[768px]:max-[991.98px]:text-lg min-[768px]:max-[991.98px]:mb-1.5
+                   min-[992px]:max-[1199.98px]:text-lg min-[992px]:max-[1199.98px]:mb-2
+                   min-[1200px]:text-lg min-[1200px]:mb-2">
           fredy@<span class="text-blue-600 dark:text-blue-500">dev</span>
         </h3>
-        <p class="text-sm text-gray-600 dark:text-gray-400">
+        <p class="text-gray-600 dark:text-gray-400
+                  max-[575.98px]:text-xs
+                  min-[768px]:max-[991.98px]:text-sm
+                  min-[992px]:text-sm">
           Developer & Security Enthusiast
         </p>
       </div>
 
-      <!-- Centro: Copyright -->
-      <div class="text-center">
-        <p class="text-sm text-gray-600 dark:text-gray-400">
-          © {{ currentYear }}  Hecho con pasión usando Angular & Tailwind CSS
+      <!-- Copyright -->
+      <div class="text-center
+                  max-[575.98px]:order-3
+                  min-[768px]:max-[991.98px]:order-3
+                  min-[992px]:order-2">
+        <p class="text-gray-600 dark:text-gray-400
+                  max-[575.98px]:text-xs
+                  min-[768px]:max-[991.98px]:text-sm
+                  min-[992px]:text-sm">
+          © {{ currentYear }} Hecho con pasión usando Angular & Tailwind CSS
         </p>
       </div>
 
-      <!-- Derecha: Links e iconos sociales -->
-      <div class="flex items-center gap-6">
-        <a href="#home" class="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
-          Inicio
-        </a>
-        <a href="#projects" class="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
-          Proyectos
-        </a>
-        <a href="#contact" class="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors">
-          Contacto
-        </a>
+      <!-- Links e iconos sociales -->
+      <div class="flex items-center
+                  max-[575.98px]:flex-col max-[575.98px]:gap-4 max-[575.98px]:order-2
+                  min-[768px]:max-[991.98px]:flex-row min-[768px]:max-[991.98px]:gap-5 min-[768px]:max-[991.98px]:order-2
+                  min-[992px]:flex-row min-[992px]:gap-6 min-[992px]:order-3">
 
-        <div class="flex gap-4 ml-4 pl-4 border-l border-gray-300 dark:border-gray-700">
+        <!-- Navigation Links -->
+        <div class="flex items-center
+                    max-[575.98px]:gap-4
+                    min-[768px]:max-[991.98px]:gap-5
+                    min-[992px]:gap-6">
+          <a href="#home"
+             class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors
+                    max-[575.98px]:text-xs
+                    min-[768px]:max-[991.98px]:text-sm
+                    min-[992px]:text-sm">
+            Inicio
+          </a>
+          <a href="#projects"
+             class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors
+                    max-[575.98px]:text-xs
+                    min-[768px]:max-[991.98px]:text-sm
+                    min-[992px]:text-sm">
+            Proyectos
+          </a>
+          <a href="#contact"
+             class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors
+                    max-[575.98px]:text-xs
+                    min-[768px]:max-[991.98px]:text-sm
+                    min-[992px]:text-sm">
+            Contacto
+          </a>
+        </div>
+
+        <!-- Social Icons -->
+        <div class="flex gap-4 border-gray-300 dark:border-gray-700
+                    max-[575.98px]:gap-3 max-[575.98px]:border-t max-[575.98px]:pt-4
+                    min-[768px]:max-[991.98px]:gap-3.5 min-[768px]:max-[991.98px]:ml-0 min-[768px]:max-[991.98px]:pl-0 min-[768px]:max-[991.98px]:border-t min-[768px]:max-[991.98px]:pt-5
+                    min-[992px]:ml-4 min-[992px]:pl-4 min-[992px]:border-l min-[992px]:border-t-0 min-[992px]:pt-0">
           <!-- GitHub -->
           <a href="https://github.com/fserech"
              target="_blank"
              rel="noopener noreferrer"
              class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors"
              title="GitHub">
-            <lucide-angular [img]="Github" [size]="18"></lucide-angular>
+            <lucide-angular [img]="Github"
+                           class="max-[575.98px]:w-4 max-[575.98px]:h-4
+                                  min-[768px]:max-[991.98px]:w-4 min-[768px]:max-[991.98px]:h-4
+                                  min-[992px]:w-[18px] min-[992px]:h-[18px]"></lucide-angular>
           </a>
 
           <!-- LinkedIn -->
@@ -47,14 +100,20 @@
              rel="noopener noreferrer"
              class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors"
              title="LinkedIn">
-            <lucide-angular [img]="Linkedin" [size]="18"></lucide-angular>
+            <lucide-angular [img]="Linkedin"
+                           class="max-[575.98px]:w-4 max-[575.98px]:h-4
+                                  min-[768px]:max-[991.98px]:w-4 min-[768px]:max-[991.98px]:h-4
+                                  min-[992px]:w-[18px] min-[992px]:h-[18px]"></lucide-angular>
           </a>
 
           <!-- Email -->
           <a href="mailto:serech63@gmail.com"
              class="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500 transition-colors"
              title="Email">
-            <lucide-angular [img]="Mail" [size]="18"></lucide-angular>
+            <lucide-angular [img]="Mail"
+                           class="max-[575.98px]:w-4 max-[575.98px]:h-4
+                                  min-[768px]:max-[991.98px]:w-4 min-[768px]:max-[991.98px]:h-4
+                                  min-[992px]:w-[18px] min-[992px]:h-[18px]"></lucide-angular>
           </a>
         </div>
       </div>
