@@ -1,6 +1,7 @@
 [build]
+  base = "portfolio-angular"
   command = "npm run build"
-  publish = "dist/portfolio-angular"
+  publish = "portfolio-angular/dist/portfolio-angular"
 
 [[redirects]]
   from = "/*"
