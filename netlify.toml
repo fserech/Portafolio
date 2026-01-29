@@ -1,0 +1,11 @@
+[build]
+  base = "portfolio-angular"
+  command = "npm run build"
+  publish = "portfolio-angular/dist/portfolio-angular/browser"
+  functions = "portfolio-angular/netlify/functions"
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server"
+  status = 200
+  force = true
