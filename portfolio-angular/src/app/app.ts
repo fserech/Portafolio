@@ -27,5 +27,5 @@ import { SkillsComponent } from './components/skills/skills';
 })
 export class App {
   title = 'portfolio-angular';
-  heroImage = 'https://images.unsplash.com/photo-1760536928911-40831dacdbc3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=1080';
+  heroImage = 'assets/DEV.png';
 }

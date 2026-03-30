@@ -1,8 +1,9 @@
-import { Component, HostListener, signal, OnInit } from '@angular/core';
+import { Component, HostListener, signal, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { LucideAngularModule, Menu, X, Moon, Sun } from 'lucide-angular';
+import { LucideAngularModule, Menu, X, Moon, Sun, Code2, Shield } from 'lucide-angular';
 import { ThemeService } from '../../services/theme';
+import { ModeService } from '../../services/mode.service';
 
 interface NavLink {
   name: string;
@@ -29,23 +30,28 @@ interface NavLink {
   ]
 })
 export class NavbarComponent implements OnInit {
-  readonly Menu = Menu;
-  readonly X = X;
-  readonly Moon = Moon;
-  readonly Sun = Sun;
+  readonly Menu   = Menu;
+  readonly X      = X;
+  readonly Moon   = Moon;
+  readonly Sun    = Sun;
+  readonly Code2  = Code2;
+  readonly Shield = Shield;
 
-  isOpen = signal(false);
+  isOpen  = signal(false);
   scrolled = signal(false);
 
   navLinks: NavLink[] = [
-    { name: 'Inicio', href: '#home' },
-    { name: 'Sobre Mí', href: '#about' },
-    { name: 'Habilidades', href: '#skills' },
-    { name: 'Proyectos', href: '#projects' },
-    { name: 'Contacto', href: '#contact' }
+    { name: 'Inicio',      href: '#home'     },
+    { name: 'Sobre Mí',   href: '#about'    },
+    { name: 'Habilidades', href: '#skills'   },
+    { name: 'Proyectos',  href: '#projects' },
+    { name: 'Contacto',   href: '#contact'  }
   ];
 
-  constructor(public themeService: ThemeService) {}
+  constructor(
+    public themeService: ThemeService,
+    public modeService: ModeService
+  ) {}
 
   ngOnInit() {
     this.themeService.initTheme();
@@ -56,11 +62,11 @@ export class NavbarComponent implements OnInit {
     this.scrolled.set(window.scrollY > 50);
   }
 
-  toggleMenu() {
-    this.isOpen.update(value => !value);
-  }
+  toggleMenu()  { this.isOpen.update(v => !v); }
+  closeMenu()   { this.isOpen.set(false); }
 
-  closeMenu() {
-    this.isOpen.set(false);
+  setMode(mode: 'dev' | 'security') {
+    this.modeService.setMode(mode);
+    this.closeMenu();
   }
 }

@@ -1,231 +1,238 @@
-<section id="contact" class="bg-gray-50 dark:bg-gray-950 transition-colors duration-300
-                                      max-[575.98px]:py-12
-                                      min-[768px]:max-[991.98px]:py-16
-                                      min-[992px]:max-[1199.98px]:py-20
-                                      min-[1200px]:py-20">
-  <div class="w-full px-4 sm:px-6 lg:px-12">
+<section id="contact"
+  [class]="'transition-colors duration-500 max-[575.98px]:py-12 min-[768px]:max-[991.98px]:py-16 min-[992px]:py-20 ' +
+           (modeService.activeMode() === 'dev'
+             ? 'bg-gray-50 dark:bg-gray-950'
+             : 'bg-gray-950 sec-bg')">
+
+  <div *ngIf="modeService.activeMode() === 'security'" class="scanlines-overlay pointer-events-none"></div>
+
+  <div class="w-full px-4 sm:px-6 lg:px-12 relative">
+
     <!-- Header -->
-    <div class="text-center
-                max-[575.98px]:mb-10
-                min-[768px]:max-[991.98px]:mb-12
-                min-[992px]:mb-16">
-      <h2 class="font-bold text-gray-900 dark:text-white transition-colors
-                 max-[575.98px]:text-2xl
-                 min-[768px]:max-[991.98px]:text-3xl
-                 min-[992px]:max-[1199.98px]:text-3xl
-                 min-[1200px]:text-4xl">
-        Hablemos
-      </h2>
-      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-3xl mx-auto transition-colors
-                max-[575.98px]:text-base max-[575.98px]:mt-3 max-[575.98px]:px-4
-                min-[768px]:max-[991.98px]:text-lg min-[768px]:max-[991.98px]:mt-3
-                min-[992px]:max-[1199.98px]:text-xl min-[992px]:max-[1199.98px]:mt-4
-                min-[1200px]:text-xl min-[1200px]:mt-4">
-        ¿Tienes un proyecto en mente o quieres colaborar? ¡Me encantaría escucharte!
-      </p>
+    <div class="text-center max-[575.98px]:mb-10 min-[768px]:max-[991.98px]:mb-12 min-[992px]:mb-16">
+      <ng-container *ngIf="modeService.activeMode() === 'dev'">
+        <h2 class="font-bold text-gray-900 dark:text-white
+                   max-[575.98px]:text-2xl min-[768px]:text-3xl min-[992px]:text-4xl">
+          Hablemos
+        </h2>
+        <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-3xl mx-auto
+                  max-[575.98px]:text-base min-[992px]:text-xl">
+          ¿Tienes un proyecto en mente o quieres colaborar? ¡Me encantaría escucharte!
+        </p>
+      </ng-container>
+      <ng-container *ngIf="modeService.activeMode() === 'security'">
+        <h2 class="font-mono font-bold text-green-400
+                   max-[575.98px]:text-2xl min-[768px]:text-3xl min-[992px]:text-4xl">
+          <span class="text-green-600">$</span> nc -lvp 4444
+        </h2>
+        <p class="mt-3 font-mono text-green-700 text-sm tracking-wider">
+          <span class="text-green-500">[LISTEN]</span> Esperando conexión entrante...
+          <span class="terminal-cursor">▋</span>
+        </p>
+      </ng-container>
     </div>
 
     <div class="grid max-w-7xl mx-auto
                 max-[575.98px]:grid-cols-1 max-[575.98px]:gap-8
-                min-[768px]:max-[991.98px]:grid-cols-1 min-[768px]:max-[991.98px]:gap-10
                 min-[992px]:grid-cols-2 min-[992px]:gap-12">
 
       <!-- Contact Info -->
-      <div class="bg-gray-200 dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden relative border border-gray-300 dark:border-gray-700 transition-colors h-full fade-in-left
-                  max-[575.98px]:p-6 max-[575.98px]:rounded-xl
-                  min-[768px]:max-[991.98px]:p-8 min-[768px]:max-[991.98px]:rounded-2xl
-                  min-[992px]:max-[1199.98px]:p-10
-                  min-[1200px]:p-12">
-        <h3 class="font-bold mb-6 text-gray-900 dark:text-white transition-colors
-                   max-[575.98px]:text-xl max-[575.98px]:mb-4
-                   min-[768px]:max-[991.98px]:text-2xl min-[768px]:max-[991.98px]:mb-5
-                   min-[992px]:max-[1199.98px]:text-2xl min-[992px]:max-[1199.98px]:mb-6
-                   min-[1200px]:text-3xl min-[1200px]:mb-6">
-          Información de Contacto
-        </h3>
-        <p class="text-gray-700 dark:text-gray-300 mb-12 transition-colors
-                  max-[575.98px]:text-sm max-[575.98px]:mb-8
-                  min-[768px]:max-[991.98px]:text-base min-[768px]:max-[991.98px]:mb-10
-                  min-[992px]:max-[1199.98px]:text-lg min-[992px]:max-[1199.98px]:mb-10
-                  min-[1200px]:text-lg min-[1200px]:mb-12">
-          Estoy disponible para trabajos freelance y oportunidades a tiempo completo.
-          ¡No dudes en contactarme para discutir tu próximo proyecto!
-        </p>
+      <div [class]="'rounded-2xl overflow-hidden relative h-full fade-in-left ' +
+             (modeService.activeMode() === 'dev'
+               ? 'bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-8 min-[992px]:p-12'
+               : 'bg-gray-900 border border-green-500/20 p-8')">
 
-        <div class="space-y-8
-                    max-[575.98px]:space-y-6
-                    min-[768px]:max-[991.98px]:space-y-7">
+        <ng-container *ngIf="modeService.activeMode() === 'dev'">
+          <h3 class="font-bold text-gray-900 dark:text-white mb-6
+                     max-[575.98px]:text-xl min-[992px]:text-3xl">
+            Información de Contacto
+          </h3>
+          <p class="text-gray-700 dark:text-gray-300 mb-10 text-lg">
+            Estoy disponible para trabajos freelance y oportunidades a tiempo completo.
+            ¡No dudes en contactarme!
+          </p>
+        </ng-container>
+
+        <ng-container *ngIf="modeService.activeMode() === 'security'">
+          <h3 class="font-mono font-bold text-green-400 text-xl mb-4">
+            <span class="text-green-600">$</span> cat contact.cfg
+          </h3>
+          <div class="font-mono text-green-700 text-xs mb-8 space-y-1">
+            <p><span class="text-green-500">[*]</span> Disponible para bug bounty collaborations</p>
+            <p><span class="text-green-500">[*]</span> Pentesting engagements (authorized only)</p>
+            <p><span class="text-green-500">[*]</span> CTF team partnerships</p>
+          </div>
+        </ng-container>
+
+        <div class="space-y-6">
           <!-- Email -->
-          <div class="flex items-start
-                      max-[575.98px]:gap-4
-                      min-[768px]:max-[991.98px]:gap-5
-                      min-[992px]:gap-6">
-            <div class="bg-blue-500 dark:bg-blue-600/20 rounded-xl shrink-0 border border-blue-600 dark:border-blue-500/30 transition-colors
-                        max-[575.98px]:p-3
-                        min-[768px]:max-[991.98px]:p-3.5
-                        min-[992px]:p-4">
+          <div class="flex items-start gap-5">
+            <div [class]="'rounded-xl shrink-0 p-3.5 border ' +
+                   (modeService.activeMode() === 'dev'
+                     ? 'bg-blue-500 dark:bg-blue-600/20 border-blue-600 dark:border-blue-500/30'
+                     : 'bg-green-900/30 border-green-500/30')">
               <lucide-angular [img]="Mail"
-                             class="text-white dark:text-blue-400 transition-colors
-                                    max-[575.98px]:h-5 max-[575.98px]:w-5
-                                    min-[768px]:max-[991.98px]:h-5 min-[768px]:max-[991.98px]:w-5
-                                    min-[992px]:h-6 min-[992px]:w-6"></lucide-angular>
+                             [class]="'h-5 w-5 ' +
+                               (modeService.activeMode() === 'dev'
+                                 ? 'text-white dark:text-blue-400'
+                                 : 'text-green-400')"></lucide-angular>
             </div>
             <div>
-              <h4 class="font-semibold mb-1 text-gray-900 dark:text-white transition-colors
-                         max-[575.98px]:text-base max-[575.98px]:mb-0.5
-                         min-[768px]:max-[991.98px]:text-lg min-[768px]:max-[991.98px]:mb-1
-                         min-[992px]:max-[1199.98px]:text-xl min-[992px]:max-[1199.98px]:mb-1
-                         min-[1200px]:text-xl min-[1200px]:mb-1">Email</h4>
-              <p class="text-gray-700 dark:text-gray-300 transition-colors
-                        max-[575.98px]:text-sm
-                        min-[768px]:max-[991.98px]:text-base
-                        min-[992px]:text-lg">serech63@gmail.com</p>
+              <h4 [class]="'font-semibold mb-1 ' +
+                     (modeService.activeMode() === 'dev'
+                       ? 'text-gray-900 dark:text-white text-xl'
+                       : 'text-green-400 font-mono text-sm')">
+                <ng-container *ngIf="modeService.activeMode() === 'dev'">Email</ng-container>
+                <ng-container *ngIf="modeService.activeMode() === 'security'">--email</ng-container>
+              </h4>
+              <p [class]="modeService.activeMode() === 'dev'
+                   ? 'text-gray-700 dark:text-gray-300 text-lg'
+                   : 'text-green-700 font-mono text-xs'">serech63@gmail.com</p>
             </div>
           </div>
 
           <!-- Phone -->
-          <div class="flex items-start
-                      max-[575.98px]:gap-4
-                      min-[768px]:max-[991.98px]:gap-5
-                      min-[992px]:gap-6">
-            <div class="bg-blue-500 dark:bg-blue-600/20 rounded-xl shrink-0 border border-blue-600 dark:border-blue-500/30 transition-colors
-                        max-[575.98px]:p-3
-                        min-[768px]:max-[991.98px]:p-3.5
-                        min-[992px]:p-4">
+          <div class="flex items-start gap-5">
+            <div [class]="'rounded-xl shrink-0 p-3.5 border ' +
+                   (modeService.activeMode() === 'dev'
+                     ? 'bg-blue-500 dark:bg-blue-600/20 border-blue-600 dark:border-blue-500/30'
+                     : 'bg-green-900/30 border-green-500/30')">
               <lucide-angular [img]="Phone"
-                             class="text-white dark:text-blue-400 transition-colors
-                                    max-[575.98px]:h-5 max-[575.98px]:w-5
-                                    min-[768px]:max-[991.98px]:h-5 min-[768px]:max-[991.98px]:w-5
-                                    min-[992px]:h-6 min-[992px]:w-6"></lucide-angular>
+                             [class]="'h-5 w-5 ' +
+                               (modeService.activeMode() === 'dev'
+                                 ? 'text-white dark:text-blue-400'
+                                 : 'text-green-400')"></lucide-angular>
             </div>
             <div>
-              <h4 class="font-semibold mb-1 text-gray-900 dark:text-white transition-colors
-                         max-[575.98px]:text-base max-[575.98px]:mb-0.5
-                         min-[768px]:max-[991.98px]:text-lg min-[768px]:max-[991.98px]:mb-1
-                         min-[992px]:max-[1199.98px]:text-xl min-[992px]:max-[1199.98px]:mb-1
-                         min-[1200px]:text-xl min-[1200px]:mb-1">Teléfono</h4>
-              <p class="text-gray-700 dark:text-gray-300 transition-colors
-                        max-[575.98px]:text-sm
-                        min-[768px]:max-[991.98px]:text-base
-                        min-[992px]:text-lg">+502 4105 1656</p>
+              <h4 [class]="'font-semibold mb-1 ' +
+                     (modeService.activeMode() === 'dev'
+                       ? 'text-gray-900 dark:text-white text-xl'
+                       : 'text-green-400 font-mono text-sm')">
+                <ng-container *ngIf="modeService.activeMode() === 'dev'">Teléfono</ng-container>
+                <ng-container *ngIf="modeService.activeMode() === 'security'">--phone</ng-container>
+              </h4>
+              <p [class]="modeService.activeMode() === 'dev'
+                   ? 'text-gray-700 dark:text-gray-300 text-lg'
+                   : 'text-green-700 font-mono text-xs'">+502 4105 1656</p>
             </div>
           </div>
 
           <!-- Location -->
-          <div class="flex items-start
-                      max-[575.98px]:gap-4
-                      min-[768px]:max-[991.98px]:gap-5
-                      min-[992px]:gap-6">
-            <div class="bg-blue-500 dark:bg-blue-600/20 rounded-xl shrink-0 border border-blue-600 dark:border-blue-500/30 transition-colors
-                        max-[575.98px]:p-3
-                        min-[768px]:max-[991.98px]:p-3.5
-                        min-[992px]:p-4">
+          <div class="flex items-start gap-5">
+            <div [class]="'rounded-xl shrink-0 p-3.5 border ' +
+                   (modeService.activeMode() === 'dev'
+                     ? 'bg-blue-500 dark:bg-blue-600/20 border-blue-600 dark:border-blue-500/30'
+                     : 'bg-green-900/30 border-green-500/30')">
               <lucide-angular [img]="MapPin"
-                             class="text-white dark:text-blue-400 transition-colors
-                                    max-[575.98px]:h-5 max-[575.98px]:w-5
-                                    min-[768px]:max-[991.98px]:h-5 min-[768px]:max-[991.98px]:w-5
-                                    min-[992px]:h-6 min-[992px]:w-6"></lucide-angular>
+                             [class]="'h-5 w-5 ' +
+                               (modeService.activeMode() === 'dev'
+                                 ? 'text-white dark:text-blue-400'
+                                 : 'text-green-400')"></lucide-angular>
             </div>
             <div>
-              <h4 class="font-semibold mb-1 text-gray-900 dark:text-white transition-colors
-                         max-[575.98px]:text-base max-[575.98px]:mb-0.5
-                         min-[768px]:max-[991.98px]:text-lg min-[768px]:max-[991.98px]:mb-1
-                         min-[992px]:max-[1199.98px]:text-xl min-[992px]:max-[1199.98px]:mb-1
-                         min-[1200px]:text-xl min-[1200px]:mb-1">Ubicación</h4>
-              <p class="text-gray-700 dark:text-gray-300 transition-colors
-                        max-[575.98px]:text-sm
-                        min-[768px]:max-[991.98px]:text-base
-                        min-[992px]:text-lg">Chimaltenango, Guatemala</p>
+              <h4 [class]="'font-semibold mb-1 ' +
+                     (modeService.activeMode() === 'dev'
+                       ? 'text-gray-900 dark:text-white text-xl'
+                       : 'text-green-400 font-mono text-sm')">
+                <ng-container *ngIf="modeService.activeMode() === 'dev'">Ubicación</ng-container>
+                <ng-container *ngIf="modeService.activeMode() === 'security'">--location</ng-container>
+              </h4>
+              <p [class]="modeService.activeMode() === 'dev'
+                   ? 'text-gray-700 dark:text-gray-300 text-lg'
+                   : 'text-green-700 font-mono text-xs'">Chimaltenango, Guatemala</p>
             </div>
           </div>
         </div>
 
-        <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-blue-300/20 dark:bg-blue-500/10 rounded-full blur-3xl"></div>
-        <div class="absolute top-10 right-10 w-32 h-32 bg-blue-200/30 dark:bg-blue-500/5 rounded-full blur-xl"></div>
+        <div class="absolute -bottom-24 -right-24 w-64 h-64 rounded-full blur-3xl"
+             [class]="modeService.activeMode() === 'dev'
+               ? 'bg-blue-300/20 dark:bg-blue-500/10'
+               : 'bg-green-500/5'"></div>
       </div>
 
-      <!-- Contact Form -->
-      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 transition-colors h-full fade-in-right
-                  max-[575.98px]:p-6 max-[575.98px]:rounded-xl
-                  min-[768px]:max-[991.98px]:p-8 min-[768px]:max-[991.98px]:rounded-2xl
-                  min-[992px]:max-[1199.98px]:p-10
-                  min-[1200px]:p-12">
-        <form (ngSubmit)="onSubmit($event)" class="h-full flex flex-col justify-center
-                                                    max-[575.98px]:space-y-6
-                                                    min-[768px]:max-[991.98px]:space-y-7
-                                                    min-[992px]:space-y-8">
+      <!-- Form -->
+      <div [class]="'rounded-2xl h-full fade-in-right ' +
+             (modeService.activeMode() === 'dev'
+               ? 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-8 min-[992px]:p-12'
+               : 'bg-gray-900 border border-green-500/20 p-8')">
+
+        <!-- Security form header -->
+        <p *ngIf="modeService.activeMode() === 'security'"
+           class="font-mono text-green-700 text-xs mb-6">
+          <span class="text-green-500">[*]</span> Iniciando canal cifrado... TLS 1.3 activo
+        </p>
+
+        <form (ngSubmit)="onSubmit($event)" class="h-full flex flex-col justify-center space-y-6">
 
           <div>
-            <label for="name" class="block font-semibold text-gray-700 dark:text-gray-300 mb-2 transition-colors
-                                     max-[575.98px]:text-xs
-                                     min-[768px]:max-[991.98px]:text-sm
-                                     min-[992px]:text-sm">
-              Nombre Completo
+            <label [class]="'block font-semibold mb-2 ' +
+                     (modeService.activeMode() === 'dev'
+                       ? 'text-gray-700 dark:text-gray-300 text-sm'
+                       : 'text-green-700 font-mono text-xs')">
+              <ng-container *ngIf="modeService.activeMode() === 'dev'">Nombre Completo</ng-container>
+              <ng-container *ngIf="modeService.activeMode() === 'security'">--name &lt;handle&gt;</ng-container>
             </label>
-            <input type="text"
-                   id="name"
-                   [(ngModel)]="formData.name"
-                   name="name"
-                   required
-                   class="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all
-                          max-[575.98px]:px-3 max-[575.98px]:py-3 max-[575.98px]:text-sm
-                          min-[768px]:max-[991.98px]:px-4 min-[768px]:max-[991.98px]:py-3.5 min-[768px]:max-[991.98px]:text-base
-                          min-[992px]:px-4 min-[992px]:py-4"
-                   placeholder="Juan Pérez">
+            <input type="text" [(ngModel)]="formData.name" name="name" required
+                   [class]="'w-full rounded-xl border outline-none transition-all px-4 py-3 ' +
+                     (modeService.activeMode() === 'dev'
+                       ? 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                       : 'border-green-500/30 bg-gray-950 text-green-300 font-mono text-sm placeholder-green-900 focus:border-green-500/60')"
+                   [placeholder]="modeService.activeMode() === 'dev' ? 'Juan Pérez' : 'h4cker_m4n'">
           </div>
 
           <div>
-            <label for="email" class="block font-semibold text-gray-700 dark:text-gray-300 mb-2 transition-colors
-                                      max-[575.98px]:text-xs
-                                      min-[768px]:max-[991.98px]:text-sm
-                                      min-[992px]:text-sm">
-              Correo Electrónico
+            <label [class]="'block font-semibold mb-2 ' +
+                     (modeService.activeMode() === 'dev'
+                       ? 'text-gray-700 dark:text-gray-300 text-sm'
+                       : 'text-green-700 font-mono text-xs')">
+              <ng-container *ngIf="modeService.activeMode() === 'dev'">Correo Electrónico</ng-container>
+              <ng-container *ngIf="modeService.activeMode() === 'security'">--email &lt;secure&gt;</ng-container>
             </label>
-            <input type="email"
-                   id="email"
-                   [(ngModel)]="formData.email"
-                   name="email"
-                   required
-                   class="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all
-                          max-[575.98px]:px-3 max-[575.98px]:py-3 max-[575.98px]:text-sm
-                          min-[768px]:max-[991.98px]:px-4 min-[768px]:max-[991.98px]:py-3.5 min-[768px]:max-[991.98px]:text-base
-                          min-[992px]:px-4 min-[992px]:py-4"
-                   placeholder="juan@ejemplo.com">
+            <input type="email" [(ngModel)]="formData.email" name="email" required
+                   [class]="'w-full rounded-xl border outline-none transition-all px-4 py-3 ' +
+                     (modeService.activeMode() === 'dev'
+                       ? 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                       : 'border-green-500/30 bg-gray-950 text-green-300 font-mono text-sm placeholder-green-900 focus:border-green-500/60')"
+                   [placeholder]="modeService.activeMode() === 'dev' ? 'juan@ejemplo.com' : 'user@protonmail.com'">
           </div>
 
           <div>
-            <label for="message" class="block font-semibold text-gray-700 dark:text-gray-300 mb-2 transition-colors
-                                        max-[575.98px]:text-xs
-                                        min-[768px]:max-[991.98px]:text-sm
-                                        min-[992px]:text-sm">
-              Mensaje
+            <label [class]="'block font-semibold mb-2 ' +
+                     (modeService.activeMode() === 'dev'
+                       ? 'text-gray-700 dark:text-gray-300 text-sm'
+                       : 'text-green-700 font-mono text-xs')">
+              <ng-container *ngIf="modeService.activeMode() === 'dev'">Mensaje</ng-container>
+              <ng-container *ngIf="modeService.activeMode() === 'security'">--payload &lt;message&gt;</ng-container>
             </label>
-            <textarea id="message"
-                      [(ngModel)]="formData.message"
-                      name="message"
-                      required
-                      class="w-full rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none
-                             max-[575.98px]:px-3 max-[575.98px]:py-3 max-[575.98px]:text-sm max-[575.98px]:rows-4
-                             min-[768px]:max-[991.98px]:px-4 min-[768px]:max-[991.98px]:py-3.5 min-[768px]:max-[991.98px]:text-base min-[768px]:max-[991.98px]:rows-5
-                             min-[992px]:px-4 min-[992px]:py-4 min-[992px]:rows-5"
-                      [attr.rows]="5"
-                      placeholder="Cuéntame sobre tu proyecto..."></textarea>
+            <textarea [(ngModel)]="formData.message" name="message" required [attr.rows]="5"
+                      [class]="'w-full rounded-xl border outline-none resize-none transition-all px-4 py-3 ' +
+                        (modeService.activeMode() === 'dev'
+                          ? 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent'
+                          : 'border-green-500/30 bg-gray-950 text-green-300 font-mono text-sm placeholder-green-900 focus:border-green-500/60')"
+                      [placeholder]="modeService.activeMode() === 'dev'
+                        ? 'Cuéntame sobre tu proyecto...'
+                        : '# Describe el objetivo...'"></textarea>
           </div>
 
           <button type="submit"
                   [disabled]="isSubmitting()"
-                  class="w-full flex justify-center items-center gap-3 border border-transparent rounded-xl text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-bold transition-all disabled:opacity-70 disabled:cursor-not-allowed shadow-lg hover:shadow-xl
-                         max-[575.98px]:py-3 max-[575.98px]:px-5 max-[575.98px]:text-base
-                         min-[768px]:max-[991.98px]:py-3.5 min-[768px]:max-[991.98px]:px-6 min-[768px]:max-[991.98px]:text-base
-                         min-[992px]:py-4 min-[992px]:px-6 min-[992px]:text-lg">
+                  [class]="'w-full flex justify-center items-center gap-3 font-bold transition-all disabled:opacity-70 disabled:cursor-not-allowed ' +
+                    (modeService.activeMode() === 'dev'
+                      ? 'py-4 rounded-xl text-white bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-xl text-lg'
+                      : 'py-3 rounded border font-mono text-sm border-green-500/40 text-green-400 bg-green-900/30 hover:bg-green-900/50')">
             <ng-container *ngIf="!isSubmitting()">
-              Enviar Mensaje
-              <lucide-angular [img]="Send"
-                             class="max-[575.98px]:w-4 max-[575.98px]:h-4
-                                    min-[768px]:w-5 min-[768px]:h-5"></lucide-angular>
+              <ng-container *ngIf="modeService.activeMode() === 'dev'">
+                Enviar Mensaje
+                <lucide-angular [img]="Send" class="w-5 h-5"></lucide-angular>
+              </ng-container>
+              <ng-container *ngIf="modeService.activeMode() === 'security'">
+                <lucide-angular [img]="Terminal" class="w-4 h-4"></lucide-angular>
+                ./send --encrypt --target=fredy
+              </ng-container>
             </ng-container>
             <ng-container *ngIf="isSubmitting()">
-              Enviando...
+              <ng-container *ngIf="modeService.activeMode() === 'dev'">Enviando...</ng-container>
+              <ng-container *ngIf="modeService.activeMode() === 'security'">Transmitiendo payload...</ng-container>
             </ng-container>
           </button>
         </form>

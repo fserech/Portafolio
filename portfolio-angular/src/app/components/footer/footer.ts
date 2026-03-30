@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, Github, Linkedin, Twitter, Heart, Mail, MapPin, Globe } from 'lucide-angular';
+import { LucideAngularModule, Github, Linkedin, Mail } from 'lucide-angular';
+import { ModeService } from '../../services/mode.service';
 
 @Component({
   selector: 'app-footer',
@@ -10,14 +11,10 @@ import { LucideAngularModule, Github, Linkedin, Twitter, Heart, Mail, MapPin, Gl
   styleUrls: ['./footer.scss']
 })
 export class FooterComponent {
-  readonly Github = Github;
+  readonly Github   = Github;
   readonly Linkedin = Linkedin;
-  readonly Twitter = Twitter;
-  readonly Mail = Mail;
-  readonly MapPin = MapPin;
-  readonly Globe = Globe;
-  readonly Heart = Heart;
+  readonly Mail     = Mail;
 
-
+  modeService = inject(ModeService);
   currentYear = new Date().getFullYear();
 }

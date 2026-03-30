@@ -1,120 +1,141 @@
-<section id="home" class="relative min-h-screen flex items-center pt-16 overflow-hidden bg-gray-50 dark:bg-gray-950 transition-colors duration-300">
-  <div class="w-full px-4 sm:px-6 lg:px-12">
-    <!-- Mobile: max-width: 575.98px -->
-    <!-- Tablet: min-width: 768px and max-width: 991.98px -->
-    <!-- Desktop: min-width: 992px and max-width: 1199.98px -->
-    <!-- Extra Large: min-width: 1200px -->
+<section id="home"
+  [class]="'relative min-h-screen flex items-center pt-16 overflow-hidden transition-colors duration-500 ' +
+           (modeService.activeMode() === 'dev'
+             ? 'bg-gray-50 dark:bg-gray-950'
+             : 'bg-gray-950 sec-bg')">
 
-    <div class="grid grid-cols-1 max-[575.98px]:grid-cols-1 min-[768px]:max-[991.98px]:grid-cols-1 min-[992px]:grid-cols-2 gap-12 items-center">
+  <!-- Scanlines security -->
+  <div *ngIf="modeService.activeMode() === 'security'" class="scanlines-overlay pointer-events-none"></div>
 
-      <!-- Content -->
+  <div class="w-full px-4 sm:px-6 lg:px-12 relative">
+    <div class="grid grid-cols-1 min-[992px]:grid-cols-2 gap-12 items-center">
+
+      <!-- ── Content ─────────────────────────────────────────────────── -->
       <div class="order-2 min-[992px]:order-1 min-[992px]:pr-12 fade-in-left">
-        <!-- Badge - ajustado por breakpoint -->
-        <span class="inline-block px-3 py-1 text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-4 transition-colors
-                     max-[575.98px]:text-xs max-[575.98px]:px-2.5 max-[575.98px]:py-0.5
-                     min-[768px]:max-[991.98px]:text-sm
-                     min-[992px]:max-[1199.98px]:text-sm
-                     min-[1200px]:text-base">
-           fredy@dev
-        </span>
 
-        <!-- Heading - tamaños específicos por breakpoint -->
-        <h1 class="font-extrabold text-gray-900 dark:text-white leading-tight mb-6 transition-colors
-                   max-[575.98px]:text-3xl max-[575.98px]:mb-4
-                   min-[768px]:max-[991.98px]:text-4xl min-[768px]:max-[991.98px]:mb-5
-                   min-[992px]:max-[1199.98px]:text-5xl min-[992px]:max-[1199.98px]:mb-6
-                   min-[1200px]:text-7xl min-[1200px]:mb-6">
-          Desarrollando aplicaciones empresariales
-          <span class="text-blue-600 dark:text-blue-500">modernas</span> y
-          <span class="text-blue-600 dark:text-blue-500">sistemas de gestión completos</span>
-        </h1>
+        <!-- DEV mode -->
+        <ng-container *ngIf="modeService.activeMode() === 'dev'">
+          <span class="inline-block px-3 py-1 text-sm font-semibold text-blue-600 dark:text-blue-400 bg-blue-100 dark:bg-blue-900/30 rounded-full mb-4">
+            fredy@dev
+          </span>
+          <h1 class="font-extrabold text-gray-900 dark:text-white leading-tight mb-6
+                     max-[575.98px]:text-3xl min-[768px]:text-4xl min-[992px]:text-5xl min-[1200px]:text-7xl">
+            Desarrollando aplicaciones empresariales
+            <span class="text-blue-600 dark:text-blue-500">modernas</span> y
+            <span class="text-blue-600 dark:text-blue-500">sistemas de gestión completos</span>
+          </h1>
+          <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl
+                    max-[575.98px]:text-base min-[768px]:text-lg">
+            Especializado en construir interfaces de usuario excepcionales y accesibles.
+            Transformo diseños en código limpio y escalable usando tecnologías de vanguardia.
+          </p>
+          <div class="flex gap-4 mb-8 max-[575.98px]:flex-col min-[768px]:flex-row">
+            <a href="#projects"
+               class="inline-flex justify-center items-center gap-2 px-6 py-3 rounded-lg text-white bg-blue-600 hover:bg-blue-700 font-medium transition-colors shadow-lg shadow-blue-500/30">
+              Ver Proyectos
+              <lucide-angular [img]="ArrowRight" class="h-4 w-4"></lucide-angular>
+            </a>
+            <a href="#contact"
+               class="inline-flex justify-center items-center px-6 py-3 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 font-medium transition-colors">
+              Contactar
+            </a>
+          </div>
+          <div class="flex items-center gap-6 text-gray-500 dark:text-gray-400
+                      max-[575.98px]:justify-center">
+            <a href="https://github.com/fserech" target="_blank" rel="noopener noreferrer"
+               class="hover:text-gray-900 dark:hover:text-white transition-colors">
+              <lucide-angular [img]="Github" class="w-6 h-6"></lucide-angular>
+            </a>
+            <a href="https://www.linkedin.com/in/fredy-serech-08a11a246" target="_blank" rel="noopener noreferrer"
+               class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+              <lucide-angular [img]="Linkedin" class="w-6 h-6"></lucide-angular>
+            </a>
+            <a href="mailto:serech63@gmail.com"
+               class="hover:text-red-500 dark:hover:text-red-400 transition-colors">
+              <lucide-angular [img]="Mail" class="w-6 h-6"></lucide-angular>
+            </a>
+          </div>
+        </ng-container>
 
-        <!-- Description - ajustado por breakpoint -->
-        <p class="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl transition-colors
-                  max-[575.98px]:text-base max-[575.98px]:mb-6
-                  min-[768px]:max-[991.98px]:text-lg min-[768px]:max-[991.98px]:mb-7
-                  min-[992px]:max-[1199.98px]:text-lg min-[992px]:max-[1199.98px]:mb-8
-                  min-[1200px]:text-lg min-[1200px]:mb-8">
-          Especializado en construir interfaces de usuario excepcionales y accesibles.
-          Transformo diseños en código limpio y escalable usando tecnologías de vanguardia.
-        </p>
-
-        <!-- Buttons - layout responsivo específico -->
-        <div class="flex gap-4 mb-8
-                    max-[575.98px]:flex-col max-[575.98px]:mb-6
-                    min-[768px]:max-[991.98px]:flex-row min-[768px]:max-[991.98px]:mb-7
-                    min-[992px]:flex-row">
-          <a href="#projects"
-             class="inline-flex justify-center items-center border border-transparent font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 transition-colors shadow-lg shadow-blue-500/30 dark:shadow-blue-500/20
-                    max-[575.98px]:px-5 max-[575.98px]:py-2.5 max-[575.98px]:text-sm
-                    min-[768px]:max-[991.98px]:px-6 min-[768px]:max-[991.98px]:py-3 min-[768px]:max-[991.98px]:text-base
-                    min-[992px]:max-[1199.98px]:px-6 min-[992px]:max-[1199.98px]:py-3 min-[992px]:max-[1199.98px]:text-base
-                    min-[1200px]:px-6 min-[1200px]:py-3 min-[1200px]:text-base">
-            Ver Proyectos
-            <lucide-angular [img]="ArrowRight" class="ml-2 h-4 w-4"></lucide-angular>
-          </a>
-          <a href="#contact"
-             class="inline-flex justify-center items-center border border-gray-300 dark:border-gray-700 font-medium rounded-lg text-gray-700 dark:text-gray-200 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors
-                    max-[575.98px]:px-5 max-[575.98px]:py-2.5 max-[575.98px]:text-sm
-                    min-[768px]:max-[991.98px]:px-6 min-[768px]:max-[991.98px]:py-3 min-[768px]:max-[991.98px]:text-base
-                    min-[992px]:max-[1199.98px]:px-6 min-[992px]:max-[1199.98px]:py-3 min-[992px]:max-[1199.98px]:text-base
-                    min-[1200px]:px-6 min-[1200px]:py-3 min-[1200px]:text-base">
-            Contactar
-          </a>
-        </div>
-
-        <!-- Social Links -->
-        <div class="flex items-center gap-6 text-gray-500 dark:text-gray-400
-                    max-[575.98px]:gap-4 max-[575.98px]:justify-center
-                    min-[768px]:max-[991.98px]:gap-5
-                    min-[992px]:gap-6">
-          <a href="https://github.com/fserech" target="_blank" rel="noopener noreferrer"
-             class="hover:text-gray-900 dark:hover:text-white transition-colors">
-            <lucide-angular [img]="Github"
-                           class="max-[575.98px]:w-5 max-[575.98px]:h-5
-                                  min-[768px]:max-[991.98px]:w-6 min-[768px]:max-[991.98px]:h-6
-                                  min-[992px]:w-6 min-[992px]:h-6"></lucide-angular>
-          </a>
-          <a href="https://www.linkedin.com/in/fredy-serech-08a11a246" target="_blank" rel="noopener noreferrer"
-             class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-            <lucide-angular [img]="Linkedin"
-                           class="max-[575.98px]:w-5 max-[575.98px]:h-5
-                                  min-[768px]:max-[991.98px]:w-6 min-[768px]:max-[991.98px]:h-6
-                                  min-[992px]:w-6 min-[992px]:h-6"></lucide-angular>
-          </a>
-          <a href="mailto:serech63@gmail.com"
-             class="hover:text-red-500 dark:hover:text-red-400 transition-colors">
-            <lucide-angular [img]="Mail"
-                           class="max-[575.98px]:w-5 max-[575.98px]:h-5
-                                  min-[768px]:max-[991.98px]:w-6 min-[768px]:max-[991.98px]:h-6
-                                  min-[992px]:w-6 min-[992px]:h-6"></lucide-angular>
-          </a>
-        </div>
+        <!-- SECURITY mode -->
+        <ng-container *ngIf="modeService.activeMode() === 'security'">
+          <div class="font-mono mb-4 text-green-700 text-sm">
+            <span class="text-green-500">[+]</span> Iniciando sesión...
+            <span class="text-green-400 ml-2">ACCESS GRANTED</span>
+            <span class="terminal-cursor ml-1">▋</span>
+          </div>
+          <h1 class="font-mono font-extrabold leading-tight mb-6 text-green-400
+                     max-[575.98px]:text-2xl min-[768px]:text-3xl min-[992px]:text-4xl min-[1200px]:text-5xl">
+            <span class="text-green-600">root@portfolio</span><span class="text-gray-500">:~$</span>
+            <br>
+            <span class="text-gray-300">./</span>fredy
+            <span class="text-green-500"> --role</span>=<span class="text-yellow-400">"security"</span>
+          </h1>
+          <div class="font-mono text-green-700 text-sm mb-8 space-y-1 max-w-2xl">
+            <p><span class="text-green-500">[*]</span> Especialidad: Pentesting Web &amp; Red</p>
+            <p><span class="text-green-500">[*]</span> Certificaciones: eJPT | CEH (en progreso)</p>
+            <p><span class="text-green-500">[*]</span> Plataformas: HackTheBox | TryHackMe</p>
+            <p><span class="text-green-500">[*]</span> Filosofía: <span class="text-green-300">hack to learn, not learn to hack</span></p>
+          </div>
+          <div class="flex gap-3 mb-8 max-[575.98px]:flex-col min-[768px]:flex-row">
+            <a href="#projects"
+               class="inline-flex justify-center items-center gap-2 px-5 py-2.5 rounded border border-green-500/50 text-green-400 bg-green-900/30 hover:bg-green-900/50 font-mono text-sm transition-colors">
+              <lucide-angular [img]="Terminal" class="h-4 w-4"></lucide-angular>
+              ./ver-proyectos
+            </a>
+            <a href="#contact"
+               class="inline-flex justify-center items-center gap-2 px-5 py-2.5 rounded border border-green-900 text-green-700 hover:text-green-400 hover:border-green-500/50 font-mono text-sm transition-colors">
+              <lucide-angular [img]="Shield" class="h-4 w-4"></lucide-angular>
+              ./contactar
+            </a>
+          </div>
+          <div class="flex items-center gap-5 text-green-800">
+            <a href="https://github.com/fserech" target="_blank" rel="noopener noreferrer"
+               class="hover:text-green-400 transition-colors">
+              <lucide-angular [img]="Github" class="w-5 h-5"></lucide-angular>
+            </a>
+            <a href="https://www.linkedin.com/in/fredy-serech-08a11a246" target="_blank" rel="noopener noreferrer"
+               class="hover:text-green-400 transition-colors">
+              <lucide-angular [img]="Linkedin" class="w-5 h-5"></lucide-angular>
+            </a>
+            <a href="mailto:serech63@gmail.com"
+               class="hover:text-green-400 transition-colors">
+              <lucide-angular [img]="Mail" class="w-5 h-5"></lucide-angular>
+            </a>
+          </div>
+        </ng-container>
       </div>
 
-      <!-- Image -->
+      <!-- ── Image ───────────────────────────────────────────────────── -->
       <div class="order-1 min-[992px]:order-2 relative fade-in-right">
-        <div class="relative rounded-2xl overflow-hidden shadow-2xl w-full
-                    max-[575.98px]:aspect-[16/9] max-[575.98px]:rounded-xl
-                    min-[768px]:max-[991.98px]:aspect-[16/9] min-[768px]:max-[991.98px]:rounded-2xl
-                    min-[992px]:max-[1199.98px]:aspect-auto min-[992px]:max-[1199.98px]:h-[70vh]
-                    min-[1200px]:aspect-auto min-[1200px]:h-[80vh]">
-          <div class="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-transparent mix-blend-overlay z-10"></div>
+        <div [class]="'relative rounded-2xl overflow-hidden shadow-2xl w-full
+                       max-[575.98px]:aspect-[16/9] min-[992px]:h-[70vh] min-[1200px]:h-[80vh] ' +
+                       (modeService.activeMode() === 'security'
+                         ? 'border border-green-500/20'
+                         : '')">
+          <div [class]="'absolute inset-0 mix-blend-overlay z-10 ' +
+                 (modeService.activeMode() === 'dev'
+                   ? 'bg-gradient-to-tr from-blue-600/20 to-transparent'
+                   : 'bg-gradient-to-tr from-green-600/30 to-transparent')"></div>
           <img [src]="imageUrl"
                alt="Developer Workspace"
-               class="w-full h-full object-cover">
+               [class]="'w-full h-full object-cover ' +
+                 (modeService.activeMode() === 'security' ? 'opacity-60 sec-img-filter' : '')">
+          <!-- Security overlay text -->
+          <div *ngIf="modeService.activeMode() === 'security'"
+               class="absolute bottom-4 left-4 font-mono text-xs text-green-500/60 select-none">
+            <p>encrypted_session: true</p>
+            <p>vpn: active</p>
+          </div>
         </div>
-
-        <!-- Decorative elements - ocultos en mobile -->
-        <div class="absolute -bottom-6 -left-6 w-24 h-24 bg-dots-pattern opacity-50 dark:opacity-20
-                    max-[575.98px]:hidden
-                    min-[768px]:max-[991.98px]:hidden
-                    min-[992px]:block"></div>
-        <div class="absolute -top-6 -right-6 w-32 h-32 bg-blue-100 dark:bg-blue-900/30 rounded-full -z-10 blur-3xl transition-colors
-                    max-[575.98px]:hidden
-                    min-[768px]:max-[991.98px]:hidden
-                    min-[992px]:block"></div>
+        <div *ngIf="modeService.activeMode() === 'dev'"
+             class="absolute -bottom-6 -left-6 w-24 h-24 bg-dots-pattern opacity-50 dark:opacity-20
+                    max-[575.98px]:hidden min-[992px]:block"></div>
+        <div *ngIf="modeService.activeMode() === 'dev'"
+             class="absolute -top-6 -right-6 w-32 h-32 bg-blue-100 dark:bg-blue-900/30 rounded-full -z-10 blur-3xl transition-colors
+                    max-[575.98px]:hidden min-[992px]:block"></div>
       </div>
+
     </div>
   </div>
 </section>

@@ -1,13 +1,6 @@
+// ── Card entrance ──────────────────────────────────────────────────────
 .project-card {
-  animation: fadeInUp 0.6s ease-out;
-  animation-fill-mode: backwards;
-}
-
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  animation: fadeInUp 0.5s ease-out both;
 }
 
 @keyframes fadeInUp {
@@ -19,4 +12,74 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+// ── Security mode background ───────────────────────────────────────────
+.sec-bg {
+  background: #040804;
+  background-image:
+    radial-gradient(ellipse at 10% 40%, rgba(34, 197, 94, 0.05) 0%, transparent 55%),
+    radial-gradient(ellipse at 90% 70%, rgba(34, 197, 94, 0.03) 0%, transparent 50%);
+}
+
+// ── Scanlines ─────────────────────────────────────────────────────────
+.scanlines-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.06) 2px,
+    rgba(0, 0, 0, 0.06) 4px
+  );
+  pointer-events: none;
+}
+
+// ── Terminal cursor blink ─────────────────────────────────────────────
+.terminal-cursor {
+  display: inline-block;
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+// ── Security project card ─────────────────────────────────────────────
+.sec-project-card {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(34, 197, 94, 0.4), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+// ── Security image filter ─────────────────────────────────────────────
+.sec-img-filter {
+  filter: grayscale(1) sepia(0.3) hue-rotate(80deg);
+}
+
+// ── Mode tabs ─────────────────────────────────────────────────────────
+.mode-tabs {
+  transition: all 0.3s ease;
 }

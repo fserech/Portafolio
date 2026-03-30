@@ -1,131 +1,166 @@
-<section id="about" class="bg-white dark:bg-gray-900 transition-colors duration-300
-                                   max-[575.98px]:py-12
-                                   min-[768px]:max-[991.98px]:py-16
-                                   min-[992px]:max-[1199.98px]:py-20
-                                   min-[1200px]:py-20">
-  <div class="w-full px-4 sm:px-6 lg:px-12">
+<section id="about"
+  [class]="'transition-colors duration-500 max-[575.98px]:py-12 min-[768px]:max-[991.98px]:py-16 min-[992px]:py-20 ' +
+           (modeService.activeMode() === 'dev'
+             ? 'bg-white dark:bg-gray-900'
+             : 'bg-gray-950 sec-bg')">
+
+  <!-- Scanlines security -->
+  <div *ngIf="modeService.activeMode() === 'security'" class="scanlines-overlay pointer-events-none"></div>
+
+  <div class="w-full px-4 sm:px-6 lg:px-12 relative">
+
     <!-- Header -->
-    <div class="text-center
-                max-[575.98px]:mb-10
-                min-[768px]:max-[991.98px]:mb-12
-                min-[992px]:mb-16">
-      <h2 class="font-bold text-gray-900 dark:text-white transition-colors
-                 max-[575.98px]:text-2xl
-                 min-[768px]:max-[991.98px]:text-3xl
-                 min-[992px]:max-[1199.98px]:text-3xl
-                 min-[1200px]:text-4xl">
-        Sobre Mí
-      </h2>
-      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-3xl mx-auto transition-colors
-                max-[575.98px]:text-base max-[575.98px]:mt-3 max-[575.98px]:px-4
-                min-[768px]:max-[991.98px]:text-lg min-[768px]:max-[991.98px]:mt-3
-                min-[992px]:max-[1199.98px]:text-xl min-[992px]:max-[1199.98px]:mt-4
-                min-[1200px]:text-xl min-[1200px]:mt-4">
-        Más que un desarrollador, soy un apasionado por crear soluciones digitales que impactan.
-      </p>
+    <div class="text-center max-[575.98px]:mb-10 min-[768px]:max-[991.98px]:mb-12 min-[992px]:mb-16">
+
+      <!-- DEV title -->
+      <ng-container *ngIf="modeService.activeMode() === 'dev'">
+        <h2 class="font-bold text-gray-900 dark:text-white transition-colors
+                   max-[575.98px]:text-2xl min-[768px]:max-[991.98px]:text-3xl min-[992px]:text-4xl">
+          Sobre Mí
+        </h2>
+        <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-3xl mx-auto
+                  max-[575.98px]:text-base min-[992px]:text-xl">
+          Más que un desarrollador, soy un apasionado por crear soluciones digitales que impactan.
+        </p>
+      </ng-container>
+
+      <!-- SECURITY title -->
+      <ng-container *ngIf="modeService.activeMode() === 'security'">
+        <h2 class="font-mono font-bold text-green-400
+                   max-[575.98px]:text-2xl min-[768px]:max-[991.98px]:text-3xl min-[992px]:text-4xl">
+          <span class="text-green-600">$</span> whoami
+        </h2>
+        <p class="mt-3 font-mono text-green-700 text-sm tracking-wider">
+          <span class="text-green-500">[INFO]</span> Cargando perfil de seguridad...
+          <span class="terminal-cursor">▋</span>
+        </p>
+      </ng-container>
     </div>
 
-    <!-- Cards de características -->
+    <!-- Feature cards -->
     <div class="grid gap-8
                 max-[575.98px]:grid-cols-1 max-[575.98px]:gap-6
                 min-[768px]:max-[991.98px]:grid-cols-2 min-[768px]:max-[991.98px]:gap-6
-                min-[992px]:max-[1199.98px]:grid-cols-3 min-[992px]:max-[1199.98px]:gap-6
-                min-[1200px]:grid-cols-3 min-[1200px]:gap-8">
+                min-[992px]:grid-cols-3 min-[992px]:gap-8">
+
       <div *ngFor="let feature of features; let i = index"
-           class="bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg dark:hover:shadow-blue-900/10 transition-all border border-gray-200 dark:border-gray-700 fade-in-up
-                  max-[575.98px]:p-6
-                  min-[768px]:max-[991.98px]:p-7
-                  min-[992px]:max-[1199.98px]:p-8
-                  min-[1200px]:p-8"
+           [class]="'rounded-xl fade-in-up transition-all duration-300 ' +
+             (modeService.activeMode() === 'dev'
+               ? 'bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:shadow-lg p-8'
+               : 'bg-gray-900/80 border border-green-500/20 hover:border-green-500/50 hover:shadow-[0_0_20px_rgba(34,197,94,0.15)] p-6')"
            [style.animation-delay.ms]="i * 200">
-        <div class="bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center mb-6 transition-colors
-                    max-[575.98px]:w-10 max-[575.98px]:h-10 max-[575.98px]:mb-4
-                    min-[768px]:max-[991.98px]:w-11 min-[768px]:max-[991.98px]:h-11 min-[768px]:max-[991.98px]:mb-5
-                    min-[992px]:w-12 min-[992px]:h-12">
-          <lucide-angular [img]="feature.icon"
-                         class="text-blue-600 dark:text-blue-400
-                                max-[575.98px]:h-5 max-[575.98px]:w-5
-                                min-[768px]:max-[991.98px]:h-5 min-[768px]:max-[991.98px]:w-5
-                                min-[992px]:h-6 min-[992px]:w-6"></lucide-angular>
+
+        <!-- DEV icon -->
+        <div *ngIf="modeService.activeMode() === 'dev'"
+             class="bg-blue-100 dark:bg-blue-900/50 rounded-lg w-12 h-12 flex items-center justify-center mb-6">
+          <lucide-angular [img]="feature.icon" class="text-blue-600 dark:text-blue-400 h-6 w-6"></lucide-angular>
         </div>
-        <h3 class="font-bold text-gray-900 dark:text-white mb-3 transition-colors
-                   max-[575.98px]:text-lg max-[575.98px]:mb-2
-                   min-[768px]:max-[991.98px]:text-lg min-[768px]:max-[991.98px]:mb-2
-                   min-[992px]:max-[1199.98px]:text-xl min-[992px]:max-[1199.98px]:mb-3
-                   min-[1200px]:text-xl min-[1200px]:mb-3">
+
+        <!-- SECURITY icon -->
+        <div *ngIf="modeService.activeMode() === 'security'"
+             class="bg-green-900/30 border border-green-500/30 rounded-lg w-10 h-10 flex items-center justify-center mb-4">
+          <lucide-angular [img]="feature.icon" class="text-green-400 h-5 w-5"></lucide-angular>
+        </div>
+
+        <h3 [class]="'font-bold mb-3 ' +
+               (modeService.activeMode() === 'dev'
+                 ? 'text-gray-900 dark:text-white text-xl'
+                 : 'text-green-400 font-mono text-base')">
+          <span *ngIf="modeService.activeMode() === 'security'" class="text-green-700">[+] </span>
           {{ feature.title }}
         </h3>
-        <p class="text-gray-600 dark:text-gray-400 leading-relaxed transition-colors
-                  max-[575.98px]:text-sm
-                  min-[768px]:max-[991.98px]:text-sm
-                  min-[992px]:text-base">
+        <p [class]="'leading-relaxed ' +
+             (modeService.activeMode() === 'dev'
+               ? 'text-gray-600 dark:text-gray-400 text-base'
+               : 'text-green-700 font-mono text-xs')">
+          <span *ngIf="modeService.activeMode() === 'security'" class="text-green-600"># </span>
           {{ feature.description }}
         </p>
       </div>
     </div>
 
-    <!-- Sección "¿Por qué trabajar conmigo?" -->
-    <div class="bg-gray-200 dark:bg-gray-800 rounded-2xl overflow-hidden relative border border-gray-300 dark:border-gray-700 transition-colors
-                max-[575.98px]:mt-10 max-[575.98px]:p-6 max-[575.98px]:rounded-xl
-                min-[768px]:max-[991.98px]:mt-12 min-[768px]:max-[991.98px]:p-8
-                min-[992px]:max-[1199.98px]:mt-14 min-[992px]:max-[1199.98px]:p-10
-                min-[1200px]:mt-16 min-[1200px]:p-12">
+    <!-- Bottom banner -->
+    <div [class]="'rounded-2xl overflow-hidden relative mt-16 ' +
+           (modeService.activeMode() === 'dev'
+             ? 'bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-12'
+             : 'bg-gray-900 border border-green-500/20 p-10')">
+
       <div class="relative z-10 grid items-center
                   max-[575.98px]:grid-cols-1 max-[575.98px]:gap-6
                   min-[768px]:max-[991.98px]:grid-cols-1 min-[768px]:max-[991.98px]:gap-8
                   min-[992px]:grid-cols-2 min-[992px]:gap-12">
         <div>
-          <h3 class="font-bold mb-4 text-gray-900 dark:text-white transition-colors
-                     max-[575.98px]:text-xl max-[575.98px]:mb-3
-                     min-[768px]:max-[991.98px]:text-xl min-[768px]:max-[991.98px]:mb-3
-                     min-[992px]:max-[1199.98px]:text-2xl min-[992px]:max-[1199.98px]:mb-4
-                     min-[1200px]:text-2xl min-[1200px]:mb-4">
-            ¿Por qué trabajar conmigo?
+          <h3 [class]="'font-bold mb-4 ' +
+                 (modeService.activeMode() === 'dev'
+                   ? 'text-gray-900 dark:text-white text-2xl'
+                   : 'text-green-400 font-mono text-xl')">
+            <ng-container *ngIf="modeService.activeMode() === 'dev'">¿Por qué trabajar conmigo?</ng-container>
+            <ng-container *ngIf="modeService.activeMode() === 'security'">
+              <span class="text-green-600">$</span> cat motivacion.txt
+            </ng-container>
           </h3>
-          <p class="text-gray-700 dark:text-gray-300 mb-6 transition-colors
-                    max-[575.98px]:text-base max-[575.98px]:mb-4
-                    min-[768px]:max-[991.98px]:text-base min-[768px]:max-[991.98px]:mb-5
-                    min-[992px]:max-[1199.98px]:text-lg min-[992px]:max-[1199.98px]:mb-6
-                    min-[1200px]:text-lg min-[1200px]:mb-6">
-            Combino habilidades técnicas sólidas con una gran capacidad de trabajo en equipo.
-            Me mantengo actualizado con las últimas tendencias de Angular y el ecosistema web moderno.
+          <p [class]="'mb-6 ' +
+               (modeService.activeMode() === 'dev'
+                 ? 'text-gray-700 dark:text-gray-300 text-lg'
+                 : 'text-green-700 font-mono text-sm')">
+            <ng-container *ngIf="modeService.activeMode() === 'dev'">
+              Combino habilidades técnicas sólidas con una gran capacidad de trabajo en equipo.
+              Me mantengo actualizado con las últimas tendencias de Angular y el ecosistema web moderno.
+            </ng-container>
+            <ng-container *ngIf="modeService.activeMode() === 'security'">
+              <span class="text-green-600"># </span>
+              Mentalidad ofensiva aplicada defensivamente. Entiendo cómo piensan los atacantes
+              porque he estado en su lugar — en entornos controlados y CTFs. La seguridad no es
+              un producto, es un proceso continuo.
+            </ng-container>
           </p>
         </div>
-        <div class="grid grid-cols-2
-                    max-[575.98px]:gap-4
-                    min-[768px]:max-[991.98px]:gap-6
-                    min-[992px]:gap-8">
-          <div class="bg-blue-500 dark:bg-blue-600/20 backdrop-blur-sm rounded-xl text-center border border-blue-600 dark:border-blue-500/30 transition-colors
-                      max-[575.98px]:p-4
-                      min-[768px]:max-[991.98px]:p-5
-                      min-[992px]:p-6">
-            <span class="block font-bold mb-2 text-white dark:text-blue-400 transition-colors
-                         max-[575.98px]:text-2xl max-[575.98px]:mb-1
-                         min-[768px]:max-[991.98px]:text-3xl min-[768px]:max-[991.98px]:mb-1
-                         min-[992px]:max-[1199.98px]:text-4xl min-[992px]:max-[1199.98px]:mb-2
-                         min-[1200px]:text-4xl min-[1200px]:mb-2">3+</span>
-            <span class="text-white dark:text-gray-300 uppercase tracking-wider transition-colors
-                         max-[575.98px]:text-xs
-                         min-[768px]:max-[991.98px]:text-xs
-                         min-[992px]:text-sm">AÑOS DE EXP.</span>
+
+        <div class="grid grid-cols-2 gap-6">
+          <div [class]="'rounded-xl text-center p-6 ' +
+                 (modeService.activeMode() === 'dev'
+                   ? 'bg-blue-500 dark:bg-blue-600/20 border border-blue-600 dark:border-blue-500/30'
+                   : 'bg-green-900/30 border border-green-500/30')">
+            <span [class]="'block font-bold mb-2 text-4xl ' +
+                     (modeService.activeMode() === 'dev'
+                       ? 'text-white dark:text-blue-400'
+                       : 'text-green-400 font-mono')">
+              <ng-container *ngIf="modeService.activeMode() === 'dev'">3+</ng-container>
+              <ng-container *ngIf="modeService.activeMode() === 'security'">50+</ng-container>
+            </span>
+            <span [class]="'uppercase tracking-wider text-sm ' +
+                     (modeService.activeMode() === 'dev'
+                       ? 'text-white dark:text-gray-300'
+                       : 'text-green-700 font-mono')">
+              <ng-container *ngIf="modeService.activeMode() === 'dev'">AÑOS DE EXP.</ng-container>
+              <ng-container *ngIf="modeService.activeMode() === 'security'">CTFs Resueltos</ng-container>
+            </span>
           </div>
-          <div class="bg-blue-500 dark:bg-blue-600/20 backdrop-blur-sm rounded-xl text-center border border-blue-600 dark:border-blue-500/30 transition-colors
-                      max-[575.98px]:p-4
-                      min-[768px]:max-[991.98px]:p-5
-                      min-[992px]:p-6">
-            <span class="block font-bold mb-2 text-white dark:text-blue-400 transition-colors
-                         max-[575.98px]:text-2xl max-[575.98px]:mb-1
-                         min-[768px]:max-[991.98px]:text-3xl min-[768px]:max-[991.98px]:mb-1
-                         min-[992px]:max-[1199.98px]:text-4xl min-[992px]:max-[1199.98px]:mb-2
-                         min-[1200px]:text-4xl min-[1200px]:mb-2">20+</span>
-            <span class="text-white dark:text-gray-300 uppercase tracking-wider transition-colors
-                         max-[575.98px]:text-xs
-                         min-[768px]:max-[991.98px]:text-xs
-                         min-[992px]:text-sm">PROYECTOS</span>
+          <div [class]="'rounded-xl text-center p-6 ' +
+                 (modeService.activeMode() === 'dev'
+                   ? 'bg-blue-500 dark:bg-blue-600/20 border border-blue-600 dark:border-blue-500/30'
+                   : 'bg-green-900/30 border border-green-500/30')">
+            <span [class]="'block font-bold mb-2 text-4xl ' +
+                     (modeService.activeMode() === 'dev'
+                       ? 'text-white dark:text-blue-400'
+                       : 'text-green-400 font-mono')">
+              <ng-container *ngIf="modeService.activeMode() === 'dev'">20+</ng-container>
+              <ng-container *ngIf="modeService.activeMode() === 'security'">10+</ng-container>
+            </span>
+            <span [class]="'uppercase tracking-wider text-sm ' +
+                     (modeService.activeMode() === 'dev'
+                       ? 'text-white dark:text-gray-300'
+                       : 'text-green-700 font-mono')">
+              <ng-container *ngIf="modeService.activeMode() === 'dev'">PROYECTOS</ng-container>
+              <ng-container *ngIf="modeService.activeMode() === 'security'">Vulns Reportadas</ng-container>
+            </span>
           </div>
         </div>
       </div>
-      <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-blue-300/20 dark:bg-blue-500/10 rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-24 -right-24 w-64 h-64 rounded-full blur-3xl"
+           [class]="modeService.activeMode() === 'dev'
+             ? 'bg-blue-300/20 dark:bg-blue-500/10'
+             : 'bg-green-500/5'"></div>
     </div>
   </div>
 </section>
