@@ -1,8 +1,9 @@
-import { Component, signal, computed, inject } from '@angular/core';
+import { Component, signal, computed, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, Plus, X, Edit2, Check, Shield, Code2, ChevronRight } from 'lucide-angular';
 import { ModeService } from '../../services/mode.service';
+import { StorageService } from '../../services/storage.service';
 
 export interface Skill {
   id: string;
@@ -15,6 +16,87 @@ export interface SkillCategory {
   title: string;
   skills: Skill[];
 }
+
+const DEFAULT_DEV_CATEGORIES: SkillCategory[] = [
+  {
+    id: 'dev-1', title: 'Frontend Core',
+    skills: [
+      { id: 's1', name: 'Angular',        level: 90 },
+      { id: 's2', name: 'TypeScript',      level: 85 },
+      { id: 's3', name: 'HTML5',           level: 95 },
+      { id: 's4', name: 'CSS3',            level: 90 },
+      { id: 's5', name: 'JavaScript ES6+', level: 85 },
+    ]
+  },
+  {
+    id: 'dev-2', title: 'Backend',
+    skills: [
+      { id: 's6', name: 'Spring Boot', level: 75 },
+      { id: 's7', name: 'Java',        level: 75 },
+      { id: 's8', name: 'MySQL',       level: 70 },
+      { id: 's9', name: 'Postman',     level: 85 },
+    ]
+  },
+  {
+    id: 'dev-3', title: 'Estilos & UI',
+    skills: [
+      { id: 's10', name: 'Tailwind CSS', level: 90 },
+      { id: 's11', name: 'SASS/SCSS',    level: 80 },
+      { id: 's12', name: 'Material UI',  level: 75 },
+      { id: 's13', name: 'Bootstrap',    level: 80 },
+    ]
+  },
+  {
+    id: 'dev-4', title: 'DevOps & Herramientas',
+    skills: [
+      { id: 's14', name: 'Docker',     level: 65 },
+      { id: 's15', name: 'Git/GitHub', level: 85 },
+      { id: 's16', name: 'VS Code',    level: 95 },
+      { id: 's17', name: 'Figma',      level: 70 },
+    ]
+  }
+];
+
+const DEFAULT_SEC_CATEGORIES: SkillCategory[] = [
+  {
+    id: 'sec-1', title: 'Firewalls & Redes',
+    skills: [
+      { id: 'ss1',  name: 'FortiGate',        level: 85 },
+      { id: 'ss2',  name: 'FortiAnalyzer',     level: 80 },
+      { id: 'ss3',  name: 'Segmentación de Red', level: 85 },
+      { id: 'ss4',  name: 'VLANs',             level: 90 },
+      { id: 'ss5',  name: 'Creación de VPNs',  level: 80 },
+    ]
+  },
+  {
+    id: 'sec-2', title: 'Servidores Windows',
+    skills: [
+      { id: 'ss6',  name: 'Windows Server',    level: 85 },
+      { id: 'ss7',  name: 'Active Directory',  level: 85 },
+      { id: 'ss8',  name: 'Group Policy (GPO)', level: 80 },
+      { id: 'ss9',  name: 'DNS / DHCP',        level: 75 },
+    ]
+  },
+  {
+    id: 'sec-3', title: 'Linux',
+    skills: [
+      { id: 'ss10', name: 'Ubuntu Server',     level: 80 },
+      { id: 'ss11', name: 'Debian',            level: 75 },
+      { id: 'ss12', name: 'Kali Linux',        level: 80 },
+      { id: 'ss13', name: 'Bash Scripting',    level: 70 },
+    ]
+  },
+  {
+    id: 'sec-4', title: 'Ethical Hacking & Web Sec',
+    skills: [
+      { id: 'ss14', name: 'OWASP Top 10',      level: 85 },
+      { id: 'ss15', name: 'Burp Suite',        level: 75 },
+      { id: 'ss16', name: 'Nmap / Recon',      level: 85 },
+      { id: 'ss17', name: 'Metasploit',        level: 70 },
+      { id: 'ss18', name: 'Wireshark',         level: 80 },
+    ]
+  }
+];
 
 @Component({
   selector: 'app-skills',
@@ -32,11 +114,13 @@ export class SkillsComponent {
   readonly Code2        = Code2;
   readonly ChevronRight = ChevronRight;
 
-  modeService = inject(ModeService);
+  private storage = inject(StorageService);
+  modeService     = inject(ModeService);
 
-  // Alias para el template
+  // Alias para compatibilidad con el template existente
   get activeMode() { return this.modeService.activeMode; }
 
+  // ─── Edit state ──────────────────────────────────────────────────────
   editingCategoryId     = signal<string | null>(null);
   editingSkillId        = signal<string | null>(null);
   newSkillName          = signal('');
@@ -46,85 +130,25 @@ export class SkillsComponent {
   addingCategory        = signal(false);
   editCategoryName      = signal('');
 
-  devCategories = signal<SkillCategory[]>([
-    {
-      id: 'dev-1', title: 'Frontend Core',
-      skills: [
-        { id: 's1', name: 'Angular',         level: 90 },
-        { id: 's2', name: 'TypeScript',       level: 85 },
-        { id: 's3', name: 'HTML5',            level: 95 },
-        { id: 's4', name: 'CSS3',             level: 90 },
-        { id: 's5', name: 'JavaScript ES6+',  level: 85 },
-      ]
-    },
-    {
-      id: 'dev-2', title: 'Backend',
-      skills: [
-        { id: 's6', name: 'Spring Boot', level: 75 },
-        { id: 's7', name: 'Java',        level: 75 },
-        { id: 's8', name: 'MySQL',       level: 70 },
-        { id: 's9', name: 'Postman',     level: 85 },
-      ]
-    },
-    {
-      id: 'dev-3', title: 'Estilos & UI',
-      skills: [
-        { id: 's10', name: 'Tailwind CSS',  level: 90 },
-        { id: 's11', name: 'SASS/SCSS',     level: 80 },
-        { id: 's12', name: 'Material UI',   level: 75 },
-        { id: 's13', name: 'Bootstrap',     level: 80 },
-      ]
-    },
-    {
-      id: 'dev-4', title: 'DevOps & Herramientas',
-      skills: [
-        { id: 's14', name: 'Docker',     level: 65 },
-        { id: 's15', name: 'Git/GitHub', level: 85 },
-        { id: 's16', name: 'VS Code',    level: 95 },
-        { id: 's17', name: 'Figma',      level: 70 },
-      ]
-    }
-  ]);
+  // ─── Datos con persistencia ──────────────────────────────────────────
+  devCategories = signal<SkillCategory[]>(
+    this.storage.get<SkillCategory[]>('portfolio_dev_skills', DEFAULT_DEV_CATEGORIES)
+  );
 
-  secCategories = signal<SkillCategory[]>([
-    {
-      id: 'sec-1', title: 'Ethical Hacking',
-      skills: [
-        { id: 'ss1', name: 'Kali Linux',   level: 80 },
-        { id: 'ss2', name: 'Metasploit',   level: 70 },
-        { id: 'ss3', name: 'Nmap',         level: 85 },
-        { id: 'ss4', name: 'Burp Suite',   level: 75 },
-      ]
-    },
-    {
-      id: 'sec-2', title: 'Network Security',
-      skills: [
-        { id: 'ss5', name: 'Wireshark',      level: 80 },
-        { id: 'ss6', name: 'Firewall Config', level: 70 },
-        { id: 'ss7', name: 'VPN/Tunneling',  level: 65 },
-        { id: 'ss8', name: 'IDS/IPS',        level: 60 },
-      ]
-    },
-    {
-      id: 'sec-3', title: 'Web Security',
-      skills: [
-        { id: 'ss9',  name: 'OWASP Top 10', level: 85 },
-        { id: 'ss10', name: 'SQL Injection', level: 80 },
-        { id: 'ss11', name: 'XSS/CSRF',     level: 80 },
-        { id: 'ss12', name: 'JWT/OAuth',     level: 75 },
-      ]
-    },
-    {
-      id: 'sec-4', title: 'OSINT & Análisis',
-      skills: [
-        { id: 'ss13', name: 'Maltego',       level: 65 },
-        { id: 'ss14', name: 'Shodan',        level: 70 },
-        { id: 'ss15', name: 'TheHarvester',  level: 70 },
-        { id: 'ss16', name: 'Recon-ng',      level: 60 },
-      ]
-    }
-  ]);
+  secCategories = signal<SkillCategory[]>(
+    this.storage.get<SkillCategory[]>('portfolio_sec_skills', DEFAULT_SEC_CATEGORIES)
+  );
 
+  constructor() {
+    effect(() => {
+      this.storage.set('portfolio_dev_skills', this.devCategories());
+    });
+    effect(() => {
+      this.storage.set('portfolio_sec_skills', this.secCategories());
+    });
+  }
+
+  // ─── Computed ────────────────────────────────────────────────────────
   currentCategories = computed(() =>
     this.modeService.activeMode() === 'dev' ? this.devCategories() : this.secCategories()
   );
@@ -166,7 +190,9 @@ export class SkillsComponent {
   confirmEditCategory(catId: string) {
     const name = this.editCategoryName().trim();
     if (!name) return;
-    this.updateCategories(this.currentCategories().map(c => c.id === catId ? { ...c, title: name } : c));
+    this.updateCategories(
+      this.currentCategories().map(c => c.id === catId ? { ...c, title: name } : c)
+    );
     this.cancelAll();
   }
 
@@ -210,7 +236,12 @@ export class SkillsComponent {
     if (!name) return;
     this.updateCategories(this.currentCategories().map(c => {
       if (c.id !== catId) return c;
-      return { ...c, skills: c.skills.map(s => s.id === skillId ? { ...s, name, level: this.newSkillLevel() } : s) };
+      return {
+        ...c,
+        skills: c.skills.map(s =>
+          s.id === skillId ? { ...s, name, level: this.newSkillLevel() } : s
+        )
+      };
     }));
     this.cancelAll();
   }

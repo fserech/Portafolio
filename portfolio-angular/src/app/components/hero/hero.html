@@ -4,13 +4,12 @@
              ? 'bg-gray-50 dark:bg-gray-950'
              : 'bg-gray-950 sec-bg')">
 
-  <!-- Scanlines security -->
   <div *ngIf="modeService.activeMode() === 'security'" class="scanlines-overlay pointer-events-none"></div>
 
   <div class="w-full px-4 sm:px-6 lg:px-12 relative">
     <div class="grid grid-cols-1 min-[992px]:grid-cols-2 gap-12 items-center">
 
-      <!-- ── Content ─────────────────────────────────────────────────── -->
+      <!-- Content -->
       <div class="order-2 min-[992px]:order-1 min-[992px]:pr-12 fade-in-left">
 
         <!-- DEV mode -->
@@ -40,8 +39,7 @@
               Contactar
             </a>
           </div>
-          <div class="flex items-center gap-6 text-gray-500 dark:text-gray-400
-                      max-[575.98px]:justify-center">
+          <div class="flex items-center gap-6 text-gray-500 dark:text-gray-400 max-[575.98px]:justify-center">
             <a href="https://github.com/fserech" target="_blank" rel="noopener noreferrer"
                class="hover:text-gray-900 dark:hover:text-white transition-colors">
               <lucide-angular [img]="Github" class="w-6 h-6"></lucide-angular>
@@ -60,7 +58,7 @@
         <!-- SECURITY mode -->
         <ng-container *ngIf="modeService.activeMode() === 'security'">
           <div class="font-mono mb-4 text-green-700 text-sm">
-            <span class="text-green-500">[+]</span> Iniciando sesión...
+            <span class="text-green-500">[+]</span> Autenticando sesión...
             <span class="text-green-400 ml-2">ACCESS GRANTED</span>
             <span class="terminal-cursor ml-1">▋</span>
           </div>
@@ -69,13 +67,15 @@
             <span class="text-green-600">root@portfolio</span><span class="text-gray-500">:~$</span>
             <br>
             <span class="text-gray-300">./</span>fredy
-            <span class="text-green-500"> --role</span>=<span class="text-yellow-400">"security"</span>
+            <span class="text-green-500"> --role</span>=<span class="text-yellow-400">"network-security"</span>
           </h1>
-          <div class="font-mono text-green-700 text-sm mb-8 space-y-1 max-w-2xl">
-            <p><span class="text-green-500">[*]</span> Especialidad: Pentesting Web &amp; Red</p>
-            <p><span class="text-green-500">[*]</span> Certificaciones: eJPT | CEH (en progreso)</p>
-            <p><span class="text-green-500">[*]</span> Plataformas: HackTheBox | TryHackMe</p>
-            <p><span class="text-green-500">[*]</span> Filosofía: <span class="text-green-300">hack to learn, not learn to hack</span></p>
+          <div class="font-mono text-green-700 text-sm mb-8 space-y-1.5 max-w-2xl">
+            <p><span class="text-green-500">[*]</span> Rol: Administrador de Seguridad &amp; Redes</p>
+            <p><span class="text-green-500">[*]</span> Stack: FortiGate · FortiAnalyzer · Windows Server · Linux</p>
+            <p><span class="text-green-500">[*]</span> Especialidad: VLANs · VPNs · Active Directory · Segmentación</p>
+            <p><span class="text-green-500">[*]</span> Filosofía:
+              <span class="text-green-300">la seguridad se diseña, no se improvisa</span>
+            </p>
           </div>
           <div class="flex gap-3 mb-8 max-[575.98px]:flex-col min-[768px]:flex-row">
             <a href="#projects"
@@ -106,33 +106,29 @@
         </ng-container>
       </div>
 
-      <!-- ── Image ───────────────────────────────────────────────────── -->
+      <!-- Image -->
       <div class="order-1 min-[992px]:order-2 relative fade-in-right">
         <div [class]="'relative rounded-2xl overflow-hidden shadow-2xl w-full
                        max-[575.98px]:aspect-[16/9] min-[992px]:h-[70vh] min-[1200px]:h-[80vh] ' +
-                       (modeService.activeMode() === 'security'
-                         ? 'border border-green-500/20'
-                         : '')">
+                       (modeService.activeMode() === 'security' ? 'border border-green-500/20' : '')">
           <div [class]="'absolute inset-0 mix-blend-overlay z-10 ' +
                  (modeService.activeMode() === 'dev'
                    ? 'bg-gradient-to-tr from-blue-600/20 to-transparent'
                    : 'bg-gradient-to-tr from-green-600/30 to-transparent')"></div>
-          <img [src]="imageUrl"
-               alt="Developer Workspace"
+          <img [src]="imageUrl" alt="Developer Workspace"
                [class]="'w-full h-full object-cover ' +
                  (modeService.activeMode() === 'security' ? 'opacity-60 sec-img-filter' : '')">
-          <!-- Security overlay text -->
           <div *ngIf="modeService.activeMode() === 'security'"
                class="absolute bottom-4 left-4 font-mono text-xs text-green-500/60 select-none">
-            <p>encrypted_session: true</p>
-            <p>vpn: active</p>
+            <p>firewall: active</p>
+            <p>vpn_tunnel: established</p>
           </div>
         </div>
         <div *ngIf="modeService.activeMode() === 'dev'"
              class="absolute -bottom-6 -left-6 w-24 h-24 bg-dots-pattern opacity-50 dark:opacity-20
                     max-[575.98px]:hidden min-[992px]:block"></div>
         <div *ngIf="modeService.activeMode() === 'dev'"
-             class="absolute -top-6 -right-6 w-32 h-32 bg-blue-100 dark:bg-blue-900/30 rounded-full -z-10 blur-3xl transition-colors
+             class="absolute -top-6 -right-6 w-32 h-32 bg-blue-100 dark:bg-blue-900/30 rounded-full -z-10 blur-3xl
                     max-[575.98px]:hidden min-[992px]:block"></div>
       </div>
 

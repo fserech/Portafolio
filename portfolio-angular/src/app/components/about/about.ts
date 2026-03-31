@@ -47,18 +47,18 @@ export class AboutComponent {
   secFeatures: Feature[] = [
     {
       icon: Shield,
-      title: 'Ethical Hacking',
-      description: 'Evaluaciones de seguridad ofensiva: pentesting web, red e ingeniería social siguiendo metodologías PTES y OWASP.'
+      title: 'Seguridad de Infraestructura',
+      description: 'Administración de firewalls FortiGate, segmentación de redes y configuración de VLANs y VPNs en entornos empresariales.'
     },
     {
       icon: Terminal,
-      title: 'Scripting & Exploit Dev',
-      description: 'Desarrollo de exploits, automatización de ataques y herramientas de reconocimiento en Python y Bash.'
+      title: 'Administración de Servidores',
+      description: 'Instalación y gestión de Windows Server con Active Directory, así como servidores Linux (Ubuntu, Debian) en producción.'
     },
     {
       icon: Eye,
-      title: 'Threat Intelligence',
-      description: 'Análisis de amenazas, OSINT y monitoreo de CVEs para identificar vectores de ataque antes que los atacantes.'
+      title: 'Análisis de Seguridad',
+      description: 'Monitoreo de redes con FortiAnalyzer, análisis de tráfico y detección de amenazas en infraestructuras corporativas.'
     }
   ];
 
