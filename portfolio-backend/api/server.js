@@ -64,5 +64,13 @@ server.post('/auth/verify', (req, res) => {
 // ─── ROUTER ─────────────────────────────
 server.use(router);
 
-// 🔥 EXPORTAR EN VEZ DE LISTEN
+// ─── MODO LOCAL (IMPORTANTE) ────────────
+if (process.env.NODE_ENV !== 'production') {
+  const PORT = 3000;
+  server.listen(PORT, () => {
+    console.log(`🚀 Local: http://localhost:${PORT}`);
+  });
+}
+
+// ─── EXPORT PARA VERCEL ─────────────────
 module.exports = server;
