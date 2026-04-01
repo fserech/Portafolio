@@ -1,0 +1,151 @@
+{
+  "skills_dev": [
+    {
+      "id": "dev-1",
+      "title": "Frontend Core",
+      "skills": [
+        { "id": "s1", "name": "Angular", "level": 90 },
+        { "id": "s2", "name": "TypeScript", "level": 85 },
+        { "id": "s3", "name": "HTML5", "level": 95 },
+        { "id": "s4", "name": "CSS3", "level": 90 },
+        { "id": "s5", "name": "JavaScript ES6+", "level": 85 }
+      ]
+    },
+    {
+      "id": "dev-2",
+      "title": "Backend",
+      "skills": [
+        { "id": "s6", "name": "Spring Boot", "level": 75 },
+        { "id": "s7", "name": "Java", "level": 75 },
+        { "id": "s8", "name": "MySQL", "level": 70 },
+        { "id": "s9", "name": "Postman", "level": 85 }
+      ]
+    },
+    {
+      "id": "dev-3",
+      "title": "Estilos & UI",
+      "skills": [
+        { "id": "s10", "name": "Tailwind CSS", "level": 90 },
+        { "id": "s11", "name": "SASS/SCSS", "level": 80 },
+        { "id": "s12", "name": "Material UI", "level": 75 },
+        { "id": "s13", "name": "Bootstrap", "level": 80 }
+      ]
+    },
+    {
+      "id": "dev-4",
+      "title": "DevOps & Herramientas",
+      "skills": [
+        { "id": "s14", "name": "Docker", "level": 65 },
+        { "id": "s15", "name": "Git & GitHub", "level": 85 },
+        { "id": "s16", "name": "VS Code", "level": 95 },
+        { "id": "s17", "name": "Figma", "level": 70 }
+      ]
+    }
+  ],
+  "skills_security": [
+    {
+      "id": "sec-1",
+      "title": "Ethical Hacking",
+      "skills": [
+        { "id": "ss1", "name": "Kali Linux", "level": 80 },
+        { "id": "ss2", "name": "Metasploit", "level": 70 },
+        { "id": "ss3", "name": "Nmap", "level": 85 },
+        { "id": "ss4", "name": "Burp Suite", "level": 75 }
+      ]
+    },
+    {
+      "id": "sec-2",
+      "title": "Network Security",
+      "skills": [
+        { "id": "ss5", "name": "Wireshark", "level": 80 },
+        { "id": "ss6", "name": "Firewall Config", "level": 70 },
+        { "id": "ss7", "name": "VPN / Tunneling", "level": 65 },
+        { "id": "ss8", "name": "IDS / IPS", "level": 60 }
+      ]
+    },
+    {
+      "id": "sec-3",
+      "title": "Web Security",
+      "skills": [
+        { "id": "ss9", "name": "OWASP Top 10", "level": 85 },
+        { "id": "ss10", "name": "SQL Injection", "level": 80 },
+        { "id": "ss11", "name": "XSS / CSRF", "level": 80 },
+        { "id": "ss12", "name": "JWT / OAuth", "level": 75 }
+      ]
+    },
+    {
+      "id": "sec-4",
+      "title": "OSINT & Análisis",
+      "skills": [
+        { "id": "ss13", "name": "Maltego", "level": 65 },
+        { "id": "ss14", "name": "Shodan", "level": 70 },
+        { "id": "ss15", "name": "TheHarvester", "level": 70 },
+        { "id": "ss16", "name": "Recon-ng", "level": 60 }
+      ]
+    }
+  ],
+  "projects_dev": [
+    {
+      "id": "dp1",
+      "title": "Dashboard Analítico",
+      "description": "Panel de control administrativo con gráficos interactivos, tablas de datos y gestión de usuarios.",
+      "tags": ["Angular", "Tailwind CSS", "TypeScript"],
+      "image": "https://images.unsplash.com/photo-1641567535859-c58187ac4954?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+      "demoUrl": "#",
+      "repoUrl": "#"
+    },
+    {
+      "id": "dp2",
+      "title": "E-commerce Moderno",
+      "description": "Tienda en línea con carrito de compras, pasarela de pago simulada y filtrado avanzado de productos.",
+      "tags": ["Angular", "RxJS", "Stripe API"],
+      "image": "https://images.unsplash.com/photo-1661870139279-95fecab7c53a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+      "demoUrl": "#",
+      "repoUrl": "#"
+    },
+    {
+      "id": "dp3",
+      "title": "Landing Page Corporativa",
+      "description": "Página de aterrizaje de alta conversión para una startup tecnológica con animaciones suaves.",
+      "tags": ["Angular", "Animations", "Tailwind CSS"],
+      "image": "https://images.unsplash.com/photo-1561291349-2f23e640ac9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+      "demoUrl": "#",
+      "repoUrl": "#"
+    }
+  ],
+  "projects_security": [
+    {
+      "id": "sp1",
+      "title": "Web Vuln Scanner",
+      "description": "Herramienta automatizada para detección de vulnerabilidades OWASP Top 10. Reportes en JSON/HTML.",
+      "tags": ["Python", "Nmap", "OWASP", "Burp Suite"],
+      "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+      "demoUrl": "#",
+      "repoUrl": "#",
+      "status": "active",
+      "cve": "CVE-2023-XXXX"
+    },
+    {
+      "id": "sp2",
+      "title": "Network Traffic Analyzer",
+      "description": "Captura y análisis en tiempo real de tráfico de red. Detección de patrones anómalos.",
+      "tags": ["Wireshark", "Python", "Scapy", "ELK Stack"],
+      "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+      "demoUrl": "#",
+      "repoUrl": "#",
+      "status": "active",
+      "cve": ""
+    },
+    {
+      "id": "sp3",
+      "title": "CTF Write-ups Repository",
+      "description": "Colección documentada de resoluciones de CTF. Categorizado por tipo: crypto, forensics, pwn, web.",
+      "tags": ["CTF", "Crypto", "Forensics", "Pwn"],
+      "image": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800",
+      "demoUrl": "#",
+      "repoUrl": "#",
+      "status": "archived",
+      "cve": ""
+    }
+  ]
+}

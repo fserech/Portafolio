@@ -4,11 +4,12 @@ import { AuthService } from '../services/auth.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
-  const token = authService.getToken();
+  const pin = authService.getPin();
 
-  if (token) {
+  const writeMethods = ['POST', 'PUT', 'PATCH', 'DELETE'];
+  if (pin && writeMethods.includes(req.method)) {
     const cloned = req.clone({
-      headers: req.headers.set('Authorization', `Bearer ${token}`)
+      headers: req.headers.set('x-admin-pin', pin)
     });
     return next(cloned);
   }
