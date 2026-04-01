@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, Plus, X, Edit2, Check, Shield, Code2, ChevronRight } from 'lucide-angular';
 import { ModeService } from '../../services/mode.service';
 import { StorageService } from '../../services/storage.service';
+import { AuthService } from '../../services/auth.service';
+import { EditGuardService } from '../../services/edit-guard.service';
 
 export interface Skill {
   id: string;
@@ -61,39 +63,39 @@ const DEFAULT_SEC_CATEGORIES: SkillCategory[] = [
   {
     id: 'sec-1', title: 'Firewalls & Redes',
     skills: [
-      { id: 'ss1',  name: 'FortiGate',        level: 85 },
-      { id: 'ss2',  name: 'FortiAnalyzer',     level: 80 },
-      { id: 'ss3',  name: 'Segmentación de Red', level: 85 },
-      { id: 'ss4',  name: 'VLANs',             level: 90 },
-      { id: 'ss5',  name: 'Creación de VPNs',  level: 80 },
+      { id: 'ss1',  name: 'FortiGate',           level: 85 },
+      { id: 'ss2',  name: 'FortiAnalyzer',        level: 80 },
+      { id: 'ss3',  name: 'Segmentación de Red',  level: 85 },
+      { id: 'ss4',  name: 'VLANs',                level: 90 },
+      { id: 'ss5',  name: 'Creación de VPNs',     level: 80 },
     ]
   },
   {
     id: 'sec-2', title: 'Servidores Windows',
     skills: [
-      { id: 'ss6',  name: 'Windows Server',    level: 85 },
-      { id: 'ss7',  name: 'Active Directory',  level: 85 },
-      { id: 'ss8',  name: 'Group Policy (GPO)', level: 80 },
-      { id: 'ss9',  name: 'DNS / DHCP',        level: 75 },
+      { id: 'ss6',  name: 'Windows Server',       level: 85 },
+      { id: 'ss7',  name: 'Active Directory',      level: 85 },
+      { id: 'ss8',  name: 'Group Policy (GPO)',    level: 80 },
+      { id: 'ss9',  name: 'DNS / DHCP',            level: 75 },
     ]
   },
   {
     id: 'sec-3', title: 'Linux',
     skills: [
-      { id: 'ss10', name: 'Ubuntu Server',     level: 80 },
-      { id: 'ss11', name: 'Debian',            level: 75 },
-      { id: 'ss12', name: 'Kali Linux',        level: 80 },
-      { id: 'ss13', name: 'Bash Scripting',    level: 70 },
+      { id: 'ss10', name: 'Ubuntu Server',         level: 80 },
+      { id: 'ss11', name: 'Debian',                level: 75 },
+      { id: 'ss12', name: 'Kali Linux',            level: 80 },
+      { id: 'ss13', name: 'Bash Scripting',        level: 70 },
     ]
   },
   {
     id: 'sec-4', title: 'Ethical Hacking & Web Sec',
     skills: [
-      { id: 'ss14', name: 'OWASP Top 10',      level: 85 },
-      { id: 'ss15', name: 'Burp Suite',        level: 75 },
-      { id: 'ss16', name: 'Nmap / Recon',      level: 85 },
-      { id: 'ss17', name: 'Metasploit',        level: 70 },
-      { id: 'ss18', name: 'Wireshark',         level: 80 },
+      { id: 'ss14', name: 'OWASP Top 10',          level: 85 },
+      { id: 'ss15', name: 'Burp Suite',            level: 75 },
+      { id: 'ss16', name: 'Nmap / Recon',          level: 85 },
+      { id: 'ss17', name: 'Metasploit',            level: 70 },
+      { id: 'ss18', name: 'Wireshark',             level: 80 },
     ]
   }
 ];
@@ -114,8 +116,10 @@ export class SkillsComponent {
   readonly Code2        = Code2;
   readonly ChevronRight = ChevronRight;
 
-  private storage = inject(StorageService);
-  modeService     = inject(ModeService);
+  private storage   = inject(StorageService);
+  private auth      = inject(AuthService);
+  private editGuard = inject(EditGuardService);
+  modeService       = inject(ModeService);
 
   // Alias para compatibilidad con el template existente
   get activeMode() { return this.modeService.activeMode; }
@@ -162,6 +166,16 @@ export class SkillsComponent {
     else this.secCategories.set(cats);
   }
 
+  // ─── Guard: si no autenticado, pide PIN y guarda la acción ──────────
+  private requireAuth(action: () => void) {
+    if (this.auth.isAuthenticated()) {
+      action();
+    } else {
+      this.editGuard.requestLogin(action);
+    }
+  }
+
+  // ─── Acciones ────────────────────────────────────────────────────────
   cancelAll() {
     this.editingCategoryId.set(null);
     this.editingSkillId.set(null);
@@ -172,7 +186,12 @@ export class SkillsComponent {
     this.editCategoryName.set('');
   }
 
-  startAddCategory() { this.cancelAll(); this.addingCategory.set(true); }
+  startAddCategory() {
+    this.requireAuth(() => {
+      this.cancelAll();
+      this.addingCategory.set(true);
+    });
+  }
 
   confirmAddCategory() {
     const name = this.newCategoryName().trim();
@@ -182,9 +201,11 @@ export class SkillsComponent {
   }
 
   startEditCategory(cat: SkillCategory) {
-    this.cancelAll();
-    this.editingCategoryId.set(cat.id);
-    this.editCategoryName.set(cat.title);
+    this.requireAuth(() => {
+      this.cancelAll();
+      this.editingCategoryId.set(cat.id);
+      this.editCategoryName.set(cat.title);
+    });
   }
 
   confirmEditCategory(catId: string) {
@@ -197,14 +218,18 @@ export class SkillsComponent {
   }
 
   deleteCategory(catId: string) {
-    this.updateCategories(this.currentCategories().filter(c => c.id !== catId));
+    this.requireAuth(() => {
+      this.updateCategories(this.currentCategories().filter(c => c.id !== catId));
+    });
   }
 
   startAddSkill(catId: string) {
-    this.cancelAll();
-    this.addingSkillInCategory.set(catId);
-    this.newSkillName.set('');
-    this.newSkillLevel.set(80);
+    this.requireAuth(() => {
+      this.cancelAll();
+      this.addingSkillInCategory.set(catId);
+      this.newSkillName.set('');
+      this.newSkillLevel.set(80);
+    });
   }
 
   confirmAddSkill(catId: string) {
@@ -218,17 +243,21 @@ export class SkillsComponent {
   }
 
   deleteSkill(catId: string, skillId: string) {
-    this.updateCategories(this.currentCategories().map(c => {
-      if (c.id !== catId) return c;
-      return { ...c, skills: c.skills.filter(s => s.id !== skillId) };
-    }));
+    this.requireAuth(() => {
+      this.updateCategories(this.currentCategories().map(c => {
+        if (c.id !== catId) return c;
+        return { ...c, skills: c.skills.filter(s => s.id !== skillId) };
+      }));
+    });
   }
 
   startEditSkill(skill: Skill) {
-    this.cancelAll();
-    this.editingSkillId.set(skill.id);
-    this.newSkillName.set(skill.name);
-    this.newSkillLevel.set(skill.level ?? 80);
+    this.requireAuth(() => {
+      this.cancelAll();
+      this.editingSkillId.set(skill.id);
+      this.newSkillName.set(skill.name);
+      this.newSkillLevel.set(skill.level ?? 80);
+    });
   }
 
   confirmEditSkill(catId: string, skillId: string) {

@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, ExternalLink, Github, Plus, X, Edit2, Check, Shield, Code2, Terminal, Lock } from 'lucide-angular';
 import { ModeService } from '../../services/mode.service';
 import { StorageService } from '../../services/storage.service';
+import { AuthService } from '../../services/auth.service';
+import { EditGuardService } from '../../services/edit-guard.service';
 
 export interface Project {
   id: string;
@@ -93,8 +95,10 @@ export class ProjectsComponent {
   readonly Terminal     = Terminal;
   readonly Lock         = Lock;
 
-  private storage = inject(StorageService);
-  modeService     = inject(ModeService);
+  private storage   = inject(StorageService);
+  private auth      = inject(AuthService);
+  private editGuard = inject(EditGuardService);
+  modeService       = inject(ModeService);
 
   // Alias para compatibilidad con el template existente
   get activeMode() { return this.modeService.activeMode; }
@@ -122,7 +126,6 @@ export class ProjectsComponent {
   );
 
   constructor() {
-    // Persistir automáticamente cada vez que cambien
     effect(() => {
       this.storage.set('portfolio_dev_projects', this.devProjects());
     });
@@ -145,6 +148,16 @@ export class ProjectsComponent {
     else this.secProjects.set(projects);
   }
 
+  // ─── Guard: si no autenticado, pide PIN y guarda la acción ──────────
+  private requireAuth(action: () => void) {
+    if (this.auth.isAuthenticated()) {
+      action();
+    } else {
+      this.editGuard.requestLogin(action);
+    }
+  }
+
+  // ─── Acciones ────────────────────────────────────────────────────────
   cancelEdit() {
     this.editingId.set(null);
     this.addingNew.set(false);
@@ -152,16 +165,25 @@ export class ProjectsComponent {
     this.editDraft.set(this.emptyProject());
   }
 
-  startAdd()  { this.cancelEdit(); this.addingNew.set(true); }
+  startAdd() {
+    this.requireAuth(() => {
+      this.cancelEdit();
+      this.addingNew.set(true);
+    });
+  }
 
   startEdit(project: Project) {
-    this.cancelEdit();
-    this.editingId.set(project.id);
-    this.editDraft.set({ ...project });
+    this.requireAuth(() => {
+      this.cancelEdit();
+      this.editingId.set(project.id);
+      this.editDraft.set({ ...project });
+    });
   }
 
   deleteProject(id: string) {
-    this.updateProjects(this.currentProjects().filter(p => p.id !== id));
+    this.requireAuth(() => {
+      this.updateProjects(this.currentProjects().filter(p => p.id !== id));
+    });
   }
 
   addTag() {
