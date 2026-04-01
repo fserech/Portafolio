@@ -25,8 +25,15 @@ server.use(jsonServer.bodyParser);
 
 // ─── AUTH ───────────────────────────────
 server.use((req, res, next) => {
+
+  // ✅ PERMITIR LOGIN SIN PIN
+  if (req.path === '/auth/verify') {
+    return next();
+  }
+
   const readOnlyMethods = ['GET', 'HEAD', 'OPTIONS'];
 
+  // ✅ GET público
   if (readOnlyMethods.includes(req.method)) {
     return next();
   }
@@ -55,20 +62,24 @@ server.post('/auth/verify', (req, res) => {
   const { pin } = req.body;
 
   if (pin === SECRET_PIN) {
-    return res.json({ ok: true });
+    return res.json({ ok: true, message: 'Autenticado correctamente' });
   }
 
-  return res.status(403).json({ ok: false });
+  return res.status(403).json({
+    ok: false,
+    message: 'PIN incorrecto'
+  });
 });
 
 // ─── ROUTER ─────────────────────────────
 server.use(router);
 
-// ─── MODO LOCAL (IMPORTANTE) ────────────
+// ─── MODO LOCAL ─────────────────────────
 if (process.env.NODE_ENV !== 'production') {
   const PORT = 3000;
   server.listen(PORT, () => {
     console.log(`🚀 Local: http://localhost:${PORT}`);
+    console.log(`🔐 PIN actual: ${SECRET_PIN}`);
   });
 }
 
