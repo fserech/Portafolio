@@ -6,6 +6,12 @@
       "use": "@vercel/node"
     }
   ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/api/server.js"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -15,12 +21,6 @@
         { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization, x-admin-pin" },
         { "key": "Access-Control-Max-Age", "value": "86400" }
       ]
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/api/server.js"
     }
   ]
 }
