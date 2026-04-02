@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "JSON Server backend para portafolio fredy@dev",
   "main": "api/server.js",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "start": "node api/server.js",
     "dev": "nodemon api/server.js"
