@@ -1,4 +1,3 @@
-// src/app/services/data.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
@@ -41,7 +40,7 @@ export class DataService {
     private auth: AuthService
   ) {}
 
-  // ─── Headers privados (incluye PIN para escritura) ────────────────────
+  // ─── Headers con PIN para escritura ──────────────────────────────────
   private writeHeaders(): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/json',
@@ -49,22 +48,32 @@ export class DataService {
     });
   }
 
-  // ─── SKILLS ──────────────────────────────────────────────────────────
-  private skillsEndpoint(mode: ProfileMode) {
+  // ─── ID único garantizado (timestamp + random) ────────────────────────
+  // NO usar Math.random() solo — colisiona con json-server
+  private genId(): string {
+    return `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════
+  // SKILLS
+  // ═══════════════════════════════════════════════════════════════════════
+  private skillsUrl(mode: ProfileMode) {
     return `${this.api}/skills_${mode}`;
   }
 
   getSkillCategories(mode: ProfileMode): Promise<SkillCategory[]> {
     return firstValueFrom(
-      this.http.get<SkillCategory[]>(this.skillsEndpoint(mode))
+      this.http.get<SkillCategory[]>(this.skillsUrl(mode))
     );
   }
 
   addSkillCategory(mode: ProfileMode, category: Omit<SkillCategory, 'id'>): Promise<SkillCategory> {
-    const body: SkillCategory = { id: this.genId(), ...category };
+    // NO incluir id — dejar que json-server lo genere automáticamente
+    const body = { ...category };
     return firstValueFrom(
       this.http.post<SkillCategory>(
-        this.skillsEndpoint(mode), body,
+        this.skillsUrl(mode),
+        body,
         { headers: this.writeHeaders() }
       )
     );
@@ -73,7 +82,8 @@ export class DataService {
   updateSkillCategory(mode: ProfileMode, category: SkillCategory): Promise<SkillCategory> {
     return firstValueFrom(
       this.http.put<SkillCategory>(
-        `${this.skillsEndpoint(mode)}/${category.id}`, category,
+        `${this.skillsUrl(mode)}/${category.id}`,
+        category,
         { headers: this.writeHeaders() }
       )
     );
@@ -82,28 +92,32 @@ export class DataService {
   deleteSkillCategory(mode: ProfileMode, id: string): Promise<void> {
     return firstValueFrom(
       this.http.delete<void>(
-        `${this.skillsEndpoint(mode)}/${id}`,
+        `${this.skillsUrl(mode)}/${id}`,
         { headers: this.writeHeaders() }
       )
     );
   }
 
-  // ─── PROJECTS ────────────────────────────────────────────────────────
-  private projectsEndpoint(mode: ProfileMode) {
+  // ═══════════════════════════════════════════════════════════════════════
+  // PROJECTS
+  // ═══════════════════════════════════════════════════════════════════════
+  private projectsUrl(mode: ProfileMode) {
     return `${this.api}/projects_${mode}`;
   }
 
   getProjects(mode: ProfileMode): Promise<Project[]> {
     return firstValueFrom(
-      this.http.get<Project[]>(this.projectsEndpoint(mode))
+      this.http.get<Project[]>(this.projectsUrl(mode))
     );
   }
 
   addProject(mode: ProfileMode, project: Omit<Project, 'id'>): Promise<Project> {
-    const body: Project = { id: this.genId(), ...project };
+    // NO incluir id — dejar que json-server lo genere automáticamente
+    const body = { ...project };
     return firstValueFrom(
       this.http.post<Project>(
-        this.projectsEndpoint(mode), body,
+        this.projectsUrl(mode),
+        body,
         { headers: this.writeHeaders() }
       )
     );
@@ -112,7 +126,8 @@ export class DataService {
   updateProject(mode: ProfileMode, project: Project): Promise<Project> {
     return firstValueFrom(
       this.http.put<Project>(
-        `${this.projectsEndpoint(mode)}/${project.id}`, project,
+        `${this.projectsUrl(mode)}/${project.id}`,
+        project,
         { headers: this.writeHeaders() }
       )
     );
@@ -121,14 +136,9 @@ export class DataService {
   deleteProject(mode: ProfileMode, id: string): Promise<void> {
     return firstValueFrom(
       this.http.delete<void>(
-        `${this.projectsEndpoint(mode)}/${id}`,
+        `${this.projectsUrl(mode)}/${id}`,
         { headers: this.writeHeaders() }
       )
     );
-  }
-
-  // ─── Helper ──────────────────────────────────────────────────────────
-  private genId(): string {
-    return Math.random().toString(36).slice(2, 9);
   }
 }

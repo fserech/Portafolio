@@ -1,4 +1,4 @@
-import { Component, signal, computed, inject, OnInit } from '@angular/core';
+import { Component, signal, computed, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, ExternalLink, Github, Plus, X, Edit2, Check, Shield, Code2, Terminal, Lock } from 'lucide-angular';
@@ -16,7 +16,7 @@ export type { Project };
   templateUrl: './projects.html',
   styleUrls: ['./projects.scss']
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectsComponent implements OnInit, OnDestroy {
   readonly ExternalLink = ExternalLink;
   readonly Github       = Github;
   readonly Plus         = Plus;
@@ -36,15 +36,15 @@ export class ProjectsComponent implements OnInit {
   get activeMode() { return this.modeService.activeMode; }
 
   // ─── Estado ────────────────────────────────────────────────────────
-  devProjects  = signal<Project[]>([]);
-  secProjects  = signal<Project[]>([]);
-  loading      = signal(false);
-  saving       = signal(false);
-  saveMsg      = signal('');
+  devProjects = signal<Project[]>([]);
+  secProjects = signal<Project[]>([]);
+  loading     = signal(false);
+  saving      = signal(false);
+  saveMsg     = signal('');
 
-  editingId    = signal<string | null>(null);
-  addingNew    = signal(false);
-  tagInput     = '';
+  editingId = signal<string | null>(null);
+  addingNew  = signal(false);
+  tagInput   = '';
 
   emptyProject = (): Omit<Project, 'id'> => ({
     title: '', description: '', tags: [],
@@ -58,9 +58,27 @@ export class ProjectsComponent implements OnInit {
     this.modeService.activeMode() === 'dev' ? this.devProjects() : this.secProjects()
   );
 
-  // ─── Init: carga ambos modos desde el backend ──────────────────────
+  // ─── Polling para tiempo real ──────────────────────────────────────
+  private pollInterval: any;
+  private onFocus = () => this.reloadAll();
+
   async ngOnInit() {
-    this.loading.set(true);
+    await this.reloadAll();
+
+    // Polling cada 30 segundos
+    this.pollInterval = setInterval(() => this.reloadAll(), 30_000);
+
+    // Recarga al volver a la pestaña
+    window.addEventListener('focus', this.onFocus);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.pollInterval);
+    window.removeEventListener('focus', this.onFocus);
+  }
+
+  // ─── Carga ambos modos en paralelo ────────────────────────────────
+  private async reloadAll() {
     try {
       const [dev, sec] = await Promise.all([
         this.data.getProjects('dev'),
@@ -70,8 +88,6 @@ export class ProjectsComponent implements OnInit {
       this.secProjects.set(sec);
     } catch (e) {
       console.error('Error cargando proyectos:', e);
-    } finally {
-      this.loading.set(false);
     }
   }
 
@@ -79,11 +95,6 @@ export class ProjectsComponent implements OnInit {
   private showMsg(msg: string) {
     this.saveMsg.set(msg);
     setTimeout(() => this.saveMsg.set(''), 3000);
-  }
-
-  private setLocal(projects: Project[]) {
-    if (this.modeService.activeMode() === 'dev') this.devProjects.set(projects);
-    else this.secProjects.set(projects);
   }
 
   setMode(mode: 'dev' | 'security') {
@@ -98,16 +109,12 @@ export class ProjectsComponent implements OnInit {
     this.editDraft.set(this.emptyProject());
   }
 
-  // ─── Guard ─────────────────────────────────────────────────────────
   private requireAuth(action: () => void) {
-    if (this.auth.isAuthenticated()) {
-      action();
-    } else {
-      this.editGuard.requestLogin(action);
-    }
+    if (this.auth.isAuthenticated()) action();
+    else this.editGuard.requestLogin(action);
   }
 
-  // ─── Acciones ──────────────────────────────────────────────────────
+  // ─── CRUD ──────────────────────────────────────────────────────────
   startAdd() {
     this.requireAuth(() => {
       this.cancelEdit();
@@ -128,7 +135,12 @@ export class ProjectsComponent implements OnInit {
       this.saving.set(true);
       try {
         await this.data.deleteProject(this.modeService.activeMode(), id);
-        this.setLocal(this.currentProjects().filter(p => p.id !== id));
+        // Actualizar local inmediatamente
+        if (this.modeService.activeMode() === 'dev') {
+          this.devProjects.set(this.devProjects().filter(p => p.id !== id));
+        } else {
+          this.secProjects.set(this.secProjects().filter(p => p.id !== id));
+        }
         this.showMsg('✓ Proyecto eliminado');
       } catch (e) {
         console.error(e);
@@ -144,19 +156,24 @@ export class ProjectsComponent implements OnInit {
     if (!draft.title.trim()) return;
 
     this.saving.set(true);
-    try {
-      const mode = this.modeService.activeMode();
+    const mode = this.modeService.activeMode();
 
+    try {
       if (this.addingNew()) {
-        // POST → backend genera el ID
+        // POST sin ID — json-server genera uno único automáticamente
         const saved = await this.data.addProject(mode, draft);
-        this.setLocal([...this.currentProjects(), saved]);
+        if (mode === 'dev') this.devProjects.set([...this.devProjects(), saved]);
+        else this.secProjects.set([...this.secProjects(), saved]);
         this.showMsg('✓ Proyecto agregado');
       } else {
-        // PUT → actualizar existente
+        // PUT con ID existente
         const id = this.editingId()!;
         const updated = await this.data.updateProject(mode, { id, ...draft });
-        this.setLocal(this.currentProjects().map(p => p.id === id ? updated : p));
+        if (mode === 'dev') {
+          this.devProjects.set(this.devProjects().map(p => p.id === id ? updated : p));
+        } else {
+          this.secProjects.set(this.secProjects().map(p => p.id === id ? updated : p));
+        }
         this.showMsg('✓ Proyecto guardado');
       }
       this.cancelEdit();
