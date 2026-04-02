@@ -1,80 +1,13 @@
-import { Component, signal, computed, inject, effect } from '@angular/core';
+import { Component, signal, computed, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, ExternalLink, Github, Plus, X, Edit2, Check, Shield, Code2, Terminal, Lock } from 'lucide-angular';
 import { ModeService } from '../../services/mode.service';
-import { StorageService } from '../../services/storage.service';
 import { AuthService } from '../../services/auth.service';
 import { EditGuardService } from '../../services/edit-guard.service';
+import { DataService, Project } from '../../services/data.service';
 
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  tags: string[];
-  image: string;
-  demoUrl: string;
-  repoUrl: string;
-  status?: 'active' | 'classified' | 'archived';
-  cve?: string;
-}
-
-const DEFAULT_DEV_PROJECTS: Project[] = [
-  {
-    id: 'dp1',
-    title: 'Dashboard Analítico',
-    description: 'Panel de control administrativo con gráficos interactivos, tablas de datos y gestión de usuarios. Optimizado para rendimiento y accesibilidad.',
-    tags: ['Angular', 'Tailwind CSS', 'TypeScript', 'Recharts'],
-    image: 'https://images.unsplash.com/photo-1641567535859-c58187ac4954?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
-    demoUrl: '#', repoUrl: '#'
-  },
-  {
-    id: 'dp2',
-    title: 'E-commerce Moderno',
-    description: 'Tienda en línea con carrito de compras, pasarela de pago simulada y filtrado avanzado de productos. Diseño totalmente responsivo.',
-    tags: ['Angular', 'RxJS', 'Stripe API', 'SCSS'],
-    image: 'https://images.unsplash.com/photo-1661870139279-95fecab7c53a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
-    demoUrl: '#', repoUrl: '#'
-  },
-  {
-    id: 'dp3',
-    title: 'Landing Page Corporativa',
-    description: 'Página de aterrizaje de alta conversión para una startup tecnológica. Incluye animaciones suaves y formularios integrados.',
-    tags: ['Angular', 'Animations', 'Tailwind CSS'],
-    image: 'https://images.unsplash.com/photo-1561291349-2f23e640ac9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
-    demoUrl: '#', repoUrl: '#'
-  }
-];
-
-const DEFAULT_SEC_PROJECTS: Project[] = [
-  {
-    id: 'sp1',
-    title: 'Web Vuln Scanner',
-    description: 'Herramienta automatizada para detección de vulnerabilidades OWASP Top 10. Reportes en JSON/HTML con severidad CVSS.',
-    tags: ['Python', 'Nmap', 'OWASP', 'Burp Suite'],
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
-    demoUrl: '#', repoUrl: '#',
-    status: 'active', cve: 'CVE-2023-XXXX'
-  },
-  {
-    id: 'sp2',
-    title: 'Network Traffic Analyzer',
-    description: 'Captura y análisis en tiempo real de tráfico de red. Detección de patrones anómalos y alertas automáticas via Slack.',
-    tags: ['Wireshark', 'Python', 'Scapy', 'ELK Stack'],
-    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
-    demoUrl: '#', repoUrl: '#',
-    status: 'active'
-  },
-  {
-    id: 'sp3',
-    title: 'CTF Write-ups Repository',
-    description: 'Colección documentada de resoluciones de CTF. Categorizado por tipo: crypto, forensics, pwn, web, reversing.',
-    tags: ['CTF', 'Crypto', 'Forensics', 'Pwn'],
-    image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&w=800',
-    demoUrl: '#', repoUrl: '#',
-    status: 'archived'
-  }
-];
+export type { Project };
 
 @Component({
   selector: 'app-projects',
@@ -83,7 +16,7 @@ const DEFAULT_SEC_PROJECTS: Project[] = [
   templateUrl: './projects.html',
   styleUrls: ['./projects.scss']
 })
-export class ProjectsComponent {
+export class ProjectsComponent implements OnInit {
   readonly ExternalLink = ExternalLink;
   readonly Github       = Github;
   readonly Plus         = Plus;
@@ -95,18 +28,23 @@ export class ProjectsComponent {
   readonly Terminal     = Terminal;
   readonly Lock         = Lock;
 
-  private storage   = inject(StorageService);
+  private data      = inject(DataService);
   private auth      = inject(AuthService);
   private editGuard = inject(EditGuardService);
   modeService       = inject(ModeService);
 
-  // Alias para compatibilidad con el template existente
   get activeMode() { return this.modeService.activeMode; }
 
-  // ─── Edit state ──────────────────────────────────────────────────────
-  editingId = signal<string | null>(null);
-  addingNew  = signal(false);
-  tagInput   = '';
+  // ─── Estado ────────────────────────────────────────────────────────
+  devProjects  = signal<Project[]>([]);
+  secProjects  = signal<Project[]>([]);
+  loading      = signal(false);
+  saving       = signal(false);
+  saveMsg      = signal('');
+
+  editingId    = signal<string | null>(null);
+  addingNew    = signal(false);
+  tagInput     = '';
 
   emptyProject = (): Omit<Project, 'id'> => ({
     title: '', description: '', tags: [],
@@ -116,39 +54,51 @@ export class ProjectsComponent {
 
   editDraft = signal<Omit<Project, 'id'>>(this.emptyProject());
 
-  // ─── Datos con persistencia ──────────────────────────────────────────
-  devProjects = signal<Project[]>(
-    this.storage.get<Project[]>('portfolio_dev_projects', DEFAULT_DEV_PROJECTS)
-  );
-
-  secProjects = signal<Project[]>(
-    this.storage.get<Project[]>('portfolio_sec_projects', DEFAULT_SEC_PROJECTS)
-  );
-
-  constructor() {
-    effect(() => {
-      this.storage.set('portfolio_dev_projects', this.devProjects());
-    });
-    effect(() => {
-      this.storage.set('portfolio_sec_projects', this.secProjects());
-    });
-  }
-
-  // ─── Computed ────────────────────────────────────────────────────────
   currentProjects = computed(() =>
     this.modeService.activeMode() === 'dev' ? this.devProjects() : this.secProjects()
   );
 
-  setMode(mode: 'dev' | 'security') { this.modeService.setMode(mode); this.cancelEdit(); }
+  // ─── Init: carga ambos modos desde el backend ──────────────────────
+  async ngOnInit() {
+    this.loading.set(true);
+    try {
+      const [dev, sec] = await Promise.all([
+        this.data.getProjects('dev'),
+        this.data.getProjects('security')
+      ]);
+      this.devProjects.set(dev);
+      this.secProjects.set(sec);
+    } catch (e) {
+      console.error('Error cargando proyectos:', e);
+    } finally {
+      this.loading.set(false);
+    }
+  }
 
-  private genId() { return Math.random().toString(36).slice(2, 9); }
+  // ─── Helpers ───────────────────────────────────────────────────────
+  private showMsg(msg: string) {
+    this.saveMsg.set(msg);
+    setTimeout(() => this.saveMsg.set(''), 3000);
+  }
 
-  private updateProjects(projects: Project[]) {
+  private setLocal(projects: Project[]) {
     if (this.modeService.activeMode() === 'dev') this.devProjects.set(projects);
     else this.secProjects.set(projects);
   }
 
-  // ─── Guard: si no autenticado, pide PIN y guarda la acción ──────────
+  setMode(mode: 'dev' | 'security') {
+    this.modeService.setMode(mode);
+    this.cancelEdit();
+  }
+
+  cancelEdit() {
+    this.editingId.set(null);
+    this.addingNew.set(false);
+    this.tagInput = '';
+    this.editDraft.set(this.emptyProject());
+  }
+
+  // ─── Guard ─────────────────────────────────────────────────────────
   private requireAuth(action: () => void) {
     if (this.auth.isAuthenticated()) {
       action();
@@ -157,14 +107,7 @@ export class ProjectsComponent {
     }
   }
 
-  // ─── Acciones ────────────────────────────────────────────────────────
-  cancelEdit() {
-    this.editingId.set(null);
-    this.addingNew.set(false);
-    this.tagInput = '';
-    this.editDraft.set(this.emptyProject());
-  }
-
+  // ─── Acciones ──────────────────────────────────────────────────────
   startAdd() {
     this.requireAuth(() => {
       this.cancelEdit();
@@ -180,10 +123,49 @@ export class ProjectsComponent {
     });
   }
 
-  deleteProject(id: string) {
-    this.requireAuth(() => {
-      this.updateProjects(this.currentProjects().filter(p => p.id !== id));
+  async deleteProject(id: string) {
+    this.requireAuth(async () => {
+      this.saving.set(true);
+      try {
+        await this.data.deleteProject(this.modeService.activeMode(), id);
+        this.setLocal(this.currentProjects().filter(p => p.id !== id));
+        this.showMsg('✓ Proyecto eliminado');
+      } catch (e) {
+        console.error(e);
+        this.showMsg('✗ Error al eliminar');
+      } finally {
+        this.saving.set(false);
+      }
     });
+  }
+
+  async confirmSave() {
+    const draft = this.editDraft();
+    if (!draft.title.trim()) return;
+
+    this.saving.set(true);
+    try {
+      const mode = this.modeService.activeMode();
+
+      if (this.addingNew()) {
+        // POST → backend genera el ID
+        const saved = await this.data.addProject(mode, draft);
+        this.setLocal([...this.currentProjects(), saved]);
+        this.showMsg('✓ Proyecto agregado');
+      } else {
+        // PUT → actualizar existente
+        const id = this.editingId()!;
+        const updated = await this.data.updateProject(mode, { id, ...draft });
+        this.setLocal(this.currentProjects().map(p => p.id === id ? updated : p));
+        this.showMsg('✓ Proyecto guardado');
+      }
+      this.cancelEdit();
+    } catch (e) {
+      console.error(e);
+      this.showMsg('✗ Error al guardar');
+    } finally {
+      this.saving.set(false);
+    }
   }
 
   addTag() {
@@ -197,21 +179,6 @@ export class ProjectsComponent {
   removeTag(tag: string) {
     const draft = this.editDraft();
     this.editDraft.set({ ...draft, tags: draft.tags.filter(t => t !== tag) });
-  }
-
-  confirmSave() {
-    const draft = this.editDraft();
-    if (!draft.title.trim()) return;
-    if (this.addingNew()) {
-      this.updateProjects([...this.currentProjects(), { id: this.genId(), ...draft }]);
-    } else {
-      this.updateProjects(
-        this.currentProjects().map(p =>
-          p.id === this.editingId() ? { id: p.id, ...draft } : p
-        )
-      );
-    }
-    this.cancelEdit();
   }
 
   updateDraft(key: keyof Omit<Project, 'id'>, value: string) {

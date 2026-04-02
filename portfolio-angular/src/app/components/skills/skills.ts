@@ -1,104 +1,13 @@
-import { Component, signal, computed, inject, effect } from '@angular/core';
+import { Component, signal, computed, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, Plus, X, Edit2, Check, Shield, Code2, ChevronRight } from 'lucide-angular';
 import { ModeService } from '../../services/mode.service';
-import { StorageService } from '../../services/storage.service';
 import { AuthService } from '../../services/auth.service';
 import { EditGuardService } from '../../services/edit-guard.service';
+import { DataService, SkillCategory, Skill } from '../../services/data.service';
 
-export interface Skill {
-  id: string;
-  name: string;
-  level?: number;
-}
-
-export interface SkillCategory {
-  id: string;
-  title: string;
-  skills: Skill[];
-}
-
-const DEFAULT_DEV_CATEGORIES: SkillCategory[] = [
-  {
-    id: 'dev-1', title: 'Frontend Core',
-    skills: [
-      { id: 's1', name: 'Angular',        level: 90 },
-      { id: 's2', name: 'TypeScript',      level: 85 },
-      { id: 's3', name: 'HTML5',           level: 95 },
-      { id: 's4', name: 'CSS3',            level: 90 },
-      { id: 's5', name: 'JavaScript ES6+', level: 85 },
-    ]
-  },
-  {
-    id: 'dev-2', title: 'Backend',
-    skills: [
-      { id: 's6', name: 'Spring Boot', level: 75 },
-      { id: 's7', name: 'Java',        level: 75 },
-      { id: 's8', name: 'MySQL',       level: 70 },
-      { id: 's9', name: 'Postman',     level: 85 },
-    ]
-  },
-  {
-    id: 'dev-3', title: 'Estilos & UI',
-    skills: [
-      { id: 's10', name: 'Tailwind CSS', level: 90 },
-      { id: 's11', name: 'SASS/SCSS',    level: 80 },
-      { id: 's12', name: 'Material UI',  level: 75 },
-      { id: 's13', name: 'Bootstrap',    level: 80 },
-    ]
-  },
-  {
-    id: 'dev-4', title: 'DevOps & Herramientas',
-    skills: [
-      { id: 's14', name: 'Docker',     level: 65 },
-      { id: 's15', name: 'Git/GitHub', level: 85 },
-      { id: 's16', name: 'VS Code',    level: 95 },
-      { id: 's17', name: 'Figma',      level: 70 },
-    ]
-  }
-];
-
-const DEFAULT_SEC_CATEGORIES: SkillCategory[] = [
-  {
-    id: 'sec-1', title: 'Firewalls & Redes',
-    skills: [
-      { id: 'ss1',  name: 'FortiGate',           level: 85 },
-      { id: 'ss2',  name: 'FortiAnalyzer',        level: 80 },
-      { id: 'ss3',  name: 'Segmentación de Red',  level: 85 },
-      { id: 'ss4',  name: 'VLANs',                level: 90 },
-      { id: 'ss5',  name: 'Creación de VPNs',     level: 80 },
-    ]
-  },
-  {
-    id: 'sec-2', title: 'Servidores Windows',
-    skills: [
-      { id: 'ss6',  name: 'Windows Server',       level: 85 },
-      { id: 'ss7',  name: 'Active Directory',      level: 85 },
-      { id: 'ss8',  name: 'Group Policy (GPO)',    level: 80 },
-      { id: 'ss9',  name: 'DNS / DHCP',            level: 75 },
-    ]
-  },
-  {
-    id: 'sec-3', title: 'Linux',
-    skills: [
-      { id: 'ss10', name: 'Ubuntu Server',         level: 80 },
-      { id: 'ss11', name: 'Debian',                level: 75 },
-      { id: 'ss12', name: 'Kali Linux',            level: 80 },
-      { id: 'ss13', name: 'Bash Scripting',        level: 70 },
-    ]
-  },
-  {
-    id: 'sec-4', title: 'Ethical Hacking & Web Sec',
-    skills: [
-      { id: 'ss14', name: 'OWASP Top 10',          level: 85 },
-      { id: 'ss15', name: 'Burp Suite',            level: 75 },
-      { id: 'ss16', name: 'Nmap / Recon',          level: 85 },
-      { id: 'ss17', name: 'Metasploit',            level: 70 },
-      { id: 'ss18', name: 'Wireshark',             level: 80 },
-    ]
-  }
-];
+export type { Skill, SkillCategory };
 
 @Component({
   selector: 'app-skills',
@@ -107,7 +16,7 @@ const DEFAULT_SEC_CATEGORIES: SkillCategory[] = [
   templateUrl: './skills.html',
   styleUrls: ['./skills.scss']
 })
-export class SkillsComponent {
+export class SkillsComponent implements OnInit {
   readonly Plus         = Plus;
   readonly X            = X;
   readonly Edit2        = Edit2;
@@ -116,15 +25,20 @@ export class SkillsComponent {
   readonly Code2        = Code2;
   readonly ChevronRight = ChevronRight;
 
-  private storage   = inject(StorageService);
+  private data      = inject(DataService);
   private auth      = inject(AuthService);
   private editGuard = inject(EditGuardService);
   modeService       = inject(ModeService);
 
-  // Alias para compatibilidad con el template existente
   get activeMode() { return this.modeService.activeMode; }
 
-  // ─── Edit state ──────────────────────────────────────────────────────
+  // ─── Estado ────────────────────────────────────────────────────────
+  devCategories  = signal<SkillCategory[]>([]);
+  secCategories  = signal<SkillCategory[]>([]);
+  loading        = signal(false);
+  saving         = signal(false);
+  saveMsg        = signal('');
+
   editingCategoryId     = signal<string | null>(null);
   editingSkillId        = signal<string | null>(null);
   newSkillName          = signal('');
@@ -134,48 +48,49 @@ export class SkillsComponent {
   addingCategory        = signal(false);
   editCategoryName      = signal('');
 
-  // ─── Datos con persistencia ──────────────────────────────────────────
-  devCategories = signal<SkillCategory[]>(
-    this.storage.get<SkillCategory[]>('portfolio_dev_skills', DEFAULT_DEV_CATEGORIES)
-  );
-
-  secCategories = signal<SkillCategory[]>(
-    this.storage.get<SkillCategory[]>('portfolio_sec_skills', DEFAULT_SEC_CATEGORIES)
-  );
-
-  constructor() {
-    effect(() => {
-      this.storage.set('portfolio_dev_skills', this.devCategories());
-    });
-    effect(() => {
-      this.storage.set('portfolio_sec_skills', this.secCategories());
-    });
-  }
-
-  // ─── Computed ────────────────────────────────────────────────────────
   currentCategories = computed(() =>
     this.modeService.activeMode() === 'dev' ? this.devCategories() : this.secCategories()
   );
+
+  // ─── Init: carga desde el backend ──────────────────────────────────
+  async ngOnInit() {
+    this.loading.set(true);
+    try {
+      const [dev, sec] = await Promise.all([
+        this.data.getSkillCategories('dev'),
+        this.data.getSkillCategories('security')
+      ]);
+      this.devCategories.set(dev);
+      this.secCategories.set(sec);
+    } catch (e) {
+      console.error('Error cargando skills:', e);
+    } finally {
+      this.loading.set(false);
+    }
+  }
+
+  // ─── Helpers ───────────────────────────────────────────────────────
+  private showMsg(msg: string) {
+    this.saveMsg.set(msg);
+    setTimeout(() => this.saveMsg.set(''), 3000);
+  }
+
+  private get mode() { return this.modeService.activeMode(); }
+
+  private setLocal(cats: SkillCategory[]) {
+    if (this.mode === 'dev') this.devCategories.set(cats);
+    else this.secCategories.set(cats);
+  }
 
   setMode(mode: 'dev' | 'security') { this.modeService.setMode(mode); this.cancelAll(); }
 
   private genId() { return Math.random().toString(36).slice(2, 9); }
 
-  private updateCategories(cats: SkillCategory[]) {
-    if (this.modeService.activeMode() === 'dev') this.devCategories.set(cats);
-    else this.secCategories.set(cats);
-  }
-
-  // ─── Guard: si no autenticado, pide PIN y guarda la acción ──────────
   private requireAuth(action: () => void) {
-    if (this.auth.isAuthenticated()) {
-      action();
-    } else {
-      this.editGuard.requestLogin(action);
-    }
+    if (this.auth.isAuthenticated()) action();
+    else this.editGuard.requestLogin(action);
   }
 
-  // ─── Acciones ────────────────────────────────────────────────────────
   cancelAll() {
     this.editingCategoryId.set(null);
     this.editingSkillId.set(null);
@@ -186,18 +101,21 @@ export class SkillsComponent {
     this.editCategoryName.set('');
   }
 
+  // ─── CATEGORY CRUD ─────────────────────────────────────────────────
   startAddCategory() {
-    this.requireAuth(() => {
-      this.cancelAll();
-      this.addingCategory.set(true);
-    });
+    this.requireAuth(() => { this.cancelAll(); this.addingCategory.set(true); });
   }
 
-  confirmAddCategory() {
+  async confirmAddCategory() {
     const name = this.newCategoryName().trim();
     if (!name) return;
-    this.updateCategories([...this.currentCategories(), { id: this.genId(), title: name, skills: [] }]);
-    this.cancelAll();
+    this.saving.set(true);
+    try {
+      const saved = await this.data.addSkillCategory(this.mode, { title: name, skills: [] });
+      this.setLocal([...this.currentCategories(), saved]);
+      this.showMsg('✓ Categoría creada');
+    } catch (e) { this.showMsg('✗ Error al crear'); }
+    finally { this.saving.set(false); this.cancelAll(); }
   }
 
   startEditCategory(cat: SkillCategory) {
@@ -208,21 +126,33 @@ export class SkillsComponent {
     });
   }
 
-  confirmEditCategory(catId: string) {
+  async confirmEditCategory(catId: string) {
     const name = this.editCategoryName().trim();
     if (!name) return;
-    this.updateCategories(
-      this.currentCategories().map(c => c.id === catId ? { ...c, title: name } : c)
-    );
-    this.cancelAll();
+    const cat = this.currentCategories().find(c => c.id === catId)!;
+    const updated = { ...cat, title: name };
+    this.saving.set(true);
+    try {
+      await this.data.updateSkillCategory(this.mode, updated);
+      this.setLocal(this.currentCategories().map(c => c.id === catId ? updated : c));
+      this.showMsg('✓ Categoría actualizada');
+    } catch (e) { this.showMsg('✗ Error al actualizar'); }
+    finally { this.saving.set(false); this.cancelAll(); }
   }
 
   deleteCategory(catId: string) {
-    this.requireAuth(() => {
-      this.updateCategories(this.currentCategories().filter(c => c.id !== catId));
+    this.requireAuth(async () => {
+      this.saving.set(true);
+      try {
+        await this.data.deleteSkillCategory(this.mode, catId);
+        this.setLocal(this.currentCategories().filter(c => c.id !== catId));
+        this.showMsg('✓ Categoría eliminada');
+      } catch (e) { this.showMsg('✗ Error al eliminar'); }
+      finally { this.saving.set(false); }
     });
   }
 
+  // ─── SKILL CRUD ────────────────────────────────────────────────────
   startAddSkill(catId: string) {
     this.requireAuth(() => {
       this.cancelAll();
@@ -232,22 +162,32 @@ export class SkillsComponent {
     });
   }
 
-  confirmAddSkill(catId: string) {
+  async confirmAddSkill(catId: string) {
     const name = this.newSkillName().trim();
     if (!name) return;
-    this.updateCategories(this.currentCategories().map(c => {
-      if (c.id !== catId) return c;
-      return { ...c, skills: [...c.skills, { id: this.genId(), name, level: this.newSkillLevel() }] };
-    }));
-    this.cancelAll();
+    const cat = this.currentCategories().find(c => c.id === catId)!;
+    const newSkill: Skill = { id: this.genId(), name, level: this.newSkillLevel() };
+    const updated: SkillCategory = { ...cat, skills: [...cat.skills, newSkill] };
+    this.saving.set(true);
+    try {
+      await this.data.updateSkillCategory(this.mode, updated);
+      this.setLocal(this.currentCategories().map(c => c.id === catId ? updated : c));
+      this.showMsg('✓ Skill agregado');
+    } catch (e) { this.showMsg('✗ Error al agregar'); }
+    finally { this.saving.set(false); this.cancelAll(); }
   }
 
   deleteSkill(catId: string, skillId: string) {
-    this.requireAuth(() => {
-      this.updateCategories(this.currentCategories().map(c => {
-        if (c.id !== catId) return c;
-        return { ...c, skills: c.skills.filter(s => s.id !== skillId) };
-      }));
+    this.requireAuth(async () => {
+      const cat = this.currentCategories().find(c => c.id === catId)!;
+      const updated: SkillCategory = { ...cat, skills: cat.skills.filter(s => s.id !== skillId) };
+      this.saving.set(true);
+      try {
+        await this.data.updateSkillCategory(this.mode, updated);
+        this.setLocal(this.currentCategories().map(c => c.id === catId ? updated : c));
+        this.showMsg('✓ Skill eliminado');
+      } catch (e) { this.showMsg('✗ Error al eliminar'); }
+      finally { this.saving.set(false); }
     });
   }
 
@@ -260,18 +200,20 @@ export class SkillsComponent {
     });
   }
 
-  confirmEditSkill(catId: string, skillId: string) {
+  async confirmEditSkill(catId: string, skillId: string) {
     const name = this.newSkillName().trim();
     if (!name) return;
-    this.updateCategories(this.currentCategories().map(c => {
-      if (c.id !== catId) return c;
-      return {
-        ...c,
-        skills: c.skills.map(s =>
-          s.id === skillId ? { ...s, name, level: this.newSkillLevel() } : s
-        )
-      };
-    }));
-    this.cancelAll();
+    const cat = this.currentCategories().find(c => c.id === catId)!;
+    const updated: SkillCategory = {
+      ...cat,
+      skills: cat.skills.map(s => s.id === skillId ? { ...s, name, level: this.newSkillLevel() } : s)
+    };
+    this.saving.set(true);
+    try {
+      await this.data.updateSkillCategory(this.mode, updated);
+      this.setLocal(this.currentCategories().map(c => c.id === catId ? updated : c));
+      this.showMsg('✓ Skill actualizado');
+    } catch (e) { this.showMsg('✗ Error al actualizar'); }
+    finally { this.saving.set(false); this.cancelAll(); }
   }
 }
