@@ -1,21 +1,23 @@
 const jsonServer = require('json-server');
 const path = require('path');
 
-// ─── CONFIG ─────────────────────────────
 const SECRET_PIN = process.env.ADMIN_PIN || 'fr3dy@s3c';
 
 const server = jsonServer.create();
-
-// db.json está en la raíz del proyecto
 const router = jsonServer.router(path.join(__dirname, '../db.json'));
 const middlewares = jsonServer.defaults({ noCors: true, logger: false });
 
-// ─── CORS ───────────────────────────────
+// ─── CORS (debe ir PRIMERO antes de todo) ───────────────────────────────
 server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-admin-pin');
-  if (req.method === 'OPTIONS') return res.status(200).end();
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-admin-pin');
+  res.setHeader('Access-Control-Max-Age', '86400');
+
+  // Responder inmediatamente al preflight OPTIONS
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
   next();
 });
 
@@ -31,16 +33,10 @@ server.use((req, res, next) => {
 
   const pin = req.headers['x-admin-pin'];
   if (!pin) {
-    return res.status(401).json({
-      error: 'Unauthorized',
-      message: 'Se requiere PIN (x-admin-pin)'
-    });
+    return res.status(401).json({ error: 'Unauthorized', message: 'Se requiere PIN (x-admin-pin)' });
   }
   if (pin !== SECRET_PIN) {
-    return res.status(403).json({
-      error: 'Forbidden',
-      message: 'PIN incorrecto'
-    });
+    return res.status(403).json({ error: 'Forbidden', message: 'PIN incorrecto' });
   }
   next();
 });
@@ -66,5 +62,4 @@ if (require.main === module) {
   });
 }
 
-// ─── EXPORT PARA VERCEL (serverless) ────
 module.exports = server;
