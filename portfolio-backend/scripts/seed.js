@@ -1,11 +1,8 @@
 const { Pool } = require('pg');
 
+// Usando el Transaction Pooler de Supabase (funciona desde cualquier red)
 const pool = new Pool({
-  host: 'db.pqizywmrjqbnbfzjvdrp.supabase.co',
-  port: 5432,
-  database: 'postgres',
-  user: 'postgres',
-  password: 'Yufre##2558*%94',
+  connectionString: 'postgresql://postgres.pqizywmrjqbnbfzjvdrp:Yufre##2558*%94@aws-1-us-east-1.pooler.supabase.com:6543/postgres',
   ssl: { rejectUnauthorized: false },
 });
 
@@ -18,20 +15,25 @@ async function seed() {
 
   try {
     console.log('🔧 Creando tablas...');
-
+    // El pooler no soporta múltiples statements en un solo query.
+    // Hay que ejecutarlos uno por uno.
     await client.query(`
       CREATE TABLE IF NOT EXISTS skills_dev (
         id TEXT PRIMARY KEY,
         title TEXT,
         skills JSONB DEFAULT '[]',
         sort_order SERIAL
-      );
+      )
+    `);
+    await client.query(`
       CREATE TABLE IF NOT EXISTS skills_security (
         id TEXT PRIMARY KEY,
         title TEXT,
         skills JSONB DEFAULT '[]',
         sort_order SERIAL
-      );
+      )
+    `);
+    await client.query(`
       CREATE TABLE IF NOT EXISTS projects_dev (
         id TEXT PRIMARY KEY,
         title TEXT,
@@ -41,7 +43,9 @@ async function seed() {
         demo_url TEXT,
         repo_url TEXT,
         created_at TIMESTAMP DEFAULT NOW()
-      );
+      )
+    `);
+    await client.query(`
       CREATE TABLE IF NOT EXISTS projects_security (
         id TEXT PRIMARY KEY,
         title TEXT,
@@ -53,7 +57,9 @@ async function seed() {
         status TEXT,
         cve TEXT,
         created_at TIMESTAMP DEFAULT NOW()
-      );
+      )
+    `);
+    await client.query(`
       CREATE TABLE IF NOT EXISTS changelog (
         id INTEGER PRIMARY KEY,
         action TEXT,
@@ -64,15 +70,17 @@ async function seed() {
         target_id TEXT,
         created_at TEXT,
         version INTEGER
-      );
+      )
     `);
     console.log('✅ Tablas creadas');
 
+    // Limpiar tablas una por una (el pooler no soporta TRUNCATE múltiple)
     try {
-      await client.query(`
-        TRUNCATE skills_dev, skills_security, projects_dev, projects_security, changelog
-        RESTART IDENTITY CASCADE
-      `);
+      await client.query(`TRUNCATE skills_dev RESTART IDENTITY CASCADE`);
+      await client.query(`TRUNCATE skills_security RESTART IDENTITY CASCADE`);
+      await client.query(`TRUNCATE projects_dev RESTART IDENTITY CASCADE`);
+      await client.query(`TRUNCATE projects_security RESTART IDENTITY CASCADE`);
+      await client.query(`TRUNCATE changelog RESTART IDENTITY CASCADE`);
       console.log('🧹 Tablas limpiadas');
     } catch (e) {
       console.log('ℹ️  TRUNCATE saltado:', e.message);
