@@ -45,7 +45,7 @@
         <button
           class="cl-btn-icon"
           [class.cl-btn-icon--active]="hasActiveFilters()"
-          (click)="showFilters.update(v => !v)"
+          (click)="toggleFilters()"
           title="Filtros">
           <lucide-angular [img]="Filter" class="cl-btn-icon__svg"></lucide-angular>
         </button>
@@ -159,7 +159,6 @@
         *ngFor="let entry of filteredEntries(); trackBy: trackById"
         [class.cl-entry--expanded]="isExpanded(entry.id)">
 
-
         <div class="cl-entry__header"
              (click)="toggleExpand(entry.id)">
 
@@ -220,7 +219,6 @@
             {{ entry.description }}
           </p>
 
-          <!-- Payload -->
           <div class="cl-entry__payload"
                *ngIf="getPayloadKeys(entry.payload).length > 0">
 
@@ -238,7 +236,6 @@
             </div>
           </div>
 
-          <!-- Footer -->
           <div class="cl-entry__footer">
             <span class="cl-entry__version">
               versión {{ entry.version }}
