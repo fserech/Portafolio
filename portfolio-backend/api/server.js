@@ -5,26 +5,25 @@ const app = express();
 const SECRET_PIN = process.env.ADMIN_PIN || 'fr3dy@s3c';
 
 // ─── DB (Supabase) ────────────────────────────────────────────────────────────
+// CORRECCIÓN PRINCIPAL: usar connectionString con DATABASE_URL
+// Los # y % en el password rompen el parser de pg cuando se pasan como
+// campo "password" separado en algunas versiones. connectionString es más seguro.
 const pool = new Pool({
-  host:     process.env.DB_HOST     || 'db.pqizywmrjqbnbfzjvdrp.supabase.co',
-  port:     process.env.DB_PORT     || 5432,
-  database: process.env.DB_NAME     || 'postgres',
-  user:     process.env.DB_USER     || 'postgres',
-  password: process.env.DB_PASSWORD || 'Yufre##2558*%94',
+  connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
-  max: 5,
-  idleTimeoutMillis: 30000,
+  max: 3,                        // Serverless: pool pequeño
+  idleTimeoutMillis: 10000,
   connectionTimeoutMillis: 10000,
 });
 
+pool.connect()
+  .then(c => { console.log('✅ DB conectada'); c.release(); })
+  .catch(e => console.error('❌ DB error:', e.message));
+
 async function query(sql, params = []) {
   const client = await pool.connect();
-  try {
-    const result = await client.query(sql, params);
-    return result;
-  } finally {
-    client.release();
-  }
+  try { return await client.query(sql, params); }
+  finally { client.release(); }
 }
 
 // ─── CORS ─────────────────────────────────────────────────────────────────────
@@ -55,8 +54,17 @@ const auth = (req, res, next) => {
 
 app.use(auth);
 
-// ─── uid ──────────────────────────────────────────────────────────────────────
 const uid = () => Math.random().toString(36).slice(2, 9);
+
+// ─── HEALTH CHECK ─────────────────────────────────────────────────────────────
+app.get('/health', async (req, res) => {
+  try {
+    await query('SELECT 1');
+    res.json({ ok: true, db: 'connected' });
+  } catch (e) {
+    res.status(500).json({ ok: false, error: e.message });
+  }
+});
 
 // ══════════════════════════════════════════════════════════════════════════════
 // SKILLS DEV
@@ -81,8 +89,7 @@ app.post('/skills_dev', async (req, res) => {
   try {
     const { id = uid(), title, skills = [] } = req.body;
     const { rows } = await query(
-      `INSERT INTO skills_dev (id, title, skills) VALUES ($1,$2,$3)
-       RETURNING id, title, skills`,
+      `INSERT INTO skills_dev (id, title, skills) VALUES ($1,$2,$3) RETURNING id, title, skills`,
       [id, title, JSON.stringify(skills)]
     );
     res.status(201).json(rows[0]);
@@ -93,8 +100,7 @@ app.put('/skills_dev/:id', async (req, res) => {
   try {
     const { title, skills = [] } = req.body;
     const { rows } = await query(
-      `UPDATE skills_dev SET title=$1, skills=$2 WHERE id=$3
-       RETURNING id, title, skills`,
+      `UPDATE skills_dev SET title=$1, skills=$2 WHERE id=$3 RETURNING id, title, skills`,
       [title, JSON.stringify(skills), req.params.id]
     );
     if (!rows.length) return res.status(404).json({ error: 'Not found' });
@@ -147,8 +153,7 @@ app.post('/skills_security', async (req, res) => {
   try {
     const { id = uid(), title, skills = [] } = req.body;
     const { rows } = await query(
-      `INSERT INTO skills_security (id, title, skills) VALUES ($1,$2,$3)
-       RETURNING id, title, skills`,
+      `INSERT INTO skills_security (id, title, skills) VALUES ($1,$2,$3) RETURNING id, title, skills`,
       [id, title, JSON.stringify(skills)]
     );
     res.status(201).json(rows[0]);
@@ -159,8 +164,7 @@ app.put('/skills_security/:id', async (req, res) => {
   try {
     const { title, skills = [] } = req.body;
     const { rows } = await query(
-      `UPDATE skills_security SET title=$1, skills=$2 WHERE id=$3
-       RETURNING id, title, skills`,
+      `UPDATE skills_security SET title=$1, skills=$2 WHERE id=$3 RETURNING id, title, skills`,
       [title, JSON.stringify(skills), req.params.id]
     );
     if (!rows.length) return res.status(404).json({ error: 'Not found' });
@@ -371,13 +375,11 @@ app.delete('/changelog/:id', async (req, res) => {
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
-// ─── LOCAL ────────────────────────────────────────────────────────────────────
+// ─── EXPORT ───────────────────────────────────────────────────────────────────
+// Vercel Serverless requiere module.exports = app
+module.exports = app;
+
 if (require.main === module) {
   const PORT = process.env.PORT || 3000;
-  app.listen(PORT, () => {
-    console.log(`🚀 Server corriendo en http://localhost:${PORT}`);
-    console.log(`🗄️  DB: Supabase Postgres`);
-  });
+  app.listen(PORT, () => console.log(`🚀 http://localhost:${PORT}`));
 }
-
-module.exports = app;
