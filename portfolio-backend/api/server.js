@@ -375,6 +375,85 @@ app.delete('/changelog/:id', async (req, res) => {
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
+// ══════════════════════════════════════════════════════════════════════════════
+// ABOUT CONTENT
+// ══════════════════════════════════════════════════════════════════════════════
+
+const mapAbout = r => ({
+  id:              r.id,
+  mode:            r.mode,
+  sectionTitle:    r.section_title,
+  sectionSubtitle: r.section_subtitle,
+  bannerTitle:     r.banner_title,
+  bannerText:      r.banner_text,
+  stat1Value:      r.stat1_value,
+  stat1Label:      r.stat1_label,
+  stat2Value:      r.stat2_value,
+  stat2Label:      r.stat2_label,
+});
+
+// GET todos
+app.get('/about_content', async (req, res) => {
+  try {
+    const { rows } = await query(`SELECT * FROM about_content ORDER BY mode`);
+    res.json(rows.map(mapAbout));
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+// GET por modo: /about_content/dev  o  /about_content/security
+app.get('/about_content/:mode', async (req, res) => {
+  try {
+    const { rows } = await query(`SELECT * FROM about_content WHERE mode=$1`, [req.params.mode]);
+    if (!rows.length) return res.status(404).json({ error: 'Not found' });
+    res.json(mapAbout(rows[0]));
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+// PUT actualizar por modo
+app.put('/about_content/:mode', async (req, res) => {
+  try {
+    const { sectionTitle, sectionSubtitle, bannerTitle, bannerText,
+            stat1Value, stat1Label, stat2Value, stat2Label } = req.body;
+    const { rows } = await query(
+      `UPDATE about_content
+       SET section_title=$1, section_subtitle=$2, banner_title=$3, banner_text=$4,
+           stat1_value=$5, stat1_label=$6, stat2_value=$7, stat2_label=$8
+       WHERE mode=$9 RETURNING *`,
+      [sectionTitle, sectionSubtitle, bannerTitle, bannerText,
+       stat1Value, stat1Label, stat2Value, stat2Label, req.params.mode]
+    );
+    if (!rows.length) return res.status(404).json({ error: 'Not found' });
+    res.json(mapAbout(rows[0]));
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
+// PATCH actualizar parcialmente
+app.patch('/about_content/:mode', async (req, res) => {
+  try {
+    const { rows: cur } = await query(`SELECT * FROM about_content WHERE mode=$1`, [req.params.mode]);
+    if (!cur.length) return res.status(404).json({ error: 'Not found' });
+    const c = cur[0];
+    const { rows } = await query(
+      `UPDATE about_content
+       SET section_title=$1, section_subtitle=$2, banner_title=$3, banner_text=$4,
+           stat1_value=$5, stat1_label=$6, stat2_value=$7, stat2_label=$8
+       WHERE mode=$9 RETURNING *`,
+      [
+        req.body.sectionTitle    ?? c.section_title,
+        req.body.sectionSubtitle ?? c.section_subtitle,
+        req.body.bannerTitle     ?? c.banner_title,
+        req.body.bannerText      ?? c.banner_text,
+        req.body.stat1Value      ?? c.stat1_value,
+        req.body.stat1Label      ?? c.stat1_label,
+        req.body.stat2Value      ?? c.stat2_value,
+        req.body.stat2Label      ?? c.stat2_label,
+        req.params.mode
+      ]
+    );
+    res.json(mapAbout(rows[0]));
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
 // ─── EXPORT ───────────────────────────────────────────────────────────────────
 // Vercel Serverless requiere module.exports = app
 module.exports = app;
