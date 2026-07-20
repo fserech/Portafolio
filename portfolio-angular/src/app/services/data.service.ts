@@ -72,6 +72,12 @@ export class DataService {
   // ═══════════════════════════════════════════════════════════════════════
   // SKILLS
   // ═══════════════════════════════════════════════════════════════════════
+  //
+  // Lectura desde JSON estático (assets/data/skills.json) en vez del backend.
+  // Esto elimina la dependencia de un servidor externo para mostrar contenido:
+  // el portafolio nunca se ve "vacío" por una caída o desincronización del API.
+  // La escritura (add/update/delete) sigue apuntando al backend y requiere
+  // que esté desplegado y accesible para funcionar.
 
   private skillsUrl(mode: ProfileMode): string {
     return `${this.api}/skills_${mode}`;
@@ -79,8 +85,10 @@ export class DataService {
 
   getSkillCategories(mode: ProfileMode): Promise<SkillCategory[]> {
     return firstValueFrom(
-      this.http.get<SkillCategory[]>(this.skillsUrl(mode))
-    );
+      this.http.get<{ dev: SkillCategory[]; security: SkillCategory[] }>(
+        '/assets/data/skills.json'
+      )
+    ).then(data => data[mode]);
   }
 
   async addSkillCategory(
@@ -168,8 +176,10 @@ export class DataService {
 
   getProjects(mode: ProfileMode): Promise<Project[]> {
     return firstValueFrom(
-      this.http.get<Project[]>(this.projectsUrl(mode))
-    );
+      this.http.get<{ dev: Project[]; security: Project[] }>(
+        '/assets/data/projects.json'
+      )
+    ).then(data => data[mode]);
   }
 
   async addProject(

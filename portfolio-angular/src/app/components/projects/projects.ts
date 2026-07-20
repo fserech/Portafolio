@@ -33,6 +33,11 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   private editGuard = inject(EditGuardService);
   modeService       = inject(ModeService);
 
+  // El sitio ahora es estático (sin backend de escritura): se ocultan
+  // los controles de edición en vivo. Para actualizar contenido, edita
+  // src/assets/data/projects.json y vuelve a desplegar.
+  readonly readOnly = true;
+
   get activeMode() { return this.modeService.activeMode; }
 
   // ─── Estado ────────────────────────────────────────────────────────

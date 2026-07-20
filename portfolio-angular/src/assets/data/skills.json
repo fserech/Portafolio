@@ -1,0 +1,76 @@
+{
+  "dev": [
+    {
+      "id": "dev-1",
+      "title": "Frontend Core",
+      "skills": [
+        { "id": "s1", "name": "Angular", "level": 90 },
+        { "id": "s2", "name": "TypeScript", "level": 85 },
+        { "id": "s3", "name": "HTML5", "level": 95 },
+        { "id": "s4", "name": "CSS3", "level": 90 },
+        { "id": "s5", "name": "JavaScript ES6+", "level": 85 }
+      ]
+    },
+    {
+      "id": "dev-2",
+      "title": "Backend",
+      "skills": [
+        { "id": "s6", "name": "Spring Boot", "level": 75 },
+        { "id": "s7", "name": "Java", "level": 75 },
+        { "id": "s8", "name": "MySQL", "level": 70 },
+        { "id": "s9", "name": "Postman", "level": 85 }
+      ]
+    },
+    {
+      "id": "dev-3",
+      "title": "Estilos y UI",
+      "skills": [
+        { "id": "s10", "name": "Tailwind CSS", "level": 90 },
+        { "id": "s11", "name": "SASS/SCSS", "level": 80 },
+        { "id": "s12", "name": "Material UI", "level": 75 },
+        { "id": "s13", "name": "Bootstrap", "level": 80 }
+      ]
+    },
+    {
+      "id": "dev-4",
+      "title": "DevOps y herramientas",
+      "skills": [
+        { "id": "s14", "name": "Docker", "level": 65 },
+        { "id": "s15", "name": "Git y GitHub", "level": 85 },
+        { "id": "s16", "name": "VS Code", "level": 95 },
+        { "id": "s17", "name": "Figma", "level": 70 }
+      ]
+    }
+  ],
+  "security": [
+    {
+      "id": "sec-1",
+      "title": "Seguridad de infraestructura",
+      "skills": [
+        { "id": "ss1", "name": "Firewalls FortiGate", "level": 85 },
+        { "id": "ss2", "name": "Segmentación de red", "level": 85 },
+        { "id": "ss3", "name": "VLANs y VPNs", "level": 80 },
+        { "id": "ss4", "name": "Protocolos TCP/UDP", "level": 80 }
+      ]
+    },
+    {
+      "id": "sec-2",
+      "title": "Administración de servidores",
+      "skills": [
+        { "id": "ss5", "name": "VMware vCenter", "level": 80 },
+        { "id": "ss6", "name": "Migración Hyper-V a VMware", "level": 75 },
+        { "id": "ss7", "name": "Windows Server / Active Directory", "level": 75 },
+        { "id": "ss8", "name": "Linux (Ubuntu, Debian)", "level": 70 }
+      ]
+    },
+    {
+      "id": "sec-3",
+      "title": "Monitoreo y análisis",
+      "skills": [
+        { "id": "ss9", "name": "FortiAnalyzer", "level": 75 },
+        { "id": "ss10", "name": "Análisis de tráfico de red", "level": 70 },
+        { "id": "ss11", "name": "Wireshark", "level": 65 }
+      ]
+    }
+  ]
+}
