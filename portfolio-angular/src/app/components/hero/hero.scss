@@ -27,3 +27,29 @@
     transform: scale(1);
   }
 }
+
+// Movimiento sutil y continuo sobre la imagen del hero (efecto "Ken Burns").
+// Alterna zoom + desplazamiento leve cada 16s, en bucle infinito.
+.hero-img-live {
+  animation: heroLiveMotion 16s ease-in-out infinite;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+@keyframes heroLiveMotion {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.06) translate(-1.5%, -1%);
+  }
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-img-live {
+    animation: none;
+  }
+}
