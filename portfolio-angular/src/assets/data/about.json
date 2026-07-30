@@ -1,9 +1,9 @@
 {
   "dev": {
     "sectionTitle": "Sobre Mí",
-    "sectionSubtitle": "Más que un desarrollador, soy un apasionado por crear soluciones digitales que impactan.",
+    "sectionSubtitle": "Más que un desarrollador, soy un apasionado por crear soluciones digitales.",
     "bannerTitle": "¿Por qué trabajar conmigo?",
-    "bannerText": "Combino habilidades técnicas sólidas con una gran capacidad de trabajo en equipo. Me mantengo actualizado con las últimas tendencias de Angular y el ecosistema moderno.",
+    "bannerText": "Combino habilidades técnicas sólidas con una gran capacidad de trabajo en equipo. Me mantengo actualizado con las últimas tendencias de tecnologias y el ecosistema moderno.",
     "features": [
       { "icon": "Code", "title": "Clean Code", "description": "Escribo código legible, mantenible y escalable siguiendo las mejores prácticas de la industria." },
       { "icon": "Layout", "title": "Diseño Responsivo", "description": "Mis aplicaciones se ven y funcionan perfectamente en cualquier dispositivo, desde móviles hasta pantallas grandes." },
