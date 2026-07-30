@@ -42,7 +42,7 @@
                 min-[768px]:max-[991.98px]:grid-cols-2 min-[768px]:max-[991.98px]:gap-6
                 min-[992px]:grid-cols-3 min-[992px]:gap-8">
 
-      @for (feature of features; track feature; let i = $index) {
+      @for (feature of features; track feature.title; let i = $index) {
         <div
            [class]="'rounded-xl fade-in-up transition-all duration-300 ' +
              (modeService.activeMode() === 'dev'

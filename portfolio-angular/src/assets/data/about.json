@@ -1,0 +1,32 @@
+{
+  "dev": {
+    "sectionTitle": "Sobre Mí",
+    "sectionSubtitle": "Más que un desarrollador, soy un apasionado por crear soluciones digitales que impactan.",
+    "bannerTitle": "¿Por qué trabajar conmigo?",
+    "bannerText": "Combino habilidades técnicas sólidas con una gran capacidad de trabajo en equipo. Me mantengo actualizado con las últimas tendencias de Angular y el ecosistema web moderno.",
+    "stat1Value": "3+",
+    "stat1Label": "AÑOS DE EXP.",
+    "stat2Value": "20+",
+    "stat2Label": "PROYECTOS",
+    "features": [
+      { "icon": "Code", "title": "Clean Code", "description": "Escribo código legible, mantenible y escalable siguiendo las mejores prácticas de la industria." },
+      { "icon": "Layout", "title": "Diseño Responsivo", "description": "Mis aplicaciones se ven y funcionan perfectamente en cualquier dispositivo, desde móviles hasta pantallas grandes." },
+      { "icon": "Smartphone", "title": "Mobile First", "description": "Enfoque prioritario en la experiencia móvil para garantizar el mejor rendimiento y usabilidad." }
+    ]
+  },
+  "security": {
+    "sectionTitle": "$ whoami",
+    "sectionSubtitle": "[INFO] Cargando perfil de seguridad...",
+    "bannerTitle": "$ cat motivacion.txt",
+    "bannerText": "Profesional en seguridad informática con enfoque en infraestructura y redes empresariales. Creo que la seguridad real se construye desde la arquitectura: segmentación, control de acceso y monitoreo continuo.",
+    "stat1Value": "3+",
+    "stat1Label": "Años en Seguridad",
+    "stat2Value": "15+",
+    "stat2Label": "Redes Configuradas",
+    "features": [
+      { "icon": "Shield", "title": "Seguridad de Infraestructura", "description": "Administración de firewalls FortiGate, segmentación de redes y configuración de VLANs y VPNs en entornos empresariales." },
+      { "icon": "Terminal", "title": "Administración de Servidores", "description": "Instalación y gestión de Windows Server con Active Directory, así como servidores Linux (Ubuntu, Debian) en producción." },
+      { "icon": "Eye", "title": "Análisis de Seguridad", "description": "Monitoreo de redes con FortiAnalyzer, análisis de tráfico y detección de amenazas en infraestructuras corporativas." }
+    ]
+  }
+}

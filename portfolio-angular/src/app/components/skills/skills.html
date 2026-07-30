@@ -74,7 +74,7 @@
                 min-[992px]:max-[1199.98px]:grid-cols-4 min-[992px]:max-[1199.98px]:gap-5
                 min-[1200px]:grid-cols-4 min-[1200px]:gap-6">
 
-      @for (category of currentCategories(); track category; let i = $index) {
+      @for (category of currentCategories(); track category.id; let i = $index) {
         <div
            [class]="'rounded-xl skill-card transition-all duration-300 ' +
              (activeMode() === 'dev'
@@ -101,7 +101,7 @@
           </div>
           <!-- Skills list -->
           <div class="flex flex-wrap gap-2 mb-4">
-            @for (skill of category.skills; track skill) {
+            @for (skill of category.skills; track skill.id) {
               <!-- DEV mode pill -->
               @if (activeMode() === 'dev') {
                 <div
