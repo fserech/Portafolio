@@ -7,6 +7,7 @@ import { ContactComponent } from './components/contact/contact';
 import { FooterComponent } from './components/footer/footer';
 import { ProjectsComponent } from './components/projects/projects';
 import { SkillsComponent } from './components/skills/skills';
+import { CircuitBgComponent } from './components/circuit-bg/circuit-bg';
 
 @Component({
   selector: 'app-root',
@@ -20,11 +21,11 @@ import { SkillsComponent } from './components/skills/skills';
     ProjectsComponent,
     ContactComponent,
     FooterComponent,
+    CircuitBgComponent,
   ],
   templateUrl: './app.html',
   styleUrls: ['./app.scss']
 })
 export class App {
   title     = 'portfolio-angular';
-  heroImage = 'assets/DEV.jpg';
 }

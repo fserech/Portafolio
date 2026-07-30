@@ -1,6 +1,6 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LucideAngularModule, ArrowRight, Github, Linkedin, Mail, Terminal, Shield } from 'lucide-angular';
+import { LucideAngularModule, ArrowRight, Github, Linkedin, Mail, Terminal, Shield, Code2 } from 'lucide-angular';
 import { ModeService } from '../../services/mode.service';
 
 @Component({
@@ -11,14 +11,13 @@ import { ModeService } from '../../services/mode.service';
   styleUrls: ['./hero.scss']
 })
 export class HeroComponent {
-  @Input() imageUrl: string = '';
-
   readonly ArrowRight = ArrowRight;
   readonly Github     = Github;
   readonly Linkedin   = Linkedin;
   readonly Mail       = Mail;
   readonly Terminal   = Terminal;
   readonly Shield     = Shield;
+  readonly Code2      = Code2;
 
   modeService = inject(ModeService);
 }

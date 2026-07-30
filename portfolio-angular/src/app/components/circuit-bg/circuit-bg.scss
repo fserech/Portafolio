@@ -1,0 +1,43 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  --c-bg:        #060b18;
+  --c-primary:   #2f6fed;
+  --c-secondary: #63b3ff;
+  --c-accent:    #7c5cff;
+  --c-flow:      #22d3ee;
+  --c-node:      #7dd3fc;
+  --c-node-glow: #93c5fd;
+  --c-core-fill: #0c1e3e;
+  --c-core-line: #3b82f6;
+  --c-core-glow: #7dd3fc;
+  --c-dot:       #3b6fc9;
+  --c-vig-1:     #0a1730;
+  --c-vig-2:     #050a17;
+  --c-vig-3:     #03060f;
+}
+
+:host.security {
+  --c-bg:        #030906;
+  --c-primary:   #16a34a;
+  --c-secondary: #4ade80;
+  --c-accent:    #facc15;
+  --c-flow:      #22c55e;
+  --c-node:      #86efac;
+  --c-node-glow: #bbf7d0;
+  --c-core-fill: #052e14;
+  --c-core-line: #22c55e;
+  --c-core-glow: #86efac;
+  --c-dot:       #1e8449;
+  --c-vig-1:     #04140a;
+  --c-vig-2:     #020806;
+  --c-vig-3:     #010302;
+}
+
+svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

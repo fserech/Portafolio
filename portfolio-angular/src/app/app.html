@@ -1,11 +1,16 @@
-<div class="min-h-screen bg-white dark:bg-gray-950 font-sans text-gray-900 dark:text-gray-100 scroll-smooth transition-colors duration-300">
-  <app-navbar></app-navbar>
-  <main>
-    <app-hero [imageUrl]="heroImage"></app-hero>
-    <app-about></app-about>
-    <app-skills></app-skills>
-    <app-projects></app-projects>
-    <app-contact></app-contact>
-  </main>
-  <app-footer></app-footer>
+<div class="min-h-screen font-sans text-gray-900 dark:text-gray-100 scroll-smooth transition-colors duration-300">
+
+  <app-circuit-bg class="fixed inset-0 z-0 pointer-events-none opacity-[0.18] dark:opacity-[0.25]"></app-circuit-bg>
+
+  <div class="relative z-10">
+    <app-navbar></app-navbar>
+    <main>
+      <app-hero></app-hero>
+      <app-about></app-about>
+      <app-skills></app-skills>
+      <app-projects></app-projects>
+      <app-contact></app-contact>
+    </main>
+    <app-footer></app-footer>
+  </div>
 </div>
