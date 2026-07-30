@@ -7,7 +7,7 @@
     "features": [
       { "icon": "Code", "title": "Clean Code", "description": "Escribo código legible, mantenible y escalable siguiendo las mejores prácticas de la industria." },
       { "icon": "Layout", "title": "Diseño Responsivo", "description": "Mis aplicaciones se ven y funcionan perfectamente en cualquier dispositivo, desde móviles hasta pantallas grandes." },
-      { "icon": "Smartphone", "title": "Mobile First", "description": "Enfoque prioritario en la experiencia móvil para garantizar el mejor rendimiento y usabilidad." }
+      { "icon": "Smartphone", "title": "Mobile First", "description": "Optimizo tiempos de carga y sigo buenas prácticas de accesibilidad para que la app funcione bien en cualquier dispositivo o condición de red." }
     ]
   },
   "security": {
