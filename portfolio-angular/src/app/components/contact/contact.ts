@@ -1,5 +1,5 @@
 import { Component, signal, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 import { LucideAngularModule, Mail, MapPin, Send, Phone, Terminal, Shield } from 'lucide-angular';
 import { ModeService } from '../../services/mode.service';
@@ -12,7 +12,7 @@ const EMAILJS_PUBLIC_KEY  = '0YuyY7Zq_sL2hbsMs';
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, FormsModule, LucideAngularModule],
+  imports: [FormsModule, LucideAngularModule],
   templateUrl: './contact.html',
   styleUrls: ['./contact.scss']
 })

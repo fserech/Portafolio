@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { LucideAngularModule, ArrowRight, Github, Linkedin, Mail, Terminal, Shield, Code2 } from 'lucide-angular';
 import { ModeService } from '../../services/mode.service';
 
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [LucideAngularModule],
   templateUrl: './hero.html',
   styleUrls: ['./hero.scss']
 })

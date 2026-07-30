@@ -1,5 +1,5 @@
 import { Component, signal, computed, inject, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { LucideAngularModule, Shield, Code2, ChevronRight } from 'lucide-angular';
 import { ModeService } from '../../services/mode.service';
 import { DataService, SkillCategory, Skill } from '../../services/data.service';
@@ -9,7 +9,7 @@ export type { Skill, SkillCategory };
 @Component({
   selector: 'app-skills',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [LucideAngularModule],
   templateUrl: './skills.html',
   styleUrls: ['./skills.scss']
 })

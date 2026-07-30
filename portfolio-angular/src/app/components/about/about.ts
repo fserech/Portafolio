@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { HttpClient } from '@angular/common/http';
 import { LucideAngularModule, Code, Layout, Smartphone, Shield, Terminal, Eye } from 'lucide-angular';
 import { ModeService } from '../../services/mode.service';
@@ -26,7 +26,7 @@ interface AboutContent {
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [LucideAngularModule],
   templateUrl: './about.html',
   styleUrls: ['./about.scss']
 })

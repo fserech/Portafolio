@@ -13,29 +13,31 @@
           (modeService.activeMode() === 'dev'
             ? 'text-gray-900 dark:text-white'
             : 'text-green-400 font-mono')">
-          <ng-container *ngIf="modeService.activeMode() === 'dev'">
+          @if (modeService.activeMode() === 'dev') {
             fredy@<span class="text-blue-600 dark:text-blue-500">Dev</span>
-          </ng-container>
-          <ng-container *ngIf="modeService.activeMode() === 'security'">
+          }
+          @if (modeService.activeMode() === 'security') {
             <span class="text-green-600">root</span><span class="text-gray-500">@</span><span class="text-green-400">portfolio</span><span class="text-gray-500">:~$</span>
-          </ng-container>
+          }
         </a>
       </div>
 
       <!-- Desktop: Nav links + Mode switcher + Theme toggle -->
       <div class="hidden md:flex items-center gap-6">
         <!-- Nav links -->
-        <a *ngFor="let link of navLinks"
-           [href]="link.href"
+        @for (link of navLinks; track link) {
+          <a
+            [href]="link.href"
            [class]="'px-3 py-2 rounded-md text-sm font-medium transition-colors ' +
              (modeService.activeMode() === 'dev'
                ? 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
                : 'text-green-700 font-mono hover:text-green-400')">
-          <ng-container *ngIf="modeService.activeMode() === 'security'">
-            <span class="text-green-900">./</span>
-          </ng-container>
-          {{ link.name }}
-        </a>
+            @if (modeService.activeMode() === 'security') {
+              <span class="text-green-900">./</span>
+            }
+            {{ link.name }}
+          </a>
+        }
 
         <!-- Mode switcher -->
         <div [class]="'flex items-center rounded-lg p-0.5 ' +
@@ -62,74 +64,89 @@
 
         <!-- Theme toggle -->
         <button (click)="themeService.toggleTheme()"
-                class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
-                aria-label="Toggle Dark Mode">
-          <lucide-angular *ngIf="!themeService.darkMode()" [img]="Moon" [size]="20"></lucide-angular>
-          <lucide-angular *ngIf="themeService.darkMode()"  [img]="Sun"  [size]="20"></lucide-angular>
+          class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500"
+          aria-label="Toggle Dark Mode">
+          @if (!themeService.darkMode()) {
+            <lucide-angular [img]="Moon" [size]="20"></lucide-angular>
+          }
+          @if (themeService.darkMode()) {
+            <lucide-angular  [img]="Sun"  [size]="20"></lucide-angular>
+          }
         </button>
       </div>
 
       <!-- Mobile: theme + hamburger -->
       <div class="md:hidden flex items-center gap-3">
         <button (click)="themeService.toggleTheme()"
-                class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-          <lucide-angular *ngIf="!themeService.darkMode()" [img]="Moon" [size]="20"></lucide-angular>
-          <lucide-angular *ngIf="themeService.darkMode()"  [img]="Sun"  [size]="20"></lucide-angular>
+          class="p-2 rounded-full text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+          @if (!themeService.darkMode()) {
+            <lucide-angular [img]="Moon" [size]="20"></lucide-angular>
+          }
+          @if (themeService.darkMode()) {
+            <lucide-angular  [img]="Sun"  [size]="20"></lucide-angular>
+          }
         </button>
         <button (click)="toggleMenu()"
                 [class]="'transition-colors ' +
                   (modeService.activeMode() === 'dev'
                     ? 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
                     : 'text-green-400 hover:text-green-300')"
-                >
-          <lucide-angular *ngIf="!isOpen()" [img]="Menu" [size]="24"></lucide-angular>
-          <lucide-angular *ngIf="isOpen()"  [img]="X"    [size]="24"></lucide-angular>
+          >
+          @if (!isOpen()) {
+            <lucide-angular [img]="Menu" [size]="24"></lucide-angular>
+          }
+          @if (isOpen()) {
+            <lucide-angular  [img]="X"    [size]="24"></lucide-angular>
+          }
         </button>
       </div>
     </div>
   </div>
 
   <!-- Mobile menu -->
-  <div *ngIf="isOpen()"
+  @if (isOpen()) {
+    <div
        [class]="'md:hidden border-t ' +
          (modeService.activeMode() === 'dev'
            ? 'bg-white/85 dark:bg-gray-900/85 backdrop-blur-sm border-gray-100 dark:border-gray-800'
            : 'bg-gray-950 border-green-500/20')"
-       [@slideDown]>
-    <div class="px-2 pt-2 pb-4 space-y-1 sm:px-3">
-      <a *ngFor="let link of navLinks"
-         [href]="link.href"
-         (click)="closeMenu()"
+      [@slideDown]>
+      <div class="px-2 pt-2 pb-4 space-y-1 sm:px-3">
+        @for (link of navLinks; track link) {
+          <a
+            [href]="link.href"
+            (click)="closeMenu()"
          [class]="'block px-3 py-2 rounded-md text-base font-medium transition-colors ' +
            (modeService.activeMode() === 'dev'
              ? 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800'
              : 'text-green-700 font-mono hover:text-green-400 hover:bg-green-900/20')">
-        {{ link.name }}
-      </a>
-
-      <!-- Mode switcher mobile -->
-      <div class="pt-3 pb-1 px-3">
+            {{ link.name }}
+          </a>
+        }
+        <!-- Mode switcher mobile -->
+        <div class="pt-3 pb-1 px-3">
         <p [class]="'text-xs mb-2 font-semibold ' +
              (modeService.activeMode() === 'dev' ? 'text-gray-400' : 'text-green-800 font-mono')">
-          Modo:
-        </p>
-        <div class="flex gap-2">
-          <button (click)="setMode('dev')"
+            Modo:
+          </p>
+          <div class="flex gap-2">
+            <button (click)="setMode('dev')"
             [class]="'flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all ' +
               (modeService.activeMode() === 'dev'
                 ? 'bg-blue-600 text-white'
                 : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400')">
-            <lucide-angular [img]="Code2" class="w-3.5 h-3.5"></lucide-angular> Desarrollador
-          </button>
-          <button (click)="setMode('security')"
+              <lucide-angular [img]="Code2" class="w-3.5 h-3.5"></lucide-angular> Desarrollador
+            </button>
+            <button (click)="setMode('security')"
             [class]="'flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all ' +
               (modeService.activeMode() === 'security'
                 ? 'bg-green-500/20 text-green-400 border border-green-500/50'
                 : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400')">
-            <lucide-angular [img]="Shield" class="w-3.5 h-3.5"></lucide-angular> Seguridad
-          </button>
+              <lucide-angular [img]="Shield" class="w-3.5 h-3.5"></lucide-angular> Seguridad
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  }
 </nav>

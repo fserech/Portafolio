@@ -4,14 +4,16 @@
              ? 'bg-white/85 dark:bg-gray-900/85 backdrop-blur-sm'
              : 'bg-gray-950/90 sec-bg backdrop-blur-sm')">
 
-  <div *ngIf="modeService.activeMode() === 'security'" class="scanlines-overlay pointer-events-none"></div>
+  @if (modeService.activeMode() === 'security') {
+    <div class="scanlines-overlay pointer-events-none"></div>
+  }
 
   <div class="w-full px-4 sm:px-6 lg:px-12 relative">
 
     <!-- Header -->
     <div class="text-center max-[575.98px]:mb-10 min-[768px]:max-[991.98px]:mb-12 min-[992px]:mb-16">
 
-      <ng-container *ngIf="modeService.activeMode() === 'dev'">
+      @if (modeService.activeMode() === 'dev') {
         <h2 class="font-bold text-gray-900 dark:text-white transition-colors
                    max-[575.98px]:text-2xl min-[768px]:max-[991.98px]:text-3xl min-[992px]:text-4xl">
           {{ content.sectionTitle }}
@@ -20,9 +22,9 @@
                   max-[575.98px]:text-base min-[992px]:text-xl">
           {{ content.sectionSubtitle }}
         </p>
-      </ng-container>
+      }
 
-      <ng-container *ngIf="modeService.activeMode() === 'security'">
+      @if (modeService.activeMode() === 'security') {
         <h2 class="font-mono font-bold text-green-400
                    max-[575.98px]:text-2xl min-[768px]:max-[991.98px]:text-3xl min-[992px]:text-4xl">
           {{ content.sectionTitle }}
@@ -31,7 +33,7 @@
           <span class="text-green-500">[INFO]</span> {{ content.sectionSubtitle }}
           <span class="terminal-cursor">▋</span>
         </p>
-      </ng-container>
+      }
     </div>
 
     <!-- Feature cards -->
@@ -40,38 +42,45 @@
                 min-[768px]:max-[991.98px]:grid-cols-2 min-[768px]:max-[991.98px]:gap-6
                 min-[992px]:grid-cols-3 min-[992px]:gap-8">
 
-      <div *ngFor="let feature of features; let i = index"
+      @for (feature of features; track feature; let i = $index) {
+        <div
            [class]="'rounded-xl fade-in-up transition-all duration-300 ' +
              (modeService.activeMode() === 'dev'
                ? 'bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:shadow-lg p-8'
                : 'bg-gray-900/80 border border-green-500/20 hover:border-green-500/50 hover:shadow-[0_0_20px_rgba(34,197,94,0.15)] p-6')"
-           [style.animation-delay.ms]="i * 200">
-
-        <div *ngIf="modeService.activeMode() === 'dev'"
-             class="bg-blue-100 dark:bg-blue-900/50 rounded-lg w-12 h-12 flex items-center justify-center mb-6">
-          <lucide-angular [img]="feature.icon" class="text-blue-600 dark:text-blue-400 h-6 w-6"></lucide-angular>
-        </div>
-
-        <div *ngIf="modeService.activeMode() === 'security'"
-             class="bg-green-900/30 border border-green-500/30 rounded-lg w-10 h-10 flex items-center justify-center mb-4">
-          <lucide-angular [img]="feature.icon" class="text-green-400 h-5 w-5"></lucide-angular>
-        </div>
-
+          [style.animation-delay.ms]="i * 200">
+          @if (modeService.activeMode() === 'dev') {
+            <div
+              class="bg-blue-100 dark:bg-blue-900/50 rounded-lg w-12 h-12 flex items-center justify-center mb-6">
+              <lucide-angular [img]="feature.icon" class="text-blue-600 dark:text-blue-400 h-6 w-6"></lucide-angular>
+            </div>
+          }
+          @if (modeService.activeMode() === 'security') {
+            <div
+              class="bg-green-900/30 border border-green-500/30 rounded-lg w-10 h-10 flex items-center justify-center mb-4">
+              <lucide-angular [img]="feature.icon" class="text-green-400 h-5 w-5"></lucide-angular>
+            </div>
+          }
         <h3 [class]="'font-bold mb-3 ' +
                (modeService.activeMode() === 'dev'
                  ? 'text-gray-900 dark:text-white text-xl'
                  : 'text-green-400 font-mono text-base')">
-          <span *ngIf="modeService.activeMode() === 'security'" class="text-green-700">[+] </span>
-          {{ feature.title }}
-        </h3>
+            @if (modeService.activeMode() === 'security') {
+              <span class="text-green-700">[+] </span>
+            }
+            {{ feature.title }}
+          </h3>
         <p [class]="'leading-relaxed ' +
              (modeService.activeMode() === 'dev'
                ? 'text-gray-600 dark:text-gray-400 text-base'
                : 'text-green-700 font-mono text-xs')">
-          <span *ngIf="modeService.activeMode() === 'security'" class="text-green-600"># </span>
-          {{ feature.description }}
-        </p>
-      </div>
+            @if (modeService.activeMode() === 'security') {
+              <span class="text-green-600"># </span>
+            }
+            {{ feature.description }}
+          </p>
+        </div>
+      }
     </div>
 
     <!-- Bottom banner -->
@@ -95,7 +104,9 @@
                (modeService.activeMode() === 'dev'
                  ? 'text-gray-700 dark:text-gray-300 text-lg'
                  : 'text-green-700 font-mono text-sm')">
-            <span *ngIf="modeService.activeMode() === 'security'" class="text-green-600"># </span>
+            @if (modeService.activeMode() === 'security') {
+              <span class="text-green-600"># </span>
+            }
             {{ content.bannerText }}
           </p>
         </div>

@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { LucideAngularModule, Github, Linkedin, Mail } from 'lucide-angular';
 import { ModeService } from '../../services/mode.service';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [LucideAngularModule],
   templateUrl: './footer.html',
   styleUrls: ['./footer.scss']
 })

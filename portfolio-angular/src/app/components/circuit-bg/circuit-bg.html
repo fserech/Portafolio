@@ -1,5 +1,5 @@
 <svg [class.security]="isSecurity" viewBox="0 0 680 600" preserveAspectRatio="xMidYMid slice"
-     role="img" xmlns="http://www.w3.org/2000/svg">
+  role="img" xmlns="http://www.w3.org/2000/svg">
   <title>Circuito de fondo</title>
 
   <defs>
@@ -19,10 +19,12 @@
     <path id="t6" d="M340,20 V120 H430 V300 H472" fill="none"/>
   </defs>
 
-  <ng-container *ngIf="!ambient">
-    <rect x="0" y="0" width="680" height="600" [style]="'fill:var(--c-bg)'" [attr.opacity]="ambient ? 0.35 : 1"/>
-<rect x="0" y="0" width="680" height="600" fill="url(#dots)" [attr.opacity]="ambient ? 0.5 : 1"/>
-  </ng-container>
+  @if (!ambient) {
+    <ng-container>
+      <rect x="0" y="0" width="680" height="600" [style]="'fill:var(--c-bg)'" [attr.opacity]="ambient ? 0.35 : 1"/>
+      <rect x="0" y="0" width="680" height="600" fill="url(#dots)" [attr.opacity]="ambient ? 0.5 : 1"/>
+    </ng-container>
+  }
 
   <g fill="none" style="stroke:var(--c-primary)" [attr.stroke-width]="ambient ? 3.5 : 1.5" [attr.opacity]="ambient ? 1 : 0.55">
     <use href="#t1"/><use href="#t2"/><use href="#t5"/>
@@ -65,12 +67,14 @@
   </circle>
 
   <polygon points="520,252 561.6,276 561.6,324 520,348 478.4,324 478.4,276"
-           fill="none" style="stroke:var(--c-core-line)" stroke-width="2" [attr.opacity]="ambient ? 1 : 0.7"/>
-  <polygon points="520,270 546,285 546,315 520,330 494,315 494,285"
-           [style]="ambient ? 'fill:transparent; stroke:var(--c-core-line)' : 'fill:var(--c-core-fill); stroke:var(--c-core-line)'" stroke-width="1.8"/>
-  <circle cx="520" cy="300" r="9" style="fill:var(--c-core-glow)">
-    <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
-  </circle>
+    fill="none" style="stroke:var(--c-core-line)" stroke-width="2" [attr.opacity]="ambient ? 1 : 0.7"/>
+    <polygon points="520,270 546,285 546,315 520,330 494,315 494,285"
+      [style]="ambient ? 'fill:transparent; stroke:var(--c-core-line)' : 'fill:var(--c-core-fill); stroke:var(--c-core-line)'" stroke-width="1.8"/>
+      <circle cx="520" cy="300" r="9" style="fill:var(--c-core-glow)">
+        <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
+      </circle>
 
-  <rect *ngIf="!ambient" x="0" y="0" width="680" height="600" fill="url(#vignette)"/>
-</svg>
+      @if (!ambient) {
+        <rect x="0" y="0" width="680" height="600" fill="url(#vignette)"/>
+      }
+    </svg>

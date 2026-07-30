@@ -14,21 +14,23 @@
                (modeService.activeMode() === 'dev'
                  ? 'text-gray-900 dark:text-white'
                  : 'text-green-400')">
-          <ng-container *ngIf="modeService.activeMode() === 'dev'">
+          @if (modeService.activeMode() === 'dev') {
             fredy@<span class="text-blue-600 dark:text-blue-500">dev</span>
-          </ng-container>
-          <ng-container *ngIf="modeService.activeMode() === 'security'">
+          }
+          @if (modeService.activeMode() === 'security') {
             <span class="text-green-600">root</span><span class="text-gray-600">@</span>portfolio
-          </ng-container>
+          }
         </h3>
         <p [class]="'text-sm ' +
              (modeService.activeMode() === 'dev'
                ? 'text-gray-600 dark:text-gray-400'
                : 'text-green-800 font-mono')">
-          <ng-container *ngIf="modeService.activeMode() === 'dev'">Developer & Security Enthusiast</ng-container>
-          <ng-container *ngIf="modeService.activeMode() === 'security'">
+          @if (modeService.activeMode() === 'dev') {
+            Developer & Security Enthusiast
+          }
+          @if (modeService.activeMode() === 'security') {
             <span class="text-green-600">[</span>offensive<span class="text-green-600">]</span> security researcher
-          </ng-container>
+          }
         </p>
       </div>
 
@@ -38,13 +40,13 @@
              (modeService.activeMode() === 'dev'
                ? 'text-gray-600 dark:text-gray-400'
                : 'text-green-900 font-mono')">
-          <ng-container *ngIf="modeService.activeMode() === 'dev'">
+          @if (modeService.activeMode() === 'dev') {
             © {{ currentYear }} Hecho con pasión usando Angular & Tailwind CSS
-          </ng-container>
-          <ng-container *ngIf="modeService.activeMode() === 'security'">
+          }
+          @if (modeService.activeMode() === 'security') {
             <span class="text-green-700">[</span>{{ currentYear }}<span class="text-green-700">]</span>
             No system is safe. Stay ethical.
-          </ng-container>
+          }
         </p>
       </div>
 
@@ -55,24 +57,28 @@
                   min-[992px]:gap-6 min-[992px]:order-3">
 
         <div class="flex items-center gap-6">
-          <a *ngFor="let link of [
-               {name: 'Inicio', href: '#home'},
-               {name: 'Proyectos', href: '#projects'},
-               {name: 'Contacto', href: '#contact'}]"
-             [href]="link.href"
+          @for (link of [
+            {name: 'Inicio', href: '#home'},
+            {name: 'Proyectos', href: '#projects'},
+            {name: 'Contacto', href: '#contact'}]; track link) {
+            <a
+              [href]="link.href"
              [class]="'text-sm transition-colors ' +
                (modeService.activeMode() === 'dev'
                  ? 'text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-500'
                  : 'text-green-900 font-mono hover:text-green-400')">
-            <ng-container *ngIf="modeService.activeMode() === 'security'">./</ng-container>
-            {{ link.name }}
-          </a>
+              @if (modeService.activeMode() === 'security') {
+                ./
+              }
+              {{ link.name }}
+            </a>
+          }
         </div>
 
         <div class="flex gap-4 border-gray-300 dark:border-gray-700
                     max-[575.98px]:border-t max-[575.98px]:pt-4
                     min-[992px]:ml-4 min-[992px]:pl-4 min-[992px]:border-l min-[992px]:border-t-0 min-[992px]:pt-0"
-             [class]="modeService.activeMode() === 'security' ? 'border-green-900' : ''">
+          [class]="modeService.activeMode() === 'security' ? 'border-green-900' : ''">
           <a href="https://github.com/fserech" target="_blank" rel="noopener noreferrer"
              [class]="'transition-colors ' +
                (modeService.activeMode() === 'dev'

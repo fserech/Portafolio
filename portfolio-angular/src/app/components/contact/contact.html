@@ -4,13 +4,15 @@
              ? 'bg-gray-50/85 dark:bg-gray-950/85 backdrop-blur-sm'
              : 'bg-gray-950/90 sec-bg backdrop-blur-sm')">
 
-  <div *ngIf="modeService.activeMode() === 'security'" class="scanlines-overlay pointer-events-none"></div>
+  @if (modeService.activeMode() === 'security') {
+    <div class="scanlines-overlay pointer-events-none"></div>
+  }
 
   <div class="w-full px-4 sm:px-6 lg:px-12 relative">
 
     <!-- Header -->
     <div class="text-center max-[575.98px]:mb-10 min-[768px]:max-[991.98px]:mb-12 min-[992px]:mb-16">
-      <ng-container *ngIf="modeService.activeMode() === 'dev'">
+      @if (modeService.activeMode() === 'dev') {
         <h2 class="font-bold text-gray-900 dark:text-white
                    max-[575.98px]:text-2xl min-[768px]:text-3xl min-[992px]:text-4xl">
           Hablemos
@@ -19,8 +21,8 @@
                   max-[575.98px]:text-base min-[992px]:text-xl">
           ¿Tienes un proyecto en mente o quieres colaborar? ¡Me encantaría escucharte!
         </p>
-      </ng-container>
-      <ng-container *ngIf="modeService.activeMode() === 'security'">
+      }
+      @if (modeService.activeMode() === 'security') {
         <h2 class="font-mono font-bold text-green-400
                    max-[575.98px]:text-2xl min-[768px]:text-3xl min-[992px]:text-4xl">
           <span class="text-green-600">$</span> nc -lvp 4444
@@ -29,7 +31,7 @@
           <span class="text-green-500">[LISTEN]</span> Esperando conexión entrante...
           <span class="terminal-cursor">▋</span>
         </p>
-      </ng-container>
+      }
     </div>
 
     <div class="grid max-w-7xl mx-auto
@@ -42,7 +44,7 @@
                ? 'bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-8 min-[992px]:p-12'
                : 'bg-gray-900 border border-green-500/20 p-8')">
 
-        <ng-container *ngIf="modeService.activeMode() === 'dev'">
+        @if (modeService.activeMode() === 'dev') {
           <h3 class="font-bold text-gray-900 dark:text-white mb-6
                      max-[575.98px]:text-xl min-[992px]:text-3xl">
             Información de Contacto
@@ -51,9 +53,9 @@
             Estoy disponible para trabajos freelance y oportunidades a tiempo completo.
             ¡No dudes en contactarme!
           </p>
-        </ng-container>
+        }
 
-        <ng-container *ngIf="modeService.activeMode() === 'security'">
+        @if (modeService.activeMode() === 'security') {
           <h3 class="font-mono font-bold text-green-400 text-xl mb-4">
             <span class="text-green-600">$</span> cat contact.cfg
           </h3>
@@ -62,7 +64,7 @@
             <p><span class="text-green-500">[*]</span> Administración de redes y servidores</p>
             <p><span class="text-green-500">[*]</span> Consultoría en seguridad corporativa</p>
           </div>
-        </ng-container>
+        }
 
         <div class="space-y-6">
           <!-- Email -->
@@ -75,8 +77,12 @@
             </div>
             <div>
               <h4 [class]="'font-semibold mb-1 ' + (modeService.activeMode() === 'dev' ? 'text-gray-900 dark:text-white text-xl' : 'text-green-400 font-mono text-sm')">
-                <ng-container *ngIf="modeService.activeMode() === 'dev'">Email</ng-container>
-                <ng-container *ngIf="modeService.activeMode() === 'security'">--email</ng-container>
+                @if (modeService.activeMode() === 'dev') {
+                  Email
+                }
+                @if (modeService.activeMode() === 'security') {
+                  --email
+                }
               </h4>
               <p [class]="modeService.activeMode() === 'dev' ? 'text-gray-700 dark:text-gray-300 text-lg' : 'text-green-700 font-mono text-xs'">
                 serech63@gmail.com
@@ -94,8 +100,12 @@
             </div>
             <div>
               <h4 [class]="'font-semibold mb-1 ' + (modeService.activeMode() === 'dev' ? 'text-gray-900 dark:text-white text-xl' : 'text-green-400 font-mono text-sm')">
-                <ng-container *ngIf="modeService.activeMode() === 'dev'">Teléfono</ng-container>
-                <ng-container *ngIf="modeService.activeMode() === 'security'">--phone</ng-container>
+                @if (modeService.activeMode() === 'dev') {
+                  Teléfono
+                }
+                @if (modeService.activeMode() === 'security') {
+                  --phone
+                }
               </h4>
               <p [class]="modeService.activeMode() === 'dev' ? 'text-gray-700 dark:text-gray-300 text-lg' : 'text-green-700 font-mono text-xs'">
                 +502 4105 1656
@@ -113,8 +123,12 @@
             </div>
             <div>
               <h4 [class]="'font-semibold mb-1 ' + (modeService.activeMode() === 'dev' ? 'text-gray-900 dark:text-white text-xl' : 'text-green-400 font-mono text-sm')">
-                <ng-container *ngIf="modeService.activeMode() === 'dev'">Ubicación</ng-container>
-                <ng-container *ngIf="modeService.activeMode() === 'security'">--location</ng-container>
+                @if (modeService.activeMode() === 'dev') {
+                  Ubicación
+                }
+                @if (modeService.activeMode() === 'security') {
+                  --location
+                }
               </h4>
               <p [class]="modeService.activeMode() === 'dev' ? 'text-gray-700 dark:text-gray-300 text-lg' : 'text-green-700 font-mono text-xs'">
                 Chimaltenango, Guatemala
@@ -124,7 +138,7 @@
         </div>
 
         <div class="absolute -bottom-24 -right-24 w-64 h-64 rounded-full blur-3xl"
-             [class]="modeService.activeMode() === 'dev' ? 'bg-blue-300/20 dark:bg-blue-500/10' : 'bg-green-500/5'"></div>
+        [class]="modeService.activeMode() === 'dev' ? 'bg-blue-300/20 dark:bg-blue-500/10' : 'bg-green-500/5'"></div>
       </div>
 
       <!-- Form -->
@@ -133,38 +147,44 @@
                ? 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-8 min-[992px]:p-12'
                : 'bg-gray-900 border border-green-500/20 p-8')">
 
-        <p *ngIf="modeService.activeMode() === 'security'"
-           class="font-mono text-green-700 text-xs mb-6">
-          <span class="text-green-500">[*]</span> Canal cifrado activo — TLS 1.3
-        </p>
+        @if (modeService.activeMode() === 'security') {
+          <p
+            class="font-mono text-green-700 text-xs mb-6">
+            <span class="text-green-500">[*]</span> Canal cifrado activo — TLS 1.3
+          </p>
+        }
 
         <!-- Éxito -->
-        <div *ngIf="submitStatus() === 'success'"
+        @if (submitStatus() === 'success') {
+          <div
              [class]="'mb-6 px-4 py-3 rounded-xl text-sm font-medium ' +
                (modeService.activeMode() === 'dev'
                  ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800'
                  : 'bg-green-900/30 text-green-400 border border-green-500/40 font-mono')">
-          <ng-container *ngIf="modeService.activeMode() === 'dev'">
-            ✓ ¡Mensaje enviado con éxito! Te responderé pronto.
-          </ng-container>
-          <ng-container *ngIf="modeService.activeMode() === 'security'">
-            [OK] Payload transmitido correctamente. Respuesta en camino.
-          </ng-container>
-        </div>
+            @if (modeService.activeMode() === 'dev') {
+              ✓ ¡Mensaje enviado con éxito! Te responderé pronto.
+            }
+            @if (modeService.activeMode() === 'security') {
+              [OK] Payload transmitido correctamente. Respuesta en camino.
+            }
+          </div>
+        }
 
         <!-- Error -->
-        <div *ngIf="submitStatus() === 'error'"
+        @if (submitStatus() === 'error') {
+          <div
              [class]="'mb-6 px-4 py-3 rounded-xl text-sm font-medium ' +
                (modeService.activeMode() === 'dev'
                  ? 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800'
                  : 'bg-red-900/20 text-red-400 border border-red-500/40 font-mono')">
-          <ng-container *ngIf="modeService.activeMode() === 'dev'">
-            ✗ Error al enviar. Intenta de nuevo o escríbeme directamente.
-          </ng-container>
-          <ng-container *ngIf="modeService.activeMode() === 'security'">
-            [ERROR] Transmisión fallida. Reintenta o usa canal alternativo.
-          </ng-container>
-        </div>
+            @if (modeService.activeMode() === 'dev') {
+              ✗ Error al enviar. Intenta de nuevo o escríbeme directamente.
+            }
+            @if (modeService.activeMode() === 'security') {
+              [ERROR] Transmisión fallida. Reintenta o usa canal alternativo.
+            }
+          </div>
+        }
 
         <form (ngSubmit)="onSubmit($event)" class="h-full flex flex-col justify-center space-y-6">
 
@@ -174,15 +194,19 @@
                      (modeService.activeMode() === 'dev'
                        ? 'text-gray-700 dark:text-gray-300 text-sm'
                        : 'text-green-700 font-mono text-xs')">
-              <ng-container *ngIf="modeService.activeMode() === 'dev'">Nombre Completo</ng-container>
-              <ng-container *ngIf="modeService.activeMode() === 'security'">--name &lt;identificador&gt;</ng-container>
+              @if (modeService.activeMode() === 'dev') {
+                Nombre Completo
+              }
+              @if (modeService.activeMode() === 'security') {
+                --name &lt;identificador&gt;
+              }
             </label>
             <input type="text" [(ngModel)]="formData.name" name="name" required
                    [class]="'w-full rounded-xl border outline-none transition-all px-4 py-3 ' +
                      (modeService.activeMode() === 'dev'
                        ? 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                        : 'border-green-500/30 bg-gray-950 text-green-300 font-mono text-sm placeholder-green-900 focus:border-green-500/60')"
-                   [placeholder]="modeService.activeMode() === 'dev' ? 'Juan Pérez' : 'operador_x'">
+              [placeholder]="modeService.activeMode() === 'dev' ? 'Juan Pérez' : 'operador_x'">
           </div>
 
           <!-- Email -->
@@ -191,15 +215,19 @@
                      (modeService.activeMode() === 'dev'
                        ? 'text-gray-700 dark:text-gray-300 text-sm'
                        : 'text-green-700 font-mono text-xs')">
-              <ng-container *ngIf="modeService.activeMode() === 'dev'">Correo Electrónico</ng-container>
-              <ng-container *ngIf="modeService.activeMode() === 'security'">--email &lt;canal seguro&gt;</ng-container>
+              @if (modeService.activeMode() === 'dev') {
+                Correo Electrónico
+              }
+              @if (modeService.activeMode() === 'security') {
+                --email &lt;canal seguro&gt;
+              }
             </label>
             <input type="email" [(ngModel)]="formData.email" name="email" required
                    [class]="'w-full rounded-xl border outline-none transition-all px-4 py-3 ' +
                      (modeService.activeMode() === 'dev'
                        ? 'border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent'
                        : 'border-green-500/30 bg-gray-950 text-green-300 font-mono text-sm placeholder-green-900 focus:border-green-500/60')"
-                   [placeholder]="modeService.activeMode() === 'dev' ? 'juan@ejemplo.com' : 'user@protonmail.com'">
+              [placeholder]="modeService.activeMode() === 'dev' ? 'juan@ejemplo.com' : 'user@protonmail.com'">
           </div>
 
           <!-- Mensaje -->
@@ -208,8 +236,12 @@
                      (modeService.activeMode() === 'dev'
                        ? 'text-gray-700 dark:text-gray-300 text-sm'
                        : 'text-green-700 font-mono text-xs')">
-              <ng-container *ngIf="modeService.activeMode() === 'dev'">Mensaje</ng-container>
-              <ng-container *ngIf="modeService.activeMode() === 'security'">--payload &lt;mensaje&gt;</ng-container>
+              @if (modeService.activeMode() === 'dev') {
+                Mensaje
+              }
+              @if (modeService.activeMode() === 'security') {
+                --payload &lt;mensaje&gt;
+              }
             </label>
             <textarea [(ngModel)]="formData.message" name="message" required [attr.rows]="5"
                       [class]="'w-full rounded-xl border outline-none resize-none transition-all px-4 py-3 ' +
@@ -223,25 +255,29 @@
 
           <!-- Botón -->
           <button type="submit"
-                  [disabled]="isSubmitting()"
+            [disabled]="isSubmitting()"
                   [class]="'w-full flex justify-center items-center gap-3 font-bold transition-all disabled:opacity-70 disabled:cursor-not-allowed ' +
                     (modeService.activeMode() === 'dev'
                       ? 'py-4 rounded-xl text-white bg-blue-600 hover:bg-blue-700 shadow-lg hover:shadow-xl text-lg'
                       : 'py-3 rounded border font-mono text-sm border-green-500/40 text-green-400 bg-green-900/30 hover:bg-green-900/50')">
-            <ng-container *ngIf="!isSubmitting()">
-              <ng-container *ngIf="modeService.activeMode() === 'dev'">
+            @if (!isSubmitting()) {
+              @if (modeService.activeMode() === 'dev') {
                 Enviar Mensaje
                 <lucide-angular [img]="Send" class="w-5 h-5"></lucide-angular>
-              </ng-container>
-              <ng-container *ngIf="modeService.activeMode() === 'security'">
+              }
+              @if (modeService.activeMode() === 'security') {
                 <lucide-angular [img]="Terminal" class="w-4 h-4"></lucide-angular>
                 ./send --encrypt --target=fredy
-              </ng-container>
-            </ng-container>
-            <ng-container *ngIf="isSubmitting()">
-              <ng-container *ngIf="modeService.activeMode() === 'dev'">Enviando...</ng-container>
-              <ng-container *ngIf="modeService.activeMode() === 'security'">Transmitiendo payload...</ng-container>
-            </ng-container>
+              }
+            }
+            @if (isSubmitting()) {
+              @if (modeService.activeMode() === 'dev') {
+                Enviando...
+              }
+              @if (modeService.activeMode() === 'security') {
+                Transmitiendo payload...
+              }
+            }
           </button>
         </form>
       </div>

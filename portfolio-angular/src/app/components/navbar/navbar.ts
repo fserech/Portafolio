@@ -1,5 +1,5 @@
 import { Component, HostListener, signal, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { LucideAngularModule, Menu, X, Moon, Sun, Code2, Shield } from 'lucide-angular';
 import { ThemeService } from '../../services/theme';
@@ -13,7 +13,7 @@ interface NavLink {
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [LucideAngularModule],
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.scss'],
   animations: [

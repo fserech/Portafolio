@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { NavbarComponent } from './components/navbar/navbar';
 import { HeroComponent } from './components/hero/hero';
 import { AboutComponent } from './components/about/about';
@@ -13,7 +13,6 @@ import { CircuitBgComponent } from './components/circuit-bg/circuit-bg';
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule,
     NavbarComponent,
     HeroComponent,
     AboutComponent,
@@ -21,8 +20,8 @@ import { CircuitBgComponent } from './components/circuit-bg/circuit-bg';
     ProjectsComponent,
     ContactComponent,
     FooterComponent,
-    CircuitBgComponent,
-  ],
+    CircuitBgComponent
+],
   templateUrl: './app.html',
   styleUrls: ['./app.scss']
 })
