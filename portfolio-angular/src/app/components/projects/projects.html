@@ -1,6 +1,6 @@
 <section id="projects"
   [class]="'transition-colors duration-500 max-[575.98px]:py-12 min-[768px]:max-[991.98px]:py-16 min-[992px]:py-20 ' +
-           (activeMode() === 'dev' ? 'bg-white dark:bg-gray-900' : 'bg-gray-950 sec-bg')">
+           (activeMode() === 'dev' ? 'bg-white/85 dark:bg-gray-900/85 backdrop-blur-sm' : 'bg-gray-950/90 sec-bg backdrop-blur-sm')">
 
   <!-- Scanlines -->
   <div *ngIf="activeMode() === 'security'" class="scanlines-overlay pointer-events-none"></div>

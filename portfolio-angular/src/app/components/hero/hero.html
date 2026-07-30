@@ -1,8 +1,8 @@
 <section id="home"
   [class]="'relative min-h-screen flex items-center pt-16 overflow-hidden transition-colors duration-500 ' +
            (modeService.activeMode() === 'dev'
-             ? 'bg-gray-50 dark:bg-gray-950'
-             : 'bg-gray-950 sec-bg')">
+             ? 'bg-gray-50/85 dark:bg-gray-950/85 backdrop-blur-sm'
+             : 'bg-gray-950/90 sec-bg backdrop-blur-sm')">
 
   <div *ngIf="modeService.activeMode() === 'security'" class="scanlines-overlay pointer-events-none"></div>
 
@@ -106,43 +106,43 @@
         </ng-container>
       </div>
 
-      <!-- Glass panel -->
-      <div class="order-1 min-[992px]:order-2 relative fade-in-right">
-        <div [class]="'relative rounded-2xl overflow-hidden shadow-2xl w-full flex items-center justify-center backdrop-blur-md
-                       max-[575.98px]:aspect-[16/9] min-[992px]:h-[70vh] min-[1200px]:h-[80vh] ' +
-                       (modeService.activeMode() === 'dev'
-                         ? 'bg-white/10 dark:bg-blue-950/10 border border-blue-500/20'
-                         : 'bg-black/20 border border-green-500/30')">
+      <!-- Glass panel (deja ver el circuito global de fondo) -->
+   <div class="order-1 min-[992px]:order-2 relative fade-in-right">
+  <div [class]="'relative rounded-2xl overflow-hidden shadow-2xl w-full flex items-center justify-center
+         max-[575.98px]:aspect-[16/9] min-[992px]:h-[70vh] min-[1200px]:h-[80vh] ' +
+       (modeService.activeMode() === 'dev'
+          ? 'border border-gray-200 dark:border-gray-700'
+          : 'border border-green-500/20')">
 
-          <!-- DEV mode content -->
-          <div *ngIf="modeService.activeMode() === 'dev'" class="flex flex-col items-center gap-4 text-center px-6">
-            <div class="relative">
-              <div class="absolute inset-0 bg-blue-500/30 rounded-full blur-2xl"></div>
-              <div class="relative w-20 h-20 rounded-full bg-blue-500/10 border border-blue-400/30 flex items-center justify-center">
-                <lucide-angular [img]="Code2" class="w-9 h-9 text-blue-400"></lucide-angular>
-              </div>
-            </div>
-            <p class="text-sm font-medium text-blue-300/80">fredy@dev · construyendo interfaces</p>
-          </div>
-
-          <!-- SECURITY mode content -->
-          <div *ngIf="modeService.activeMode() === 'security'" class="flex flex-col items-center gap-4 text-center px-6">
-            <div class="relative">
-              <div class="absolute inset-0 bg-green-500/30 rounded-full blur-2xl"></div>
-              <div class="relative w-20 h-20 rounded-full bg-green-500/10 border border-green-400/30 flex items-center justify-center">
-                <lucide-angular [img]="Shield" class="w-9 h-9 text-green-400"></lucide-angular>
-              </div>
-            </div>
-            <p class="font-mono text-xs text-green-400/80">perímetro asegurado</p>
-          </div>
-
-          <div *ngIf="modeService.activeMode() === 'security'"
-               class="absolute bottom-4 left-4 font-mono text-xs text-green-500/60 select-none">
-            <p>firewall: active</p>
-            <p>vpn_tunnel: established</p>
-          </div>
+    <!-- DEV mode content -->
+    <div *ngIf="modeService.activeMode() === 'dev'" class="flex flex-col items-center gap-4 text-center px-6">
+      <div class="relative">
+        <div class="absolute inset-0 bg-blue-500/30 rounded-full blur-2xl"></div>
+        <div class="relative w-20 h-20 rounded-full bg-blue-500/10 border border-blue-400/30 flex items-center justify-center">
+          <lucide-angular [img]="Code2" class="w-9 h-9 text-blue-400"></lucide-angular>
         </div>
       </div>
+      <p class="text-sm font-medium text-blue-300/80">fredy@dev · codificando...</p>
+    </div>
+
+    <!-- SECURITY mode content -->
+    <div *ngIf="modeService.activeMode() === 'security'" class="flex flex-col items-center gap-4 text-center px-6">
+      <div class="relative">
+        <div class="absolute inset-0 bg-green-500/30 rounded-full blur-2xl"></div>
+        <div class="relative w-20 h-20 rounded-full bg-green-500/10 border border-green-400/30 flex items-center justify-center">
+          <lucide-angular [img]="Shield" class="w-9 h-9 text-green-400"></lucide-angular>
+        </div>
+      </div>
+      <p class="font-mono text-xs text-green-400/80">perímetro asegurado</p>
+    </div>
+
+    <div *ngIf="modeService.activeMode() === 'security'"
+         class="absolute bottom-4 left-4 font-mono text-xs text-green-500/60 select-none">
+      <p>firewall: active</p>
+      <p>vpn_tunnel: established</p>
+    </div>
+  </div>
+</div>
 
     </div>
   </div>

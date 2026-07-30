@@ -93,7 +93,7 @@
   <div *ngIf="isOpen()"
        [class]="'md:hidden border-t ' +
          (modeService.activeMode() === 'dev'
-           ? 'bg-white dark:bg-gray-900 border-gray-100 dark:border-gray-800'
+           ? 'bg-white/85 dark:bg-gray-900/85 backdrop-blur-sm border-gray-100 dark:border-gray-800'
            : 'bg-gray-950 border-green-500/20')"
        [@slideDown]>
     <div class="px-2 pt-2 pb-4 space-y-1 sm:px-3">

@@ -19,56 +19,58 @@
     <path id="t6" d="M340,20 V120 H430 V300 H472" fill="none"/>
   </defs>
 
-  <rect x="0" y="0" width="680" height="600" style="fill:var(--c-bg)"/>
-  <rect x="0" y="0" width="680" height="600" fill="url(#dots)"/>
+  <ng-container *ngIf="!ambient">
+    <rect x="0" y="0" width="680" height="600" [style]="'fill:var(--c-bg)'" [attr.opacity]="ambient ? 0.35 : 1"/>
+<rect x="0" y="0" width="680" height="600" fill="url(#dots)" [attr.opacity]="ambient ? 0.5 : 1"/>
+  </ng-container>
 
-  <g fill="none" style="stroke:var(--c-primary)" stroke-width="1.5" opacity="0.55">
+  <g fill="none" style="stroke:var(--c-primary)" [attr.stroke-width]="ambient ? 3.5 : 1.5" [attr.opacity]="ambient ? 1 : 0.55">
     <use href="#t1"/><use href="#t2"/><use href="#t5"/>
   </g>
-  <g fill="none" style="stroke:var(--c-secondary)" stroke-width="1" opacity="0.4">
+  <g fill="none" style="stroke:var(--c-secondary)" [attr.stroke-width]="ambient ? 3 : 1" [attr.opacity]="ambient ? 1 : 0.4">
     <use href="#t3"/><use href="#t4"/><use href="#t6"/>
   </g>
 
-  <g fill="none" style="stroke:var(--c-accent)" stroke-width="1.5" opacity="0.5" stroke-dasharray="5 9">
+  <g fill="none" style="stroke:var(--c-accent)" stroke-width="2" [attr.opacity]="ambient ? 0.9 : 0.5" stroke-dasharray="5 9">
     <use href="#t1"/>
     <animate attributeName="stroke-dashoffset" from="0" to="-28" dur="1.8s" repeatCount="indefinite"/>
   </g>
-  <g fill="none" style="stroke:var(--c-flow)" stroke-width="1.5" opacity="0.45" stroke-dasharray="4 10">
+  <g fill="none" style="stroke:var(--c-flow)" stroke-width="2" [attr.opacity]="ambient ? 0.85 : 0.45" stroke-dasharray="4 10">
     <use href="#t4"/>
     <animate attributeName="stroke-dashoffset" from="28" to="0" dur="2.4s" repeatCount="indefinite"/>
   </g>
 
   <g style="fill:var(--c-node)">
-    <circle cx="220" cy="160" r="3"/><circle cx="400" cy="160" r="3"/>
-    <circle cx="180" cy="540" r="3"/><circle cx="360" cy="420" r="3"/>
-    <circle cx="480" cy="150" r="3"/><circle cx="480" cy="450" r="3"/>
-    <circle cx="150" cy="300" r="3"/><circle cx="320" cy="240" r="3"/>
-    <circle cx="430" cy="120" r="3"/>
+    <circle cx="220" cy="160" [attr.r]="ambient ? 4.5 : 3.5"/><circle cx="400" cy="160" [attr.r]="ambient ? 4.5 : 3.5"/>
+    <circle cx="180" cy="540" [attr.r]="ambient ? 4.5 : 3.5"/><circle cx="360" cy="420" [attr.r]="ambient ? 4.5 : 3.5"/>
+    <circle cx="480" cy="150" [attr.r]="ambient ? 4.5 : 3.5"/><circle cx="480" cy="450" [attr.r]="ambient ? 4.5 : 3.5"/>
+    <circle cx="150" cy="300" [attr.r]="ambient ? 4.5 : 3.5"/><circle cx="320" cy="240" [attr.r]="ambient ? 4.5 : 3.5"/>
+    <circle cx="430" cy="120" [attr.r]="ambient ? 4.5 : 3.5"/>
   </g>
 
-  <circle cx="220" cy="160" r="3" fill="none" style="stroke:var(--c-node-glow)" stroke-width="1">
+  <circle cx="220" cy="160" r="3" fill="none" style="stroke:var(--c-node-glow)" stroke-width="1.2">
     <animate attributeName="r" values="3;9;3" dur="2.6s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.8;0;0.8" dur="2.6s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.9;0;0.9" dur="2.6s" repeatCount="indefinite"/>
   </circle>
-  <circle cx="360" cy="420" r="3" fill="none" style="stroke:var(--c-node-glow)" stroke-width="1">
+  <circle cx="360" cy="420" r="3" fill="none" style="stroke:var(--c-node-glow)" stroke-width="1.2">
     <animate attributeName="r" values="3;9;3" dur="3.1s" begin="0.6s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0.8;0;0.8" dur="3.1s" begin="0.6s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.9;0;0.9" dur="3.1s" begin="0.6s" repeatCount="indefinite"/>
   </circle>
 
-  <circle r="3" style="fill:var(--c-node-glow)">
+  <circle r="4" style="fill:var(--c-node-glow)">
     <animateMotion dur="2.2s" repeatCount="indefinite"><mpath href="#t1"/></animateMotion>
   </circle>
-  <circle r="3" style="fill:var(--c-node-glow)">
+  <circle r="4" style="fill:var(--c-node-glow)">
     <animateMotion dur="2.6s" begin="0.9s" repeatCount="indefinite"><mpath href="#t4"/></animateMotion>
   </circle>
 
   <polygon points="520,252 561.6,276 561.6,324 520,348 478.4,324 478.4,276"
-           fill="none" style="stroke:var(--c-core-line)" stroke-width="1.5" opacity="0.7"/>
+           fill="none" style="stroke:var(--c-core-line)" stroke-width="2" [attr.opacity]="ambient ? 1 : 0.7"/>
   <polygon points="520,270 546,285 546,315 520,330 494,315 494,285"
-           style="fill:var(--c-core-fill); stroke:var(--c-core-line)" stroke-width="1.5"/>
+           [style]="ambient ? 'fill:transparent; stroke:var(--c-core-line)' : 'fill:var(--c-core-fill); stroke:var(--c-core-line)'" stroke-width="1.8"/>
   <circle cx="520" cy="300" r="9" style="fill:var(--c-core-glow)">
     <animate attributeName="opacity" values="0.6;1;0.6" dur="2s" repeatCount="indefinite"/>
   </circle>
 
-  <rect x="0" y="0" width="680" height="600" fill="url(#vignette)"/>
+  <rect *ngIf="!ambient" x="0" y="0" width="680" height="600" fill="url(#vignette)"/>
 </svg>

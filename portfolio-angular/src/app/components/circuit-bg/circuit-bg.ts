@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ModeService } from '../../services/mode.service';
 
@@ -10,6 +10,8 @@ import { ModeService } from '../../services/mode.service';
   styleUrls: ['./circuit-bg.scss']
 })
 export class CircuitBgComponent {
+  @Input() ambient = false;
+
   modeService = inject(ModeService);
 
   get isSecurity() {

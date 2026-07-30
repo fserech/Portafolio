@@ -1,6 +1,6 @@
 <section id="skills"
   [class]="'transition-colors duration-500 max-[575.98px]:py-12 min-[768px]:max-[991.98px]:py-16 min-[992px]:py-20 ' +
-           (activeMode() === 'dev' ? 'bg-gray-50 dark:bg-gray-950' : 'bg-gray-950 dark:bg-gray-950 sec-bg')">
+           (activeMode() === 'dev' ? 'bg-gray-50/85 dark:bg-gray-950/85 backdrop-blur-sm' : 'bg-gray-950 dark:bg-gray-950/90 sec-bg backdrop-blur-sm')">
 
   <!-- Scanline overlay (security mode) -->
   <div *ngIf="activeMode() === 'security'" class="scanlines-overlay pointer-events-none"></div>
