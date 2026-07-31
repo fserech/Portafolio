@@ -110,11 +110,11 @@
 
     <!-- Glass panel (deja ver el circuito global de fondo) -->
       <div class="order-2 min-[992px]:order-2 relative fade-in-right">
-  <div [class]="'relative rounded-2xl overflow-hidden shadow-2xl w-full flex items-center justify-center
-         max-[575.98px]:aspect-[16/9] min-[992px]:h-[70vh] min-[1200px]:h-[80vh] ' +
-       (modeService.activeMode() === 'dev'
-          ? 'border border-gray-200 dark:border-gray-700'
-          : 'border border-green-500/20')">
+  <div [class]="'relative rounded-2xl w-full flex items-center justify-center py-8
+       max-[575.98px]:min-h-[300px] max-[575.98px]:h-auto min-[992px]:h-[70vh] min-[1200px]:h-[80vh] ' +
+     (modeService.activeMode() === 'dev'
+        ? 'border border-gray-200 dark:border-gray-700'
+        : 'border border-green-500/20')">
 
           <!-- DEV mode content -->
           @if (modeService.activeMode() === 'dev') {
