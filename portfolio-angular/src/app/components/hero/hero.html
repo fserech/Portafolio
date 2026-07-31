@@ -108,7 +108,7 @@
         }
       </div>
 
-      <!-- Glass panel (deja ver el circuito global de fondo) -->
+    <!-- Glass panel (deja ver el circuito global de fondo) -->
       <div class="order-1 min-[992px]:order-2 relative fade-in-right">
   <div [class]="'relative rounded-2xl overflow-hidden shadow-2xl w-full flex items-center justify-center
          max-[575.98px]:aspect-[16/9] min-[992px]:h-[70vh] min-[1200px]:h-[80vh] ' +
@@ -125,7 +125,19 @@
                   <lucide-angular [img]="Code2" class="w-9 h-9 text-blue-400"></lucide-angular>
                 </div>
               </div>
-              <p class="text-sm font-medium text-blue-300/80">fredy@dev · codificando...</p>
+              <div class="text-left font-mono text-xs sm:text-sm bg-blue-950/30 rounded-lg px-5 py-4 border border-blue-500/20 leading-relaxed w-[88%] max-w-md">
+                <p><span class="text-pink-400">import</span> &#123; <span class="text-blue-300">Component</span> &#125; <span class="text-pink-400">from</span> <span class="text-green-300">'@angular/core'</span>;</p>
+                <p class="mt-2"><span class="text-pink-400">@Component</span>(&#123;</p>
+                <p class="pl-4"><span class="text-cyan-300">selector</span>: <span class="text-green-300">'app-dev'</span>,</p>
+                <p class="pl-4"><span class="text-cyan-300">standalone</span>: <span class="text-orange-300">true</span></p>
+                <p>&#125;)</p>
+                <p><span class="text-pink-400">export class</span> <span class="text-yellow-300">DevProfile</span> &#123;</p>
+                <p class="pl-4"><span class="text-blue-300">stack</span> = [<span class="text-green-300">'Angular'</span>, <span class="text-green-300">'Spring Boot'</span>, <span class="text-green-300">'Docker'</span>];</p>
+                <p class="pl-4"><span class="text-blue-300">practices</span> = [<span class="text-green-300">'clean code'</span>, <span class="text-green-300">'responsive'</span>];</p>
+                <p class="pl-4"><span class="text-blue-300">available</span> = <span class="text-orange-300">true</span>;</p>
+                <p class="pl-4"><span class="text-blue-300">status</span> = <span class="text-green-300">'coding'</span><span class="terminal-cursor text-blue-300">▋</span>;</p>
+                <p>&#125;</p>
+              </div>
             </div>
           }
 
@@ -138,17 +150,21 @@
                   <lucide-angular [img]="Shield" class="w-9 h-9 text-green-400"></lucide-angular>
                 </div>
               </div>
-              <p class="font-mono text-xs text-green-400/80">perímetro asegurado</p>
+              <div class="text-left font-mono text-xs sm:text-sm bg-green-950/30 rounded-lg px-5 py-4 border border-green-500/20 leading-relaxed w-[88%] max-w-md">
+                <p><span class="text-green-600">$</span> <span class="text-green-300">nmap -sV --scan perimeter</span></p>
+                <p class="pl-2 text-green-600 mt-2">Starting scan on 10.0.0.0/24...</p>
+                <p class="pl-2 text-green-500">[+] firewall............<span class="text-green-300">active</span></p>
+                <p class="pl-2 text-green-500">[+] vpn_tunnel..........<span class="text-green-300">established</span></p>
+                <p class="pl-2 text-green-500">[+] segmentation........<span class="text-green-300">enabled</span></p>
+                <p class="pl-2 text-green-500">[+] active_directory....<span class="text-green-300">online</span></p>
+                <p class="pl-2 text-green-500">[+] intrusion_detect....<span class="text-green-300">monitoring</span></p>
+                <p class="pl-2 text-green-500">[+] threats.............<span class="text-green-300">0 detected</span></p>
+                <p class="pl-2 mt-2"><span class="text-green-600">$</span> <span class="text-green-300">status --perimeter</span></p>
+                <p class="pl-2 text-green-500">[OK] secured<span class="terminal-cursor text-green-400">▋</span></p>
+              </div>
             </div>
           }
 
-          @if (modeService.activeMode() === 'security') {
-            <div
-              class="absolute bottom-4 left-4 font-mono text-xs text-green-500/60 select-none">
-              <p>firewall: active</p>
-              <p>vpn_tunnel: established</p>
-            </div>
-          }
         </div>
       </div>
 
