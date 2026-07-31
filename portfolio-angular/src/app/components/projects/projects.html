@@ -1,6 +1,6 @@
 <section id="projects"
   [class]="'transition-colors duration-500 max-[575.98px]:py-12 min-[768px]:max-[991.98px]:py-16 min-[992px]:py-20 ' +
-           (activeMode() === 'dev' ? 'bg-white/85 dark:bg-gray-900/85 backdrop-blur-sm' : 'bg-gray-950/90 sec-bg backdrop-blur-sm')">
+           (activeMode() === 'dev' ? 'bg-gray-50/85 dark:bg-gray-950/85 backdrop-blur-sm' : 'bg-gray-950 dark:bg-gray-950/90 sec-bg backdrop-blur-sm')">
 
   <!-- Scanlines -->
   @if (activeMode() === 'security') {
@@ -15,7 +15,7 @@
       <!-- Mode Tabs -->
       <div class="inline-flex rounded-xl p-1 mb-8 mode-tabs"
            [class]="activeMode() === 'dev'
-             ? 'bg-gray-100 dark:bg-gray-800'
+             ? 'bg-gray-200 dark:bg-gray-800'
              : 'bg-gray-900 border border-green-500/30'">
         <button (click)="setMode('dev')"
           [class]="'flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 ' +
@@ -66,102 +66,81 @@
     </div>
 
     <!-- ── Project Cards Grid ─────────────────────────────────────────── -->
-    <div class="grid gap-8
-                max-[575.98px]:grid-cols-1 max-[575.98px]:gap-6
-                min-[768px]:max-[991.98px]:grid-cols-2 min-[768px]:max-[991.98px]:gap-6
-                min-[992px]:grid-cols-3 min-[992px]:gap-8">
+    <div class="grid max-[575.98px]:grid-cols-1 max-[575.98px]:gap-4
+                min-[768px]:max-[991.98px]:grid-cols-2 min-[768px]:max-[991.98px]:gap-5
+                min-[992px]:max-[1199.98px]:grid-cols-3 min-[992px]:max-[1199.98px]:gap-5
+                min-[1200px]:grid-cols-3 min-[1200px]:gap-6">
 
-      @for (project of currentProjects(); track project; let i = $index) {
+      @for (project of currentProjects(); track project.id; let i = $index) {
+
         <!-- DEV card -->
         @if (activeMode() === 'dev') {
           <div
-            class="group bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col project-card">
-            <div class="relative overflow-hidden h-48">
-              <img [src]="project.image" [alt]="project.title"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 gap-3">
-                <a [href]="project.demoUrl" target="_blank"
-                  class="flex items-center gap-1.5 px-3 py-1.5 bg-white/90 text-gray-900 rounded-lg text-xs font-semibold hover:bg-white transition-colors">
-                  <lucide-angular [img]="ExternalLink" class="w-3.5 h-3.5"></lucide-angular> Demo
-                </a>
-                <a [href]="project.repoUrl" target="_blank"
-                  class="flex items-center gap-1.5 px-3 py-1.5 bg-gray-900/90 text-white rounded-lg text-xs font-semibold hover:bg-gray-900 transition-colors">
-                  <lucide-angular [img]="Github" class="w-3.5 h-3.5"></lucide-angular> Repo
-                </a>
-              </div>
+            class="rounded-xl skill-card transition-all duration-300 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 p-6 flex flex-col"
+            [style.animation-delay.ms]="i * 100">
+            <div class="flex items-center justify-between pb-2 mb-4 border-b border-gray-100 dark:border-gray-700">
+              <h3 class="font-bold text-gray-900 dark:text-white text-lg">{{ project.title }}</h3>
             </div>
-            <div class="p-6 flex flex-col flex-1">
-              <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-2">{{ project.title }}</h3>
-              <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 flex-1">{{ project.description }}</p>
-              <div class="flex flex-wrap gap-2">
-                @for (tag of project.tags; track tag) {
-                  <span
-                    class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-xs font-medium">
-                    {{ tag }}
-                  </span>
-                }
-              </div>
+            <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-4 flex-1">{{ project.description }}</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              @for (tag of project.tags; track tag) {
+                <span class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full text-xs font-medium">
+                  {{ tag }}
+                </span>
+              }
+            </div>
+            <div class="flex gap-4 mt-auto pt-2 border-t border-gray-100 dark:border-gray-700">
+              <a [href]="project.demoUrl" target="_blank"
+                 class="flex items-center gap-1.5 text-xs font-semibold text-blue-600 dark:text-blue-400 hover:underline">
+                <lucide-angular [img]="ExternalLink" class="w-3.5 h-3.5"></lucide-angular> Demo
+              </a>
+              <a [href]="project.repoUrl" target="_blank"
+                 class="flex items-center gap-1.5 text-xs font-semibold text-gray-600 dark:text-gray-300 hover:underline">
+                <lucide-angular [img]="Github" class="w-3.5 h-3.5"></lucide-angular> Repo
+              </a>
             </div>
           </div>
         }
+
         <!-- SECURITY card -->
         @if (activeMode() === 'security') {
           <div
-            class="group bg-gray-900/80 border border-green-500/15 hover:border-green-500/50 rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_0_24px_rgba(34,197,94,0.15)] flex flex-col sec-project-card">
-            <!-- Terminal header bar -->
-            <div class="flex items-center gap-2 px-4 py-2.5 bg-gray-950 border-b border-green-500/10">
-              <div class="flex gap-1.5">
-                <span class="w-2.5 h-2.5 rounded-full bg-red-500/60"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/60"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-green-500/60"></span>
-              </div>
-              <span class="font-mono text-xs text-green-700 flex-1 text-center">{{ project.title | lowercase }}.sh</span>
+            class="rounded-xl sec-card transition-all duration-300 bg-gray-900/80 border border-green-500/20 hover:border-green-500/50 hover:shadow-[0_0_20px_rgba(34,197,94,0.15)] p-6 flex flex-col"
+            [style.animation-delay.ms]="i * 100">
+            <div class="flex items-center justify-between pb-2 mb-4 border-b border-green-500/20">
+              <h3 class="font-mono font-bold text-green-400 text-base">
+                <span class="text-green-700 mr-1">[</span>{{ project.title }}<span class="text-green-700 ml-1">]</span>
+              </h3>
               <span [class]="'text-xs font-mono px-2 py-0.5 rounded border ' + getStatusClass(project.status)">
                 {{ project.status ?? 'active' }}
               </span>
             </div>
-            <!-- Image with green overlay -->
-            <div class="relative h-36 overflow-hidden">
-              <img [src]="project.image" [alt]="project.title"
-                class="w-full h-full object-cover opacity-30 group-hover:opacity-50 transition-opacity duration-500 sec-img-filter">
-              <div class="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/80"></div>
-              <div class="absolute inset-0 flex items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                <a [href]="project.demoUrl" target="_blank"
-                  class="flex items-center gap-1 px-3 py-1.5 border border-green-500/50 text-green-400 rounded font-mono text-xs hover:bg-green-900/30 transition-colors">
-                  <lucide-angular [img]="Terminal" class="w-3 h-3"></lucide-angular> run
-                </a>
-                <a [href]="project.repoUrl" target="_blank"
-                  class="flex items-center gap-1 px-3 py-1.5 border border-green-500/50 text-green-400 rounded font-mono text-xs hover:bg-green-900/30 transition-colors">
-                  <lucide-angular [img]="Github" class="w-3 h-3"></lucide-angular> repo
-                </a>
-              </div>
+            <p class="text-green-700 text-xs font-mono leading-relaxed mb-3 flex-1">
+              <span class="text-green-600"># </span>{{ project.description }}
+            </p>
+            @if (project.cve) {
+              <span class="text-xs font-mono text-yellow-500/70 bg-yellow-900/20 border border-yellow-500/20 px-2 py-0.5 rounded mb-3 w-fit">
+                {{ project.cve }}
+              </span>
+            }
+            <div class="flex flex-wrap gap-1.5 mb-4">
+              @for (tag of project.tags; track tag) {
+                <span class="px-2 py-0.5 bg-green-900/20 text-green-600 border border-green-900 rounded font-mono text-xs">
+                  {{ tag }}
+                </span>
+              }
             </div>
-            <!-- Content -->
-            <div class="p-5 flex flex-col flex-1">
-              <div class="flex items-start justify-between mb-2">
-                <h3 class="font-mono font-bold text-green-300 text-base">
-                  <span class="text-green-700">./</span>{{ project.title }}
-                </h3>
-                @if (project.cve) {
-                  <span class="text-xs font-mono text-yellow-500/70 bg-yellow-900/20 border border-yellow-500/20 px-2 py-0.5 rounded">
-                    {{ project.cve }}
-                  </span>
-                }
-              </div>
-              <p class="text-green-700 text-xs font-mono leading-relaxed mb-4 flex-1">
-                <span class="text-green-600"># </span>{{ project.description }}
-              </p>
-              <div class="flex flex-wrap gap-1.5">
-                @for (tag of project.tags; track tag) {
-                  <span
-                    class="px-2 py-0.5 bg-green-900/20 text-green-600 border border-green-900 rounded font-mono text-xs">
-                    {{ tag }}
-                  </span>
-                }
-              </div>
+            <div class="flex gap-4 mt-auto pt-2 border-t border-green-500/20 font-mono text-xs">
+              <a [href]="project.demoUrl" target="_blank" class="flex items-center gap-1 text-green-400 hover:text-green-300">
+                <lucide-angular [img]="Terminal" class="w-3 h-3"></lucide-angular> run
+              </a>
+              <a [href]="project.repoUrl" target="_blank" class="flex items-center gap-1 text-green-400 hover:text-green-300">
+                <lucide-angular [img]="Github" class="w-3 h-3"></lucide-angular> repo
+              </a>
             </div>
           </div>
         }
+
       }
     </div>
   </div>
