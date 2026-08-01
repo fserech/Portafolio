@@ -1,13 +1,13 @@
 {
   "dev": [
     {
-      "id": "proj-dev-1",
-      "title": "TaskFlow",
-      "description": "Aplicación de gestión de tareas en equipo con tableros Kanban, notificaciones en tiempo real y autenticación con roles.",
-      "tags": ["Angular", "Spring Boot", "MySQL"],
-      "demoUrl": "https://example.com/taskflow",
-      "repoUrl": "https://github.com/fserech/taskflow"
-    },
+  "id": "proj-dev-docshub",
+  "title": "Docs Hub",
+  "description": "Documentación interactivo de comandos y referencias rápidas todo en un solo lugar sin salir de la app.",
+  "tags": ["Angular", "TailwindCSS", "TypeScript"],
+  "demoUrl": "https://docsub.vercel.app",
+  "repoUrl": "https://github.com/fserech/docs-hub"
+   },
     {
       "id": "proj-dev-2",
       "title": "ShopLite",
