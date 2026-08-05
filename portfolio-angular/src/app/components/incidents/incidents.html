@@ -1,0 +1,113 @@
+<section id="incidents" class="transition-colors duration-500 max-[575.98px]:py-12 min-[768px]:max-[991.98px]:py-16 min-[992px]:py-20 bg-white/85 dark:bg-gray-900/85 backdrop-blur-sm">
+
+  <div class="w-full px-4 sm:px-6 lg:px-12 relative">
+
+    <!-- Header -->
+    <div class="text-center max-[575.98px]:mb-10 min-[768px]:max-[991.98px]:mb-12 min-[992px]:mb-16">
+      <h2 class="font-bold text-gray-900 dark:text-white transition-colors
+                 max-[575.98px]:text-2xl min-[768px]:max-[991.98px]:text-3xl min-[992px]:text-4xl">
+        {{ content().sectionTitle }}
+      </h2>
+      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-3xl mx-auto
+                max-[575.98px]:text-base min-[992px]:text-xl">
+        {{ content().sectionSubtitle }}
+      </p>
+    </div>
+
+    <!-- Incidents List -->
+    <div class="max-w-4xl mx-auto flex flex-col gap-5">
+
+      @for (incident of content().incidents; track incident.id; let i = $index) {
+        <div class="rounded-xl fade-in-up transition-all duration-300 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 overflow-hidden"
+             [style.animation-delay.ms]="i * 100">
+
+          <!-- Card Header (clickable) -->
+          <button type="button"
+                  (click)="toggle(incident.id)"
+                  class="w-full flex items-center justify-between gap-4 p-6 text-left hover:bg-gray-100 dark:hover:bg-gray-700/50 transition-colors">
+
+            <div class="flex items-start gap-4">
+              <div class="bg-blue-100 dark:bg-blue-900/50 rounded-lg w-11 h-11 shrink-0 flex items-center justify-center">
+                <lucide-angular [img]="ShieldAlert" class="text-blue-600 dark:text-blue-400 h-5 w-5"></lucide-angular>
+              </div>
+              <div>
+                <div class="flex flex-wrap items-center gap-2 mb-1">
+                  <h3 class="font-bold text-gray-900 dark:text-white text-lg">
+                    {{ incident.title }}
+                  </h3>
+                  <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400">
+                    {{ incident.category }}
+                  </span>
+                </div>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{{ incident.date }}</p>
+              </div>
+            </div>
+
+            <lucide-angular [img]="ChevronDown"
+              class="h-5 w-5 text-gray-400 shrink-0 transition-transform duration-300"
+              [class.rotate-180]="isExpanded(incident.id)">
+            </lucide-angular>
+          </button>
+
+          <!-- Summary (siempre visible) -->
+          <div class="px-6 pb-4 -mt-2">
+            <p class="text-gray-600 dark:text-gray-400 leading-relaxed pl-15 max-[575.98px]:pl-0">
+              {{ incident.summary }}
+            </p>
+          </div>
+
+          <!-- Detalle expandible -->
+          @if (isExpanded(incident.id)) {
+            <div class="px-6 pb-6 pt-2 border-t border-gray-200 dark:border-gray-700 space-y-5">
+
+              <div class="flex gap-3">
+                <lucide-angular [img]="Search" class="h-5 w-5 text-blue-500 shrink-0 mt-0.5"></lucide-angular>
+                <div>
+                  <h4 class="font-semibold text-gray-900 dark:text-white text-sm mb-1">Detección</h4>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{{ incident.detection }}</p>
+                </div>
+              </div>
+
+              <div class="flex gap-3">
+                <lucide-angular [img]="Activity" class="h-5 w-5 text-blue-500 shrink-0 mt-0.5"></lucide-angular>
+                <div>
+                  <h4 class="font-semibold text-gray-900 dark:text-white text-sm mb-1">Análisis y Respuesta</h4>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{{ incident.analysis }}</p>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mt-2">{{ incident.response }}</p>
+                </div>
+              </div>
+
+              <!-- Comandos ejecutados -->
+              @if (incident.commands && incident.commands.length > 0) {
+                <div class="flex gap-3">
+                  <lucide-angular [img]="Terminal" class="h-5 w-5 text-blue-500 shrink-0 mt-0.5"></lucide-angular>
+                  <div class="flex-1 min-w-0">
+                    <h4 class="font-semibold text-gray-900 dark:text-white text-sm mb-2">Comandos utilizados</h4>
+                    <div class="bg-gray-900 dark:bg-black/50 rounded-lg p-4 overflow-x-auto">
+                      @for (cmd of incident.commands; track cmd) {
+                        <p class="font-mono text-xs sm:text-sm text-green-400 leading-relaxed whitespace-pre">
+                          <span class="text-gray-500">$</span> {{ cmd }}
+                        </p>
+                      }
+                    </div>
+                  </div>
+                </div>
+              }
+
+              <div class="flex gap-3">
+                <lucide-angular [img]="CheckCircle2" class="h-5 w-5 text-green-500 shrink-0 mt-0.5"></lucide-angular>
+                <div>
+                  <h4 class="font-semibold text-gray-900 dark:text-white text-sm mb-1">Resultado</h4>
+                  <p class="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{{ incident.outcome }}</p>
+                </div>
+              </div>
+
+            </div>
+          }
+
+        </div>
+      }
+
+    </div>
+  </div>
+</section>

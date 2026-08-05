@@ -1,8 +1,6 @@
-import { Component, signal, inject } from '@angular/core';
-
+import { Component, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LucideAngularModule, Mail, MapPin, Send, Phone, Terminal, Shield } from 'lucide-angular';
-import { ModeService } from '../../services/mode.service';
+import { LucideAngularModule, Mail, MapPin, Send, Phone } from 'lucide-angular';
 import emailjs from '@emailjs/browser';
 
 const EMAILJS_SERVICE_ID  = 'service_q93kz0o';
@@ -17,14 +15,11 @@ const EMAILJS_PUBLIC_KEY  = '0YuyY7Zq_sL2hbsMs';
   styleUrls: ['./contact.scss']
 })
 export class ContactComponent {
-  readonly Mail     = Mail;
-  readonly MapPin   = MapPin;
-  readonly Send     = Send;
-  readonly Phone    = Phone;
-  readonly Terminal = Terminal;
-  readonly Shield   = Shield;
+  readonly Mail   = Mail;
+  readonly MapPin = MapPin;
+  readonly Send   = Send;
+  readonly Phone  = Phone;
 
-  modeService  = inject(ModeService);
   isSubmitting = signal(false);
   submitStatus = signal<'idle' | 'success' | 'error'>('idle');
 

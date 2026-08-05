@@ -1,7 +1,5 @@
-import { Component, signal, computed, inject, OnInit, OnDestroy } from '@angular/core';
-
-import { LucideAngularModule, Shield, Code2, ChevronRight } from 'lucide-angular';
-import { ModeService } from '../../services/mode.service';
+import { Component, signal, inject, OnInit, OnDestroy } from '@angular/core';
+import { LucideAngularModule } from 'lucide-angular';
 import { DataService, SkillCategory, Skill } from '../../services/data.service';
 
 export type { Skill, SkillCategory };
@@ -14,31 +12,16 @@ export type { Skill, SkillCategory };
   styleUrls: ['./skills.scss']
 })
 export class SkillsComponent implements OnInit, OnDestroy {
-  readonly Shield       = Shield;
-  readonly Code2        = Code2;
-  readonly ChevronRight = ChevronRight;
-
   private data = inject(DataService);
-  modeService  = inject(ModeService);
 
-  get activeMode() { return this.modeService.activeMode; }
+  categories = signal<SkillCategory[]>([]);
 
-  // ─── Estado ────────────────────────────────────────────────────────
-  devCategories = signal<SkillCategory[]>([]);
-  secCategories = signal<SkillCategory[]>([]);
-  loading       = signal(false);
-
-  currentCategories = computed(() =>
-    this.modeService.activeMode() === 'dev' ? this.devCategories() : this.secCategories()
-  );
-
-  // ─── Polling opcional para reflejar cambios en el JSON estático ────
   private pollInterval: any;
-  private onFocus = () => this.reloadAll();
+  private onFocus = () => this.reload();
 
   async ngOnInit() {
-    await this.reloadAll();
-    this.pollInterval = setInterval(() => this.reloadAll(), 30_000);
+    await this.reload();
+    this.pollInterval = setInterval(() => this.reload(), 30_000);
     window.addEventListener('focus', this.onFocus);
   }
 
@@ -47,20 +30,11 @@ export class SkillsComponent implements OnInit, OnDestroy {
     window.removeEventListener('focus', this.onFocus);
   }
 
-  private async reloadAll() {
+  private async reload() {
     try {
-      const [dev, sec] = await Promise.all([
-        this.data.getSkillCategories('dev'),
-        this.data.getSkillCategories('security')
-      ]);
-      this.devCategories.set(dev);
-      this.secCategories.set(sec);
+      this.categories.set(await this.data.getSkillCategories());
     } catch (e) {
       console.error('Error cargando skills:', e);
     }
-  }
-
-  setMode(mode: 'dev' | 'security') {
-    this.modeService.setMode(mode);
   }
 }

@@ -1,60 +1,12 @@
-{
-  "dev": [
-    {
-  "id": "proj-dev-docshub",
-  "title": "Docs Hub",
-  "description": "Documentación interactivo de comandos y referencias rápidas todo en un solo lugar sin salir de la app.",
-  "tags": ["Angular", "TailwindCSS", "TypeScript"],
-  "demoUrl": "https://docsub.vercel.app",
-  "repoUrl": "https://github.com/fserech/docs-hub"
-   },
-    {
-      "id": "proj-dev-2",
-      "title": "ShopLite",
-      "description": "Tienda en línea ligera con catálogo dinámico, carrito de compras y pasarela de pago simulada para pequeños comercios.",
-      "tags": ["Angular", "TypeScript", "TailwindCSS"],
-      "demoUrl": "https://example.com/shoplite",
-      "repoUrl": "https://github.com/fserech/shoplite"
-    },
-    {
-      "id": "proj-dev-3",
-      "title": "InvenTrack",
-      "description": "Sistema de control de inventario para bodegas con reportes automáticos, alertas de stock bajo y panel administrativo.",
-      "tags": ["Angular", "Java", "PostgreSQL"],
-      "demoUrl": "https://example.com/inventrack",
-      "repoUrl": "https://github.com/fserech/inventrack"
-    }
-  ],
-  "security": [
-    {
-      "id": "proj-sec-1",
-      "title": "NetSentinel",
-      "description": "Script de monitoreo de tráfico de red que detecta patrones anómalos y genera alertas automáticas vía correo y Telegram.",
-      "tags": ["Python", "Nmap", "Wireshark"],
-      "demoUrl": "https://example.com/netsentinel",
-      "repoUrl": "https://github.com/fserech/netsentinel",
-      "status": "active",
-      "cve": ""
-    },
-    {
-      "id": "proj-sec-2",
-      "title": "VLAN Segmenter",
-      "description": "Conjunto de scripts de configuración automatizada para segmentación de redes empresariales usando FortiGate.",
-      "tags": ["FortiGate", "VLAN", "Bash"],
-      "demoUrl": "https://example.com/vlan-segmenter",
-      "repoUrl": "https://github.com/fserech/vlan-segmenter",
-      "status": "classified",
-      "cve": ""
-    },
-    {
-      "id": "proj-sec-3",
-      "title": "ADHardening",
-      "description": "Guía y scripts de PowerShell para el endurecimiento de políticas de Active Directory en entornos corporativos.",
-      "tags": ["Active Directory", "PowerShell", "Windows Server"],
-      "demoUrl": "https://example.com/ad-hardening",
-      "repoUrl": "https://github.com/fserech/ad-hardening",
-      "status": "archived",
-      "cve": "CVE-2023-9999"
-    }
-  ]
-}
+[
+  
+  {
+    "id": "proj-dev-docshub",
+    "title": "Docs Hub",
+    "description": "Documentación interactiva de comandos y referencias rápidas, todo en un solo lugar sin salir de la app.",
+    "tags": ["Angular", "TailwindCSS", "TypeScript"],
+    "demoUrl": "https://docsub.vercel.app",
+    "repoUrl": "https://github.com/fserech/docs-hub"
+  }
+  
+]

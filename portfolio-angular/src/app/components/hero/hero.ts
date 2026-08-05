@@ -1,7 +1,5 @@
-import { Component, inject } from '@angular/core';
-
-import { LucideAngularModule, ArrowRight, Github, Linkedin, Mail, Terminal, Shield, Code2 } from 'lucide-angular';
-import { ModeService } from '../../services/mode.service';
+import { Component } from '@angular/core';
+import { LucideAngularModule, ArrowRight, Github, Linkedin, Mail, Code2, LucideIconData, ShieldCheck } from 'lucide-angular';
 
 @Component({
   selector: 'app-hero',
@@ -15,9 +13,6 @@ export class HeroComponent {
   readonly Github     = Github;
   readonly Linkedin   = Linkedin;
   readonly Mail       = Mail;
-  readonly Terminal   = Terminal;
-  readonly Shield     = Shield;
   readonly Code2      = Code2;
-
-  modeService = inject(ModeService);
+  readonly ShieldCheck = ShieldCheck;
 }

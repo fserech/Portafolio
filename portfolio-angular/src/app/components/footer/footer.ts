@@ -1,7 +1,5 @@
-import { Component, inject } from '@angular/core';
-
+import { Component } from '@angular/core';
 import { LucideAngularModule, Github, Linkedin, Mail } from 'lucide-angular';
-import { ModeService } from '../../services/mode.service';
 
 @Component({
   selector: 'app-footer',
@@ -15,6 +13,5 @@ export class FooterComponent {
   readonly Linkedin = Linkedin;
   readonly Mail     = Mail;
 
-  modeService = inject(ModeService);
   currentYear = new Date().getFullYear();
 }

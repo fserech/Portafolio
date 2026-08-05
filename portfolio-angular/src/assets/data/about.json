@@ -1,24 +1,13 @@
 {
-  "dev": {
-    "sectionTitle": "Sobre Mí",
-    "sectionSubtitle": "Más que un desarrollador, soy un apasionado por crear soluciones digitales.",
-    "bannerTitle": "¿Por qué trabajar conmigo?",
-    "bannerText": "Combino habilidades técnicas sólidas con una gran capacidad de trabajo en equipo. Me mantengo actualizado con las últimas tendencias de tecnologias y el ecosistema moderno.",
-    "features": [
-      { "icon": "Code", "title": "Clean Code", "description": "Escribo código legible, mantenible y escalable siguiendo las mejores prácticas de la industria." },
-      { "icon": "Layout", "title": "Diseño Responsivo", "description": "Mis aplicaciones se ven y funcionan perfectamente en cualquier dispositivo, desde móviles hasta pantallas grandes." },
-      { "icon": "Smartphone", "title": "Mobile First", "description": "Optimizo tiempos de carga y sigo buenas prácticas de accesibilidad para que la app funcione bien en cualquier dispositivo o condición de red." }
-    ]
-  },
-  "security": {
-    "sectionTitle": "$ whoami",
-    "sectionSubtitle": "[INFO] Cargando perfil de seguridad...",
-    "bannerTitle": "$ cat motivacion.txt",
-    "bannerText": "Profesional en seguridad informática con enfoque en infraestructura y redes empresariales. Creo que la seguridad real se construye desde la arquitectura: segmentación, control de acceso y monitoreo continuo.",
-    "features": [
-      { "icon": "Shield", "title": "Seguridad de Infraestructura", "description": "Administración de firewalls FortiGate, segmentación de redes y configuración de VLANs y VPNs en entornos empresariales." },
-      { "icon": "Terminal", "title": "Administración de Servidores", "description": "Instalación y gestión de Windows Server con Active Directory, así como servidores Linux (Ubuntu, Debian) en producción." },
-      { "icon": "Eye", "title": "Análisis de Seguridad", "description": "Monitoreo de redes con FortiAnalyzer, análisis de tráfico y detección de amenazas en infraestructuras corporativas." }
-    ]
-  }
+  "sectionTitle": "Sobre Mí",
+  "sectionSubtitle": "Profesional en seguridad informática, con base sólida en desarrollo de software.",
+  "bannerTitle": "¿Por qué trabajar conmigo?",
+  "bannerText": "Profesional en seguridad informática con enfoque en infraestructura y redes empresariales. Creo que la seguridad real se construye desde la arquitectura: segmentación, control de acceso y monitoreo continuo. Complemento este perfil con conocimientos en desarrollo de software, lo que me permite entender y asegurar aplicaciones desde el código hasta la red.",
+  "features": [
+    { "icon": "Shield", "title": "Seguridad de Infraestructura", "description": "Administración de firewalls perimetral, segmentación de redes y configuración de VLANs y VPNs en entornos empresariales." },
+    { "icon": "Terminal", "title": "Administración de Servidores", "description": "Instalación y gestión de Windows Server con Active Directory, así como servidores Linux (Ubuntu, Debian) en producción." },
+    { "icon": "Eye", "title": "Análisis de Seguridad", "description": "Monitoreo de redes con FortiAnalyzer, análisis de tráfico y detección de amenazas en infraestructuras corporativas." },
+    { "icon": "Network", "title": "Virtualización", "description": "Gestión de entornos virtualizados con VMware y Hyper-V para infraestructura empresarial segura." },
+    { "icon": "Code", "title": "Desarrollo de Software (conocimiento)", "description": "Conocimientos en Angular, Spring Boot y Docker que me permiten entender la arquitectura de las aplicaciones que ayudo a proteger, aplicando buenas prácticas de código seguro." }
+  ]
 }

@@ -1,66 +1,27 @@
 <nav [class]="'fixed top-0 left-0 right-0 z-50 transition-all duration-300 ' +
   (scrolled()
-    ? (modeService.activeMode() === 'dev'
-        ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm border-b border-gray-200/50 dark:border-gray-800/50'
-        : 'bg-gray-950/90 backdrop-blur-md shadow-sm border-b border-green-500/20')
+    ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm border-b border-gray-200/50 dark:border-gray-800/50'
     : 'bg-transparent')">
   <div class="w-full px-4 sm:px-6 lg:px-12">
     <div class="flex justify-between items-center h-16">
 
       <!-- Logo -->
       <div class="flex-shrink-0 flex items-center">
-        <a href="#" [class]="'font-bold text-xl tracking-tighter transition-colors ' +
-          (modeService.activeMode() === 'dev'
-            ? 'text-gray-900 dark:text-white'
-            : 'text-green-400 font-mono')">
-          @if (modeService.activeMode() === 'dev') {
-            fredy@<span class="text-blue-600 dark:text-blue-500">Dev</span>
-          }
-          @if (modeService.activeMode() === 'security') {
-            <span class="text-green-600">root</span><span class="text-gray-500">@</span><span class="text-green-400">portfolio</span><span class="text-gray-500">:~$</span>
-          }
+        <a href="#" class="font-bold text-xl tracking-tighter transition-colors text-gray-900 dark:text-white">
+          fredy@<span class="text-blue-600 dark:text-blue-500">SecOps</span>
         </a>
       </div>
 
-      <!-- Desktop: Nav links + Mode switcher + Theme toggle -->
+      <!-- Desktop: Nav links + Theme toggle -->
       <div class="hidden md:flex items-center gap-6">
-        <!-- Nav links -->
-        @for (link of navLinks; track link) {
+         @for (link of navLinks; track link) {
           <a
             [href]="link.href"
-           [class]="'px-3 py-2 rounded-md text-sm font-medium transition-colors ' +
-             (modeService.activeMode() === 'dev'
-               ? 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
-               : 'text-green-700 font-mono hover:text-green-400')">
-            @if (modeService.activeMode() === 'security') {
-              <span class="text-green-900">./</span>
-            }
+            class="px-3 py-2 rounded-md text-sm font-medium transition-colors text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+            
             {{ link.name }}
           </a>
         }
-
-        <!-- Mode switcher -->
-        <div [class]="'flex items-center rounded-lg p-0.5 ' +
-               (modeService.activeMode() === 'dev'
-                 ? 'bg-gray-100 dark:bg-gray-800'
-                 : 'bg-gray-900 border border-green-500/30')">
-          <button (click)="setMode('dev')"
-            [class]="'flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all duration-300 ' +
-              (modeService.activeMode() === 'dev'
-                ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm'
-                : 'text-gray-500 hover:text-gray-300')">
-            <lucide-angular [img]="Code2" class="w-3.5 h-3.5"></lucide-angular>
-            Dev
-          </button>
-          <button (click)="setMode('security')"
-            [class]="'flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold transition-all duration-300 ' +
-              (modeService.activeMode() === 'security'
-                ? 'bg-green-500/20 text-green-400 border border-green-500/50 shadow-[0_0_8px_rgba(34,197,94,0.3)]'
-                : 'text-gray-500 hover:text-gray-300')">
-            <lucide-angular [img]="Shield" class="w-3.5 h-3.5"></lucide-angular>
-            Sec
-          </button>
-        </div>
 
         <!-- Theme toggle -->
         <button (click)="themeService.toggleTheme()"
@@ -70,7 +31,7 @@
             <lucide-angular [img]="Moon" [size]="20"></lucide-angular>
           }
           @if (themeService.darkMode()) {
-            <lucide-angular  [img]="Sun"  [size]="20"></lucide-angular>
+            <lucide-angular [img]="Sun" [size]="20"></lucide-angular>
           }
         </button>
       </div>
@@ -83,20 +44,15 @@
             <lucide-angular [img]="Moon" [size]="20"></lucide-angular>
           }
           @if (themeService.darkMode()) {
-            <lucide-angular  [img]="Sun"  [size]="20"></lucide-angular>
+            <lucide-angular [img]="Sun" [size]="20"></lucide-angular>
           }
         </button>
-        <button (click)="toggleMenu()"
-                [class]="'transition-colors ' +
-                  (modeService.activeMode() === 'dev'
-                    ? 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white'
-                    : 'text-green-400 hover:text-green-300')"
-          >
+        <button (click)="toggleMenu()" class="transition-colors text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
           @if (!isOpen()) {
             <lucide-angular [img]="Menu" [size]="24"></lucide-angular>
           }
           @if (isOpen()) {
-            <lucide-angular  [img]="X"    [size]="24"></lucide-angular>
+            <lucide-angular [img]="X" [size]="24"></lucide-angular>
           }
         </button>
       </div>
@@ -105,47 +61,16 @@
 
   <!-- Mobile menu -->
   @if (isOpen()) {
-    <div
-       [class]="'md:hidden border-t ' +
-         (modeService.activeMode() === 'dev'
-           ? 'bg-white/85 dark:bg-gray-900/85 backdrop-blur-sm border-gray-100 dark:border-gray-800'
-           : 'bg-gray-950 border-green-500/20')"
-      [@slideDown]>
+    <div class="md:hidden border-t bg-white/85 dark:bg-gray-900/85 backdrop-blur-sm border-gray-100 dark:border-gray-800" [@slideDown]>
       <div class="px-2 pt-2 pb-4 space-y-1 sm:px-3">
-        @for (link of navLinks; track link) {
-          <a
-            [href]="link.href"
+         @for (link of navLinks; track link) {
+         
+            <a [href]="link.href"
             (click)="closeMenu()"
-         [class]="'block px-3 py-2 rounded-md text-base font-medium transition-colors ' +
-           (modeService.activeMode() === 'dev'
-             ? 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800'
-             : 'text-green-700 font-mono hover:text-green-400 hover:bg-green-900/20')">
+            class="block px-3 py-2 rounded-md text-base font-medium transition-colors text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800">
             {{ link.name }}
           </a>
         }
-        <!-- Mode switcher mobile -->
-        <div class="pt-3 pb-1 px-3">
-        <p [class]="'text-xs mb-2 font-semibold ' +
-             (modeService.activeMode() === 'dev' ? 'text-gray-400' : 'text-green-800 font-mono')">
-            Modo:
-          </p>
-          <div class="flex gap-2">
-            <button (click)="setMode('dev')"
-            [class]="'flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all ' +
-              (modeService.activeMode() === 'dev'
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400')">
-              <lucide-angular [img]="Code2" class="w-3.5 h-3.5"></lucide-angular> Desarrollador
-            </button>
-            <button (click)="setMode('security')"
-            [class]="'flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-semibold transition-all ' +
-              (modeService.activeMode() === 'security'
-                ? 'bg-green-500/20 text-green-400 border border-green-500/50'
-                : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400')">
-              <lucide-angular [img]="Shield" class="w-3.5 h-3.5"></lucide-angular> Seguridad
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   }

@@ -1,71 +1,17 @@
-<section id="skills"
-  [class]="'transition-colors duration-500 max-[575.98px]:py-12 min-[768px]:max-[991.98px]:py-16 min-[992px]:py-20 ' +
-           (activeMode() === 'dev' ? 'bg-gray-50/85 dark:bg-gray-950/85 backdrop-blur-sm' : 'bg-gray-950 dark:bg-gray-950/90 sec-bg backdrop-blur-sm')">
-
-  <!-- Scanline overlay (security mode) -->
-  @if (activeMode() === 'security') {
-    <div class="scanlines-overlay pointer-events-none"></div>
-  }
+<section id="skills" class="transition-colors duration-500 max-[575.98px]:py-12 min-[768px]:max-[991.98px]:py-16 min-[992px]:py-20 bg-gray-50/85 dark:bg-gray-950/85 backdrop-blur-sm">
 
   <div class="w-full px-4 sm:px-6 lg:px-12 relative">
 
     <!-- ── Header ─────────────────────────────────────────────────────── -->
     <div class="text-center max-[575.98px]:mb-10 min-[768px]:max-[991.98px]:mb-12 min-[992px]:mb-16">
-
-      <!-- Mode Tabs -->
-      <div class="inline-flex rounded-xl p-1 mb-8 mode-tabs"
-           [class]="activeMode() === 'dev'
-             ? 'bg-gray-200 dark:bg-gray-800'
-             : 'bg-gray-900 border border-green-500/30'">
-        <button (click)="setMode('dev')"
-          [class]="'flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 ' +
-            (activeMode() === 'dev'
-              ? 'bg-white dark:bg-gray-700 text-blue-600 dark:text-blue-400 shadow-sm'
-              : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300')">
-          <lucide-angular [img]="Code2" class="w-4 h-4"></lucide-angular>
-          Desarrollador
-        </button>
-        <button (click)="setMode('security')"
-          [class]="'flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-300 ' +
-            (activeMode() === 'security'
-              ? 'bg-green-500/20 text-green-400 border border-green-500/50 shadow-[0_0_12px_rgba(34,197,94,0.3)]'
-              : 'text-gray-500 dark:text-gray-400 hover:text-gray-300')">
-          <lucide-angular [img]="Shield" class="w-4 h-4"></lucide-angular>
-          Seguridad
-        </button>
-      </div>
-
-      <!-- Title -->
-      @if (activeMode() === 'dev') {
-        <h2
-          class="font-bold text-gray-900 dark:text-white transition-colors
+      <h2 class="font-bold text-gray-900 dark:text-white transition-colors
                  max-[575.98px]:text-2xl min-[768px]:max-[991.98px]:text-3xl min-[992px]:text-4xl">
-          Habilidades Técnicas
-        </h2>
-      }
-      @if (activeMode() === 'security') {
-        <h2
-          class="font-mono font-bold transition-colors text-green-400 glitch-text
-                 max-[575.98px]:text-2xl min-[768px]:max-[991.98px]:text-3xl min-[992px]:text-4xl"
-          data-text="./skills --mode=security">
-          <span class="text-green-600 mr-1">$</span> ./skills <span class="text-green-300">--mode=security</span>
-        </h2>
-      }
-
-      @if (activeMode() === 'dev') {
-        <p
-         class="mt-4 text-gray-500 dark:text-gray-400 max-w-3xl mx-auto
+        Habilidades Técnicas
+      </h2>
+      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-3xl mx-auto
                 max-[575.98px]:text-base min-[992px]:text-xl">
-          Mi stack tecnológico actual y herramientas que utilizo en mi día a día.
-        </p>
-      }
-      @if (activeMode() === 'security') {
-        <p
-          class="mt-4 font-mono text-green-600/80 max-w-3xl mx-auto text-sm tracking-wider">
-          <span class="text-green-500">[INFO]</span> Cargando arsenal de herramientas de seguridad...
-          <span class="terminal-cursor">▋</span>
-        </p>
-      }
+        Mi stack de seguridad y tecnológico, y las herramientas que utilizo en mi día a día.
+      </p>
     </div>
 
     <!-- ── Skills Grid ─────────────────────────────────────────────────── -->
@@ -74,58 +20,26 @@
                 min-[992px]:max-[1199.98px]:grid-cols-4 min-[992px]:max-[1199.98px]:gap-5
                 min-[1200px]:grid-cols-4 min-[1200px]:gap-6">
 
-      @for (category of currentCategories(); track category.id; let i = $index) {
-        <div
-           [class]="'rounded-xl skill-card transition-all duration-300 ' +
-             (activeMode() === 'dev'
-               ? 'bg-white dark:bg-gray-800 shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 p-6'
-               : 'bg-gray-900/80 border border-green-500/20 hover:border-green-500/50 hover:shadow-[0_0_20px_rgba(34,197,94,0.15)] p-6 sec-card')"
-          [style.animation-delay.ms]="i * 100">
-          <!-- Category header -->
-          <div class="flex items-center justify-between pb-2 mb-4"
-             [class]="activeMode() === 'dev'
-               ? 'border-b border-gray-100 dark:border-gray-700'
-               : 'border-b border-green-500/20'">
-          <h3 [class]="'font-bold transition-colors ' +
-                (activeMode() === 'dev'
-                  ? 'text-gray-900 dark:text-white text-lg'
-                  : 'text-green-400 font-mono text-base')">
-              @if (activeMode() === 'security') {
-                <span class="text-green-700 mr-1">[</span>
-              }
+      @for (category of categories(); track category.id; let i = $index) {
+        <div class="rounded-xl skill-card transition-all duration-300 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md border border-gray-100 dark:border-gray-700 p-6"
+             [style.animation-delay.ms]="i * 100">
+          <div class="flex items-center justify-between pb-2 mb-4 border-b border-gray-100 dark:border-gray-700">
+            <h3 class="font-bold transition-colors text-gray-900 dark:text-white text-lg">
               {{ category.title }}
-              @if (activeMode() === 'security') {
-                <span class="text-green-700 ml-1">]</span>
-              }
             </h3>
           </div>
-          <!-- Skills list -->
-          <div class="flex flex-wrap gap-2 mb-4">
+          <div class="flex flex-col gap-3 mb-4">
             @for (skill of category.skills; track skill.id) {
-              <!-- DEV mode pill -->
-              @if (activeMode() === 'dev') {
-                <div
-                  class="flex items-center gap-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full px-3 py-1.5 text-sm font-medium">
-                  {{ skill.name }}
+              <div>
+                <div class="flex justify-between items-center mb-1">
+                  <span class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ skill.name }}</span>
+                  <span class="text-xs text-gray-500 dark:text-gray-400">{{ skill.level }}%</span>
                 </div>
-              }
-              <!-- SECURITY mode bar -->
-              @if (activeMode() === 'security') {
-                <div class="w-full">
-                  <div class="flex items-center justify-between mb-1">
-                    <span class="font-mono text-xs text-green-300 flex items-center gap-1">
-                      <lucide-angular [img]="ChevronRight" class="w-3 h-3 text-green-600"></lucide-angular>
-                      {{ skill.name }}
-                    </span>
-                    <span class="font-mono text-xs text-green-600">{{ skill.level }}%</span>
-                  </div>
-                  <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
-                    <div class="h-full bg-gradient-to-r from-green-600 to-green-400 rounded-full skill-bar-fill"
-                      [style.width.%]="skill.level"
-                    [style.box-shadow]="'0 0 6px rgba(34,197,94,0.6)'"></div>
-                  </div>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5">
+                  <div class="bg-blue-600 dark:bg-blue-500 h-1.5 rounded-full transition-all duration-500"
+                       [style.width.%]="skill.level"></div>
                 </div>
-              }
+              </div>
             }
           </div>
         </div>

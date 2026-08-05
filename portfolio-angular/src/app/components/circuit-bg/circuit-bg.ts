@@ -1,6 +1,4 @@
-import { Component, Input, inject } from '@angular/core';
-
-import { ModeService } from '../../services/mode.service';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-circuit-bg',
@@ -11,10 +9,4 @@ import { ModeService } from '../../services/mode.service';
 })
 export class CircuitBgComponent {
   @Input() ambient = false;
-
-  modeService = inject(ModeService);
-
-  get isSecurity() {
-    return this.modeService.activeMode() === 'security';
-  }
 }

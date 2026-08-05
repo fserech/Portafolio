@@ -1,39 +1,17 @@
-<section id="about"
-  [class]="'transition-colors duration-500 max-[575.98px]:py-12 min-[768px]:max-[991.98px]:py-16 min-[992px]:py-20 ' +
-           (modeService.activeMode() === 'dev'
-             ? 'bg-white/85 dark:bg-gray-900/85 backdrop-blur-sm'
-             : 'bg-gray-950/90 sec-bg backdrop-blur-sm')">
-
-  @if (modeService.activeMode() === 'security') {
-    <div class="scanlines-overlay pointer-events-none"></div>
-  }
+<section id="about" class="transition-colors duration-500 max-[575.98px]:py-12 min-[768px]:max-[991.98px]:py-16 min-[992px]:py-20 bg-white/85 dark:bg-gray-900/85 backdrop-blur-sm">
 
   <div class="w-full px-4 sm:px-6 lg:px-12 relative">
 
     <!-- Header -->
     <div class="text-center max-[575.98px]:mb-10 min-[768px]:max-[991.98px]:mb-12 min-[992px]:mb-16">
-
-      @if (modeService.activeMode() === 'dev') {
-        <h2 class="font-bold text-gray-900 dark:text-white transition-colors
-                   max-[575.98px]:text-2xl min-[768px]:max-[991.98px]:text-3xl min-[992px]:text-4xl">
-          {{ content.sectionTitle }}
-        </h2>
-        <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-3xl mx-auto
-                  max-[575.98px]:text-base min-[992px]:text-xl">
-          {{ content.sectionSubtitle }}
-        </p>
-      }
-
-      @if (modeService.activeMode() === 'security') {
-        <h2 class="font-mono font-bold text-green-400
-                   max-[575.98px]:text-2xl min-[768px]:max-[991.98px]:text-3xl min-[992px]:text-4xl">
-          {{ content.sectionTitle }}
-        </h2>
-        <p class="mt-3 font-mono text-green-700 text-sm tracking-wider">
-          <span class="text-green-500">[INFO]</span> {{ content.sectionSubtitle }}
-          <span class="terminal-cursor">▋</span>
-        </p>
-      }
+      <h2 class="font-bold text-gray-900 dark:text-white transition-colors
+                 max-[575.98px]:text-2xl min-[768px]:max-[991.98px]:text-3xl min-[992px]:text-4xl">
+        {{ content().sectionTitle }}
+      </h2>
+      <p class="mt-4 text-gray-500 dark:text-gray-400 max-w-3xl mx-auto
+                max-[575.98px]:text-base min-[992px]:text-xl">
+        {{ content().sectionSubtitle }}
+      </p>
     </div>
 
     <!-- Feature cards -->
@@ -42,75 +20,33 @@
                 min-[768px]:max-[991.98px]:grid-cols-2 min-[768px]:max-[991.98px]:gap-6
                 min-[992px]:grid-cols-3 min-[992px]:gap-8">
 
-      @for (feature of features; track feature.title; let i = $index) {
-        <div
-           [class]="'rounded-xl fade-in-up transition-all duration-300 ' +
-             (modeService.activeMode() === 'dev'
-               ? 'bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:shadow-lg p-8'
-               : 'bg-gray-900/80 border border-green-500/20 hover:border-green-500/50 hover:shadow-[0_0_20px_rgba(34,197,94,0.15)] p-6')"
-          [style.animation-delay.ms]="i * 200">
-          @if (modeService.activeMode() === 'dev') {
-            <div
-              class="bg-blue-100 dark:bg-blue-900/50 rounded-lg w-12 h-12 flex items-center justify-center mb-6">
-              <lucide-angular [img]="feature.icon" class="text-blue-600 dark:text-blue-400 h-6 w-6"></lucide-angular>
-            </div>
-          }
-          @if (modeService.activeMode() === 'security') {
-            <div
-              class="bg-green-900/30 border border-green-500/30 rounded-lg w-10 h-10 flex items-center justify-center mb-4">
-              <lucide-angular [img]="feature.icon" class="text-green-400 h-5 w-5"></lucide-angular>
-            </div>
-          }
-        <h3 [class]="'font-bold mb-3 ' +
-               (modeService.activeMode() === 'dev'
-                 ? 'text-gray-900 dark:text-white text-xl'
-                 : 'text-green-400 font-mono text-base')">
-            @if (modeService.activeMode() === 'security') {
-              <span class="text-green-700">[+] </span>
-            }
+      @for (feature of features(); track feature.title; let i = $index) {
+        <div class="rounded-xl fade-in-up transition-all duration-300 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:shadow-lg p-8"
+             [style.animation-delay.ms]="i * 200">
+          <div class="bg-blue-100 dark:bg-blue-900/50 rounded-lg w-12 h-12 flex items-center justify-center mb-6">
+            <lucide-angular [img]="feature.icon" class="text-blue-600 dark:text-blue-400 h-6 w-6"></lucide-angular>
+          </div>
+          <h3 class="font-bold mb-3 text-gray-900 dark:text-white text-xl">
             {{ feature.title }}
           </h3>
-        <p [class]="'leading-relaxed ' +
-             (modeService.activeMode() === 'dev'
-               ? 'text-gray-600 dark:text-gray-400 text-base'
-               : 'text-green-700 font-mono text-xs')">
-            @if (modeService.activeMode() === 'security') {
-              <span class="text-green-600"># </span>
-            }
+          <p class="leading-relaxed text-gray-600 dark:text-gray-400 text-base">
             {{ feature.description }}
           </p>
         </div>
       }
     </div>
 
-    <!-- Bottom banner: ahora de ancho completo, sin columna vacía -->
-    <div [class]="'rounded-2xl overflow-hidden relative mt-16 ' +
-           (modeService.activeMode() === 'dev'
-             ? 'bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-12'
-             : 'bg-gray-900 border border-green-500/20 p-10')">
-
+    <!-- Bottom banner -->
+    <div class="rounded-2xl overflow-hidden relative mt-16 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 p-12">
       <div class="relative z-10">
-        <h3 [class]="'font-bold mb-4 ' +
-               (modeService.activeMode() === 'dev'
-                 ? 'text-gray-900 dark:text-white text-2xl'
-                 : 'text-green-400 font-mono text-xl')">
-          {{ content.bannerTitle }}
+        <h3 class="font-bold mb-4 text-gray-900 dark:text-white text-2xl">
+          {{ content().bannerTitle }}
         </h3>
-        <p [class]="'mb-0 ' +
-             (modeService.activeMode() === 'dev'
-               ? 'text-gray-700 dark:text-gray-300 text-lg'
-               : 'text-green-700 font-mono text-sm')">
-          @if (modeService.activeMode() === 'security') {
-            <span class="text-green-600"># </span>
-          }
-          {{ content.bannerText }}
+        <p class="mb-0 text-gray-700 dark:text-gray-300 text-lg">
+          {{ content().bannerText }}
         </p>
       </div>
-
-      <div class="absolute -bottom-24 -right-24 w-64 h-64 rounded-full blur-3xl"
-           [class]="modeService.activeMode() === 'dev'
-             ? 'bg-blue-300/20 dark:bg-blue-500/10'
-             : 'bg-green-500/5'"></div>
+      <div class="absolute -bottom-24 -right-24 w-64 h-64 rounded-full blur-3xl bg-blue-300/20 dark:bg-blue-500/10"></div>
     </div>
   </div>
 </section>
