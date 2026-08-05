@@ -99,22 +99,37 @@
       {
         "id": "17",
         "name": "Angular",
-        "level": 60
+        "level": 70
       },
       {
         "id": "18",
         "name": "Spring Boot",
-        "level": 55
+        "level": 50
       },
       {
         "id": "19",
         "name": "Docker",
-        "level": 55
+        "level":80
       },
       {
         "id": "20",
         "name": "TypeScript",
-        "level": 55
+        "level": 75
+      },
+      {
+        "id": "21",
+        "name": "Git",
+        "level": 85
+      },
+      {
+        "id": "22",
+        "name": "Tailwind CSS",
+        "level": 70
+      },
+      {
+        "id": "23",
+        "name": "Firebase",
+        "level": 50
       }
     ]
   }
