@@ -8,6 +8,10 @@
     { "icon": "Terminal", "title": "Administración de Servidores", "description": "Instalación y gestión de Windows Server con Active Directory, así como servidores Linux (Ubuntu, Debian) en producción." },
     { "icon": "Eye", "title": "Análisis de Seguridad", "description": "Monitoreo de redes con FortiAnalyzer, análisis de tráfico y detección de amenazas en infraestructuras corporativas." },
     { "icon": "Network", "title": "Virtualización", "description": "Gestión de entornos virtualizados con VMware y Hyper-V para infraestructura empresarial segura." },
-    { "icon": "Code", "title": "Desarrollo de Software (conocimiento)", "description": "Conocimientos en Angular, Spring Boot y Docker que me permiten entender la arquitectura de las aplicaciones que ayudo a proteger, aplicando buenas prácticas de código seguro." }
+      {
+      "icon": "Code",
+      "title": "Desarrollo de Software (conocimiento)",
+      "description": "Conocimientos en Angular, Spring Boot, Docker y Tailwind CSS, con manejo de Git y Firebase, que me permiten entender la arquitectura de las aplicaciones que ayudo a proteger, aplicando buenas prácticas de código seguro."
+    }
   ]
 }
