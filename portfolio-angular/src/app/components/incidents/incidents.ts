@@ -1,19 +1,14 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { LucideAngularModule, ShieldAlert, ChevronDown, Search, Activity, CheckCircle2, Terminal } from 'lucide-angular';
+import { LucideAngularModule, ShieldAlert } from 'lucide-angular';
 
 export interface Incident {
   id: string;
   title: string;
-  date: string;
-  category: string;
-  summary: string;
-  detection: string;
-  analysis: string;
-  response: string;
-  outcome: string;
-  commands?: string[];
+  date: string;      // ej. "2026" o "Reciente" — evita fechas exactas si es sensible
+  category: string;   // ej. "Firewall / Red", "Virtualización", "Acceso No Autorizado"
+  summary: string;    // resumen breve, 2-3 líneas
 }
 
 interface IncidentsContent {
@@ -32,20 +27,13 @@ interface IncidentsContent {
 export class IncidentsComponent implements OnInit {
   private http = inject(HttpClient);
 
-  readonly ShieldAlert  = ShieldAlert;
-  readonly ChevronDown  = ChevronDown;
-  readonly Search       = Search;
-  readonly Activity     = Activity;
-  readonly CheckCircle2 = CheckCircle2;
-  readonly Terminal     = Terminal;
+  readonly ShieldAlert = ShieldAlert;
 
   content = signal<IncidentsContent>({
     sectionTitle: '',
     sectionSubtitle: '',
     incidents: []
   });
-
-  expandedId = signal<string | null>(null);
 
   async ngOnInit() {
     try {
@@ -56,13 +44,5 @@ export class IncidentsComponent implements OnInit {
     } catch (err) {
       console.error('Error cargando incidents.json:', err);
     }
-  }
-
-  toggle(id: string) {
-    this.expandedId.set(this.expandedId() === id ? null : id);
-  }
-
-  isExpanded(id: string): boolean {
-    return this.expandedId() === id;
   }
 }

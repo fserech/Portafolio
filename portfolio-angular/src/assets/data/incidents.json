@@ -1,52 +1,20 @@
 {
   "sectionTitle": "Incidentes de Seguridad",
-  "sectionSubtitle": "Casos reales de diagnóstico, resolución y documentación técnica en entornos de red, virtualización y aplicaciones empresariales.",
+  "sectionSubtitle": "Casos reales de diagnóstico y resolución en entornos de red, virtualización y aplicaciones empresariales.",
   "incidents": [
     {
       "id": "incident-1",
       "title": "Bloqueo de tráfico en firewall afectando servicio de mapas GPS",
       "date": "2026",
       "category": "Firewall / Red",
-      "summary": "Un sistema de despacho con mapa GPS integrado dejó de cargar el mapa correctamente. El firewall perimetral bloqueaba el tráfico hacia el proveedor de mapas, y adicionalmente el cliente de escritorio tenía una configuración de compatibilidad de navegador desactualizada.",
-      "detection": "Revisión de logs del firewall (FortiAnalyzer), identificando eventos de bloqueo (Deny: UTM Blocked) sobre tráfico HTTPS desde el equipo 10.10.20.15 hacia múltiples IPs del proveedor de mapas, bajo un objeto de Internet Service Database (Maps-Web) que agrupa por rango de IP en vez de por dominio.",
-      "analysis": "Se descartaron los perfiles de Web Filter y Application Control como causa. Se identificó que el bloqueo real ocurría a nivel de objeto de servicio de Internet (ISDB), lo cual explicaba por qué excepciones puntuales por IP o dominio resultaban en carga intermitente del mapa. En paralelo, se determinó que el proceso cliente DispatchApp.exe usaba el motor de renderizado antiguo de Internet Explorer sin configuración de emulación de navegador ni TLS 1.2 forzado.",
-      "response": "Se creó una política de excepción de firewall (Excepcion_Maps_Web) con destino al objeto de servicio Maps-Web, ubicada con mayor prioridad que la política general (Politica_Navegacion_General), sin inspección de contenido para ese tráfico puntual. En la estación de trabajo, se aplicaron ajustes de registro de Windows para forzar el modo de renderizado moderno del navegador embebido y habilitar TLS 1.2 (SchUseStrongCrypto) en el framework .NET utilizado por la aplicación.",
-      "outcome": "El mapa cargó correctamente y se verificó la ausencia de nuevos bloqueos en los logs del firewall tras el cambio. Se documentó la política de excepción para evitar que fuera eliminada en futuras revisiones de reglas, y se recomendó replicar el ajuste de registro en otras estaciones con el mismo cliente.",
-      "commands": [
-        "reg query \"HKLM\\SOFTWARE\\Microsoft\\Internet Explorer\" /v svcVersion",
-        "tasklist | findstr /i \"dispatchapp\"",
-        "netstat -ano | findstr ESTABLISHED",
-        "netstat -ano | findstr \"203.0.113.10 203.0.113.20\"",
-        "reg add \"HKCU\\SOFTWARE\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\FEATURE_BROWSER_EMULATION\" /v \"DispatchApp.exe\" /t REG_DWORD /d 11001 /f",
-        "reg add \"HKLM\\SOFTWARE\\WOW6432Node\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\FEATURE_BROWSER_EMULATION\" /v \"DispatchApp.exe\" /t REG_DWORD /d 11001 /f",
-        "reg add \"HKLM\\SOFTWARE\\Microsoft\\.NETFramework\\v4.0.30319\" /v SchUseStrongCrypto /t REG_DWORD /d 1 /f",
-        "reg add \"HKLM\\SOFTWARE\\Wow6432Node\\Microsoft\\.NETFramework\\v4.0.30319\" /v SchUseStrongCrypto /t REG_DWORD /d 1 /f"
-      ]
+      "summary": "Un sistema de despacho no lograba cargar el mapa porque hacía las peticiones a la API con un motor de navegador obsoleto (Internet Explorer), incapaz de establecer conexiones modernas. Se aplicaron ajustes de registro para forzar un motor de renderizado actualizado, además de una excepción puntual en el firewall."
     },
     {
       "id": "incident-2",
       "title": "Fallo al restaurar punto de control en máquina virtual de producción",
       "date": "2026",
       "category": "Virtualización",
-      "summary": "Al intentar restaurar un punto de control (checkpoint) de una máquina virtual en producción, la operación fallaba con un error de metadatos de disco, a pesar de que la cadena de discos diferenciales era íntegra y legible.",
-      "detection": "El error surgió directamente al intentar aplicar el checkpoint desde el administrador de Hyper-V / PowerShell sobre la VM VM-APP-PROD01 (host HV-SRV02), señalando un problema de ruta y de una propiedad inexistente en la clase de configuración de disco virtual.",
-      "analysis": "Se verificó la existencia física de los archivos de disco, y se recorrió toda la cadena de discos diferenciales (.vhdx/.avhdx) con Get-VHD para confirmar la relación padre-hijo declarada en cada uno. Se determinó que el archivo físico y la cadena eran correctos a nivel de lectura, pero el servicio de administración de máquinas virtuales (VMMS) usaba una vía distinta de resolución de metadatos que no coincidía con lo grabado en la cabecera de los discos.",
-      "response": "Se corrigió el metadato de enlace padre-hijo de los discos afectados usando el cmdlet Set-VHD con el parámetro -IgnoreIDMismatch, reescribiendo la cabecera de cada disco diferencial en la cadena. Posteriormente se apagó la máquina virtual, se identificó el checkpoint exacto a restaurar, y se aplicó con Restore-VMSnapshot.",
-      "outcome": "La máquina virtual restauró el punto de control sin errores y arrancó correctamente en el estado esperado. Se recomendó reducir la cantidad de checkpoints activos en cadena, mantener respaldos independientes fuera de la cadena de snapshots, y validar siempre la aplicación dentro del sistema operativo invitado tras cualquier restauración.",
-      "commands": [
-        "dir \"D:\\VM-APP-PROD01\\Virtual Hard Disks\"",
-        "Get-ChildItem -Path \".\\*\" -Include *.vhdx,*.avhdx -File | ForEach-Object { try { $vhd = Get-VHD -Path $_.FullName -ErrorAction Stop; [PSCustomObject]@{ Archivo = $_.Name; ParentPath = $vhd.ParentPath } } catch { [PSCustomObject]@{ Archivo = $_.Name; ParentPath = \"ERROR: $($_.Exception.Message)\" } } } | Format-Table -AutoSize",
-        "$env:COMPUTERNAME",
-        "cd \"D:\\VM-APP-PROD01\\Virtual Hard Disks\"",
-        "Set-VHD -Path \".\\VM-APP-PROD01_CHILD01.avhdx\" -ParentPath \".\\VM-APP-PROD01.vhdx\" -IgnoreIDMismatch",
-        "Set-VHD -Path \".\\VM-APP-PROD01_CHECKPOINT01.avhdx\" -ParentPath \".\\VM-APP-PROD01_CHILD01.avhdx\" -IgnoreIDMismatch",
-        "Get-VM -Name \"VM-APP-PROD01\" | Select-Object State",
-        "Stop-VM -Name \"VM-APP-PROD01\"",
-        "Get-VM -Name \"VM-APP-PROD01\" | Get-VMSnapshot | Select-Object Name, CreationTime",
-        "Restore-VMSnapshot -VMName \"VM-APP-PROD01\" -Name \"VM-APP-PROD01 - Checkpoint01\" -Confirm:$false",
-        "Start-VM -Name \"VM-APP-PROD01\"",
-        "Get-VM -Name \"VM-APP-PROD01\" | Select-Object State, Status, Uptime"
-      ]
+      "summary": "Resolución de un error de metadatos en la cadena de discos diferenciales de una VM en producción. Se corrigió el enlace padre-hijo de los discos y se restauró el punto de control sin pérdida de datos."
     }
   ]
 }
