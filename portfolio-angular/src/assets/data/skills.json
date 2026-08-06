@@ -6,23 +6,19 @@
       {
         "id": "1",
         "name": "Firewall Perimetral",
-        "level": 90
+        "level": 75
       },
       {
         "id": "2",
-        "name": "FortiAnalyzer",
-        "level": 85
+        "name": "Gestor de logs y eventos (SIEM / Syslog)",
+        "level": 70
       },
       {
         "id": "3",
-        "name": "FortiMail",
-        "level": 80
+        "name": "Pasarela de correo seguro (SEG)",
+        "level": 70
       },
-      {
-        "id": "4",
-        "name": "VLANs",
-        "level": 85
-      },
+      
       {
         "id": "5",
         "name": "VPN",
@@ -31,7 +27,7 @@
       {
         "id": "6",
         "name": "Segmentación de Redes",
-        "level": 90
+        "level": 75
       }
     ]
   },
@@ -42,22 +38,22 @@
       {
         "id": "7",
         "name": "Windows Server",
-        "level": 85
+        "level": 75
       },
       {
         "id": "8",
         "name": "Active Directory",
-        "level": 80
+        "level": 60
       },
       {
         "id": "9",
         "name": "Ubuntu",
-        "level": 75
+        "level": 60
       },
       {
         "id": "10",
         "name": "Debian",
-        "level": 75
+        "level": 60
       }
     ]
   },
@@ -67,18 +63,18 @@
     "skills": [
       {
         "id": "12",
-        "name": "FortiAnalyzer",
-        "level": 85
+        "name": "Gestor de logs y eventos (SIEM / Syslog)",
+        "level": 70
       },
       {
         "id": "13",
         "name": "Análisis de Tráfico",
-        "level": 80
+        "level": 70
       },
       {
         "id": "14",
         "name": "VMware",
-        "level": 80
+        "level": 75
       },
       {
         "id": "15",
