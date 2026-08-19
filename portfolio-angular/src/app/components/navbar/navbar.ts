@@ -41,6 +41,7 @@ export class NavbarComponent implements OnInit {
     { name: 'Sobre Mí',    href: '#about'    },
     { name: 'Habilidades', href: '#skills'   },
     { name: 'Proyectos',   href: '#projects' },
+     { name: 'Servicios',   href: '#services' },
     { name: 'Contacto',    href: '#contact'  },
     { name: 'Incidentes', href: '#incidents' }
   ];

@@ -9,6 +9,7 @@ import { ProjectsComponent } from './components/projects/projects';
 import { SkillsComponent } from './components/skills/skills';
 import { CircuitBgComponent } from './components/circuit-bg/circuit-bg';
 import { IncidentsComponent } from "./components/incidents/incidents";
+import { ServicesComponent } from "./components/services/services";
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,8 @@ import { IncidentsComponent } from "./components/incidents/incidents";
     ContactComponent,
     FooterComponent,
     CircuitBgComponent,
-    IncidentsComponent
+    IncidentsComponent,
+    ServicesComponent
 ],
   templateUrl: './app.html',
   styleUrls: ['./app.scss']
