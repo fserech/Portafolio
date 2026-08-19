@@ -2,19 +2,25 @@
   "sectionTitle": "Incidentes de Seguridad",
   "sectionSubtitle": "Casos reales de diagnóstico y resolución en entornos de red, virtualización y aplicaciones empresariales.",
   "incidents": [
-    {
+      {
       "id": "incident-1",
-      "title": "Bloqueo de tráfico en firewall afectando servicio de mapas GPS",
+      "title": "Restauración de servicio de mapas mediante redirección de motor de renderizado",
       "date": "2026",
-      "category": "Firewall / Red",
-      "summary": "Un sistema de despacho no lograba cargar el mapa porque hacía las peticiones a la API con un motor de navegador obsoleto (Internet Explorer), incapaz de establecer conexiones modernas. Se aplicaron ajustes de registro para forzar un motor de renderizado actualizado, además de una excepción puntual en el firewall."
+      "category": "Firewall / Aplicación Legada",
+      "featured": true,
+      "problem": "El sistema de despacho de una operación crítica dejó de cargar mapas por completo. El equipo interno no había logrado identificar la causa tras varios intentos de solución.",
+      "diagnosis": "Se identificó que la aplicación hacía sus peticiones de mapas usando internamente un motor de renderizado de Internet Explorer descontinuado, cuyas conexiones ya no eran aceptadas por las APIs modernas de mapas.",
+      "solution": "Se configuró el sistema operativo para forzar que esas peticiones embebidas se redirigieran hacia un motor de navegador moderno, sin modificar el código de la aplicación original.",
+      "result": "Servicio de mapas restaurado por completo, sin reemplazar la aplicación ni interrumpir la operación diaria del equipo.",
+      "summary": "El sistema de despacho GPS dejó de cargar mapas por un motor de renderizado obsoleto embebido en la aplicación; se diagnosticó la causa raíz y se corrigió redirigiendo el tráfico hacia un motor moderno, sin tocar el software original."
     },
     {
       "id": "incident-2",
-      "title": "Fallo al restaurar punto de control en máquina virtual de producción",
+      "title": "Recuperación de máquina virtual de producción con snapshot huérfano",
       "date": "2026",
-      "category": "Virtualización",
-      "summary": "Resolución de un error de metadatos en la cadena de discos diferenciales de una VM en producción. Se corrigió el enlace padre-hijo de los discos y se restauró el punto de control sin pérdida de datos."
+      "category": "Virtualización / Hyper-V",
+      "featured": false,
+      "summary": "Un snapshot de Hyper-V quedó huérfano y el entorno dejó de reconocerlo, poniendo en riesgo los datos de una VM en producción. Se reconstruyó manualmente la cadena de dependencias entre discos diferenciales vía PowerShell, recuperando el 100% de los datos sin downtime adicional."
     }
   ]
 }

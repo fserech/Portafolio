@@ -14,12 +14,79 @@
       </p>
     </div>
 
-    <!-- Incidents Grid -->
+    <!-- Featured incident -->
+    @if (featuredIncident(); as incident) {
+      <div class="max-w-5xl mx-auto mb-8 rounded-2xl fade-in-up bg-gray-50 dark:bg-gray-800 border border-blue-200 dark:border-blue-900/50 overflow-hidden">
+
+        <div class="p-6 sm:p-8 border-b border-gray-200 dark:border-gray-700">
+          <div class="flex items-start gap-4">
+            <div class="bg-blue-100 dark:bg-blue-900/50 rounded-lg w-11 h-11 shrink-0 flex items-center justify-center">
+              <lucide-angular [img]="ShieldAlert" class="text-blue-600 dark:text-blue-400 h-5 w-5"></lucide-angular>
+            </div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-xs font-bold uppercase tracking-wide text-blue-600 dark:text-blue-400">Caso destacado</span>
+              </div>
+              <h3 class="font-bold text-gray-900 dark:text-white text-xl mb-2">
+                {{ incident.title }}
+              </h3>
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400">
+                  {{ incident.category }}
+                </span>
+                <span class="text-xs text-gray-500 dark:text-gray-400">{{ incident.date }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid gap-6 p-6 sm:p-8
+                    max-[767.98px]:grid-cols-1
+                    min-[768px]:grid-cols-2
+                    min-[1200px]:grid-cols-4">
+
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <lucide-angular [img]="ShieldAlert" class="text-red-500 h-4 w-4"></lucide-angular>
+              <span class="text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">Problema</span>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{{ incident.problem }}</p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <lucide-angular [img]="Search" class="text-amber-500 h-4 w-4"></lucide-angular>
+              <span class="text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">Diagnóstico</span>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{{ incident.diagnosis }}</p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <lucide-angular [img]="Wrench" class="text-blue-500 h-4 w-4"></lucide-angular>
+              <span class="text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">Solución</span>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{{ incident.solution }}</p>
+          </div>
+
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <lucide-angular [img]="CheckCircle2" class="text-green-500 h-4 w-4"></lucide-angular>
+              <span class="text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">Resultado</span>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{{ incident.result }}</p>
+          </div>
+
+        </div>
+      </div>
+    }
+
+    <!-- Other incidents (compact grid) -->
     <div class="grid gap-6 max-w-5xl mx-auto
                 max-[575.98px]:grid-cols-1
                 min-[768px]:grid-cols-2">
 
-      @for (incident of content().incidents; track incident.id; let i = $index) {
+      @for (incident of otherIncidents(); track incident.id; let i = $index) {
         <div class="rounded-xl fade-in-up transition-all duration-300 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:shadow-lg p-6"
              [style.animation-delay.ms]="i * 100">
 
@@ -28,11 +95,9 @@
               <lucide-angular [img]="ShieldAlert" class="text-blue-600 dark:text-blue-400 h-5 w-5"></lucide-angular>
             </div>
             <div class="flex-1 min-w-0">
-              <div class="flex flex-wrap items-center gap-2 mb-1">
-                <h3 class="font-bold text-gray-900 dark:text-white text-lg">
-                  {{ incident.title }}
-                </h3>
-              </div>
+              <h3 class="font-bold text-gray-900 dark:text-white text-lg mb-1">
+                {{ incident.title }}
+              </h3>
               <div class="flex items-center gap-2 mb-3">
                 <span class="text-xs font-medium px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-400">
                   {{ incident.category }}

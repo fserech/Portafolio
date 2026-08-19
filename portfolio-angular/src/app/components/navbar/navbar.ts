@@ -36,14 +36,14 @@ export class NavbarComponent implements OnInit {
   isOpen   = signal(false);
   scrolled = signal(false);
 
-  navLinks: NavLink[] = [
+    navLinks: NavLink[] = [
     { name: 'Inicio',      href: '#home'     },
     { name: 'Sobre Mí',    href: '#about'    },
+    { name: 'Servicios',   href: '#services' },
+    { name: 'Incidentes',  href: '#incidents'},
     { name: 'Habilidades', href: '#skills'   },
     { name: 'Proyectos',   href: '#projects' },
-     { name: 'Servicios',   href: '#services' },
-    { name: 'Contacto',    href: '#contact'  },
-    { name: 'Incidentes', href: '#incidents' }
+    { name: 'Contacto',    href: '#contact'  }
   ];
 
   constructor(public themeService: ThemeService) {}

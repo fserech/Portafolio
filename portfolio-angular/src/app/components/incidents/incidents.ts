@@ -1,14 +1,19 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { LucideAngularModule, ShieldAlert } from 'lucide-angular';
+import { LucideAngularModule, ShieldAlert, Search, Wrench, CheckCircle2 } from 'lucide-angular';
 
 export interface Incident {
   id: string;
   title: string;
-  date: string;      // ej. "2026" o "Reciente" — evita fechas exactas si es sensible
-  category: string;   // ej. "Firewall / Red", "Virtualización", "Acceso No Autorizado"
-  summary: string;    // resumen breve, 2-3 líneas
+  date: string;
+  category: string;
+  summary: string;
+  featured?: boolean;
+  problem?: string;
+  diagnosis?: string;
+  solution?: string;
+  result?: string;
 }
 
 interface IncidentsContent {
@@ -28,12 +33,23 @@ export class IncidentsComponent implements OnInit {
   private http = inject(HttpClient);
 
   readonly ShieldAlert = ShieldAlert;
+  readonly Search = Search;
+  readonly Wrench = Wrench;
+  readonly CheckCircle2 = CheckCircle2;
 
   content = signal<IncidentsContent>({
     sectionTitle: '',
     sectionSubtitle: '',
     incidents: []
   });
+
+  featuredIncident = computed(() =>
+    this.content().incidents.find(i => i.featured)
+  );
+
+  otherIncidents = computed(() =>
+    this.content().incidents.filter(i => !i.featured)
+  );
 
   async ngOnInit() {
     try {
