@@ -39,7 +39,6 @@ export class NavbarComponent implements OnInit {
     navLinks: NavLink[] = [
     { name: 'Inicio',      href: '#home'     },
     { name: 'Sobre Mí',    href: '#about'    },
-    { name: 'Servicios',   href: '#services' },
     { name: 'Incidentes',  href: '#incidents'},
     { name: 'Habilidades', href: '#skills'   },
     { name: 'Proyectos',   href: '#projects' },
