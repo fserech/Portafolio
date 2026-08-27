@@ -82,9 +82,10 @@
     }
 
     <!-- Other incidents (compact grid) -->
-    <div class="grid gap-6 max-w-5xl mx-auto
-                max-[575.98px]:grid-cols-1
-                min-[768px]:grid-cols-2">
+    <div class="grid gap-6 mx-auto
+            max-[575.98px]:grid-cols-1 max-[575.98px]:max-w-lg
+            min-[768px]:max-[1199.98px]:grid-cols-2 min-[768px]:max-[1199.98px]:max-w-5xl
+            min-[1200px]:grid-cols-3 min-[1200px]:max-w-none">
 
       @for (incident of otherIncidents(); track incident.id; let i = $index) {
         <div class="rounded-xl fade-in-up transition-all duration-300 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:shadow-lg p-6"
